@@ -1,0 +1,88 @@
+<?php
+
+namespace ByTIC\DocumentGenerator\PdfLetters;
+
+use Nip\Records\Traits\AbstractTrait\RecordsTrait as AbstractRecordsTrait;
+
+/**
+ * Class PdfLettersTrait
+ * @package ByTIC\DocumentGenerator\PdfLetters
+ *
+ * @method PdfLetterTrait[] findByParams($params)
+ */
+trait PdfLettersTrait
+{
+    use AbstractRecordsTrait;
+
+    /**
+     * @param string $type
+     * @param int $idItem
+     * @return bool|PdfLetterTrait
+     */
+    public function getByItem($type, $idItem)
+    {
+        /** @var PdfLetterTrait[] $letters */
+        $letters = $this->findByParams(
+            [
+                'where' => [
+                    ['id_item = ?', $idItem],
+                    ['type = ?', $type],
+                ],
+                'order' => [['id', 'DESC']],
+            ]
+        );
+
+        $return = false;
+
+        if (count($letters)) {
+            foreach ($letters as $letter) {
+                if ($letter->hasFile() && !$return) {
+                    $return = $letter;
+                } else {
+//                    $item->delete();
+                }
+            }
+        }
+
+        return $return;
+    }
+
+    /**
+     * @param $type
+     * @return AbstractRecordsTrait
+     */
+    abstract public function getParentManagerFromType($type);
+
+    protected function initRelations()
+    {
+        /** @noinspection PhpUndefinedClassInspection */
+        parent::initRelations();
+        $this->initCustomFieldsRelation();
+    }
+
+    protected function initCustomFieldsRelation()
+    {
+        $this->hasMany('CustomFields', $this->getCustomFieldsRelationParams());
+    }
+
+    /**
+     * @return array
+     */
+    protected function getCustomFieldsRelationParams()
+    {
+        return [
+            'class' => $this->getCustomFieldsManagerClass(),
+            'fk' => $this->getPrimaryFK(),
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    abstract protected function getCustomFieldsManagerClass();
+
+    /**
+     * @return string
+     */
+    abstract public function getPrimaryFK();
+}

@@ -5,7 +5,9 @@ namespace ByTIC\DocumentGenerator\PdfLetters;
 use ByTIC\DocumentGenerator\Helpers;
 use ByTIC\DocumentGenerator\PdfLetters\Fields\FieldTrait;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
+use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\Media\Media;
+use Nip\Records\RecordManager;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as AbstractRecordTrait;
 use setasign\Fpdi;
 use TCPDF;
@@ -116,10 +118,10 @@ trait PdfLetterTrait
 
     /**
      * @param $model
-     * @param $directory
-     * @return bool
+     * @param $output
+     * @return bool|Fpdi|TCPDF
      */
-    public function generateFile($model, $directory = null)
+    public function generateFile($model, $output = null)
     {
         $pdf = $this->generatePdfObj($model);
 
@@ -127,14 +129,17 @@ trait PdfLetterTrait
             $this->pdfDrawGuidelines($pdf);
         }
         $fileName = $this->getFileNameFromModel($model) . '.pdf';
-        if (is_dir($directory)) {
-            return $pdf->Output($directory . $fileName, 'F');
+        if (is_dir($output)) {
+            return $pdf->Output($output . $fileName, 'F');
         }
-
-        $this->addFileFromContent(
-            $pdf->Output($fileName, 'S'),
-            $fileName
-        );
+        if ($output instanceof HasMedia) {
+            /** @var HasMediaTrait $output */
+            $output->addFileFromContent(
+                $pdf->Output($fileName, 'S'),
+                $fileName
+            );
+        }
+        return $pdf;
     }
 
     /**

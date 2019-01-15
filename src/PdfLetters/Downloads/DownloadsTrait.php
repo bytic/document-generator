@@ -2,8 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\PdfLetters\Downloads;
 
-use ByTIC\Common\Records\Traits\AbstractTrait\RecordsTrait as AbstractRecordsTrait;
-
+use Nip\Records\Traits\AbstractTrait\RecordsTrait as AbstractRecordsTrait;
 
 /**
  * Class DownloadsTrait

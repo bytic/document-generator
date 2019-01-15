@@ -2,6 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\PdfLetters;
 
+use ByTIC\DocumentGenerator\Helpers;
 use ByTIC\DocumentGenerator\PdfLetters\Fields\FieldTrait;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\Media\Media;
@@ -53,7 +54,7 @@ trait PdfLetterTrait
             return false;
         }
 
-        return reset($files);
+        return $files->getDefaultMedia();
     }
 
     /**
@@ -118,7 +119,7 @@ trait PdfLetterTrait
      * @param $directory
      * @return bool
      */
-    public function generateFile($model, $directory)
+    public function generateFile($model, $directory = null)
     {
         $pdf = $this->generatePdfObj($model);
 
@@ -130,7 +131,10 @@ trait PdfLetterTrait
             return $pdf->Output($directory . $fileName, 'F');
         }
 
-        return false;
+        $this->addFileFromContent(
+            $pdf->Output($fileName, 'S'),
+            $fileName
+        );
     }
 
     /**
@@ -164,9 +168,11 @@ trait PdfLetterTrait
         $pdf = new Fpdi\TcpdfFpdi('L');
         $pdf->setPrintHeader(false);
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor(app('config')->get('SITE.name'));
 
-        $pageCount = $pdf->setSourceFile($this->getFile()->getPath());
+        $pdf->SetAuthor(Helpers::author());
+
+        $mediaFile = $this->getFile();
+        $pageCount = $pdf->setSourceFile($mediaFile->getFile()->readStream());
         for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
             $tplidx = $pdf->importPage($pageNo, '/MediaBox');
 
@@ -180,7 +186,7 @@ trait PdfLetterTrait
     }
 
     /**
-     * @return Record
+     * @return AbstractRecordTrait
      */
     public function getItem()
     {
@@ -190,7 +196,7 @@ trait PdfLetterTrait
     }
 
     /**
-     * @return Records
+     * @return AbstractRecordTrait
      */
     abstract public function getItemsManager();
 

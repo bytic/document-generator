@@ -3,7 +3,6 @@
 namespace ByTIC\DocumentGenerator\PdfLetters\Fields\Types;
 
 use ByTIC\DocumentGenerator\PdfLetters\Fields\FieldTrait;
-use ByTIC\Common\Records\Properties\Types\Generic;
 
 /**
  * Class AbstractType
@@ -11,7 +10,7 @@ use ByTIC\Common\Records\Properties\Types\Generic;
  *
  * @method FieldTrait getItem()
  */
-abstract class AbstractType extends Generic
+abstract class AbstractType extends \ByTIC\Models\SmartProperties\Properties\Types\Generic
 {
 
     /**

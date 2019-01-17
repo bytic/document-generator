@@ -107,6 +107,8 @@ trait PdfLetterTrait
     public function downloadBlank()
     {
         $file = $this->getFile();
+        $model = $this->getModelExample();
+        $name = $this->getFileNameFromModel($model) . '.pdf';
 
         header('Content-Type: application/pdf');
         header('Content-Description: File Transfer');
@@ -114,7 +116,7 @@ trait PdfLetterTrait
         header('Pragma: public');
         header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // Date in the past
         header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-        header('Content-Disposition: attachment; filename="' . basename($file) . '";');
+        header('Content-Disposition: attachment; filename="' . $name . '";');
         header("Content-Transfer-Encoding: Binary");
         echo $file->read();
         die();
@@ -284,7 +286,7 @@ trait PdfLetterTrait
     protected function hydrateMediaRepositoryCustom($mediaRepository)
     {
         $filesCollection = $mediaRepository->getCollection('files');
-        $filesCollection->getConstraint()->mimeTypes = ['pdf'];
+        $filesCollection->getConstraint()->mimeTypes = ['application/pdf'];
         return $mediaRepository;
     }
 }

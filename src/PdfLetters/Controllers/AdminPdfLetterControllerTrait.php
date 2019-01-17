@@ -62,12 +62,10 @@ trait AdminPdfLetterControllerTrait
                     $letter->delete();
                     $this->flashRedirectLetter($parent, $result, 'error');
                 }
+                die('end');
             }
-
-            die('end');
+            die('no valid item');
         }
-
-        die('no valid item');
     }
 
     public function downloadExample()

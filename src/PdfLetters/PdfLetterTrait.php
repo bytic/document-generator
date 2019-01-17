@@ -4,10 +4,14 @@ namespace ByTIC\DocumentGenerator\PdfLetters;
 
 use ByTIC\DocumentGenerator\Helpers;
 use ByTIC\DocumentGenerator\PdfLetters\Fields\FieldTrait;
+use ByTIC\MediaLibrary\Exceptions\FileCannotBeAdded\FileUnacceptableForCollection;
+use ByTIC\MediaLibrary\FileAdder\FileAdderFactory;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\Media\Media;
+use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
 use Nip\Records\RecordManager;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as AbstractRecordTrait;
 use setasign\Fpdi;
 use TCPDF;
@@ -244,5 +248,43 @@ trait PdfLetterTrait
     protected function getFileNameFromModel($model)
     {
         return $this->getFileNameDefault();
+    }
+
+    /**
+     * @param UploadedFile $uploadedFile
+     * @return string|boolean
+     */
+    public function uploadFromRequest($uploadedFile)
+    {
+        $fileCollection = $this->getFiles();
+
+        if (!$uploadedFile->isValid()) {
+            return $uploadedFile->getErrorMessage();
+        }
+
+        try {
+            $fileAdder = $this->addFile($uploadedFile);
+            $newMedia = $fileAdder->getMedia();
+        } catch (FileUnacceptableForCollection $exception) {
+            return $exception->violations->getMessageString();
+        }
+
+        foreach ($fileCollection as $name => $media) {
+            if ($name != $newMedia->getName()) {
+                $media->delete();
+            }
+        }
+        return $newMedia;
+    }
+
+    /**
+     * @param MediaRepository $mediaRepository
+     * @return MediaRepository
+     */
+    protected function hydrateMediaRepositoryCustom($mediaRepository)
+    {
+        $filesCollection = $mediaRepository->getCollection('files');
+        $filesCollection->getConstraint()->mimeTypes = ['pdf'];
+        return $mediaRepository;
     }
 }

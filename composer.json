@@ -36,7 +36,11 @@
   },
   "require-dev": {
     "bytic/translation": "^0.9",
+    "bytic/controllers": "^0.9",
     "phpunit/phpunit": "^7.2",
     "mockery/mockery": "^1.1"
+  },
+  "suggest": {
+    "bytic/controllers": "^0.9"
   }
 }

@@ -3,6 +3,7 @@
 namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters;
 
 use ByTIC\DocumentGenerator\PdfLetters\PdfLetterTrait;
+use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use Nip\Filesystem\FileDisk;
 use League\Flysystem\Adapter\Local as LocalAdapter;
 use Nip\Records\Record;
@@ -12,7 +13,7 @@ use Nip\Records\Traits\AbstractTrait\RecordTrait as AbstractRecordTrait;
  * Class PdfLetter
  * @package ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters
  */
-class PdfLetter extends Record
+class PdfLetter extends Record implements HasMedia
 {
     use PdfLetterTrait;
 

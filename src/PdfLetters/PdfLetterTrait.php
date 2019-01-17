@@ -161,13 +161,23 @@ trait PdfLetterTrait
             $this->pdfDrawGuidelines($pdf);
         }
 
+        $this->addFieldsToPDF($pdf, $model);
+
+        return $pdf;
+    }
+
+    /**
+     * @param $pdf
+     * @param $model
+     */
+    protected function addFieldsToPDF($pdf, $model)
+    {
+
         /** @var FieldTrait[] $fields */
         $fields = $this->getCustomFields();
         foreach ($fields as $field) {
             $field->addToPdf($pdf, $model);
         }
-
-        return $pdf;
     }
 
     /**

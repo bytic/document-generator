@@ -25,7 +25,7 @@ class PdfLetterTraitTest extends AbstractTest
         $uploadedFile = new UploadedFile(
             TEST_FIXTURE_PATH . '/files/file.pdf',
             'test original name.pdf',
-            null,
+            'application/pdf',
             null,
             null,
             true
@@ -56,10 +56,13 @@ class PdfLetterTraitTest extends AbstractTest
 
     public function testGenerateFile()
     {
-        $recipient = new Recipient();
         $letter = new PdfLetter();
         $letter->id = 99;
 
-        $letter->generateFile($recipient);
+        $pdf = $letter->generateNewPdfObj();
+        $output = $pdf->Output('output.pdf', 'S');
+
+        parent::assertStringStartsWith('%PDF-1.7', $output);
+        parent::assertStringContainsString('%%EOF', $output);
     }
 }

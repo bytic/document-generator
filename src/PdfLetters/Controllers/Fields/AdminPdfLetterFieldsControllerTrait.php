@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Fields;
+namespace ByTIC\DocumentGenerator\PdfLetters\Controllers\Fields;
 
 use ByTIC\DocumentGenerator\PdfLetters\PdfLetterTrait;
 use Nip\Controllers\Traits\AbstractControllerTrait;

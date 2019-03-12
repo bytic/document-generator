@@ -135,7 +135,7 @@ trait PdfLetterTrait
             $this->pdfDrawGuidelines($pdf);
         }
         $fileName = $this->getFileNameFromModel($model) . '.pdf';
-        if (is_dir($output)) {
+        if (is_string($output) && is_dir($output)) {
             return $pdf->Output($output . $fileName, 'F');
         }
         if ($output instanceof HasMedia) {

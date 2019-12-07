@@ -5,15 +5,13 @@ namespace ByTIC\DocumentGenerator\PdfLetters;
 use ByTIC\DocumentGenerator\Helpers;
 use ByTIC\DocumentGenerator\PdfLetters\Fields\FieldTrait;
 use ByTIC\MediaLibrary\Exceptions\FileCannotBeAdded\FileUnacceptableForCollection;
-use ByTIC\MediaLibrary\FileAdder\FileAdderFactory;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
-use Nip\Records\RecordManager;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as AbstractRecordTrait;
 use setasign\Fpdi;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use TCPDF;
 
 /**
@@ -181,27 +179,41 @@ trait PdfLetterTrait
     }
 
     /**
-     * @return FPDI|TCPDF
+     * @return Fpdi\Tcpdf\Fpdi|TCPDF
+     * @throws Fpdi\PdfParser\CrossReference\CrossReferenceException
+     * @throws Fpdi\PdfParser\Filter\FilterException
+     * @throws Fpdi\PdfParser\PdfParserException
+     * @throws Fpdi\PdfParser\Type\PdfTypeException
+     * @throws Fpdi\PdfReader\PdfReaderException
      */
     public function generateNewPdfObj()
     {
-        /** @var Fpdi|TCPDF $pdf */
-        $pdf = new Fpdi\TcpdfFpdi('L');
-        $pdf->setPrintHeader(false);
-        $pdf->SetCreator(PDF_CREATOR);
-
-        $pdf->SetAuthor(Helpers::author());
+        $pdf = static::newPdfBuilder('L');
 
         $mediaFile = $this->getFile();
         $pageCount = $pdf->setSourceFile($mediaFile->getFile()->readStream());
         for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
             $tplidx = $pdf->importPage($pageNo, '/MediaBox');
 
-            $pdf->addPage(ucfirst($this->orientation), $this->format);
+            $pdf->AddPage(ucfirst($this->orientation), $this->format);
             $pdf->useTemplate($tplidx);
             $pdf->endPage();
         }
         $pdf->setPage(1);
+
+        return $pdf;
+    }
+
+    /**
+     * @param mixed ...$params
+     * @return Fpdi\Tcpdf\Fpdi
+     */
+    public static function newPdfBuilder(...$params)
+    {
+        $pdf = new Fpdi\Tcpdf\Fpdi(...$params);
+        $pdf->setPrintHeader(false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor(Helpers::author());
 
         return $pdf;
     }

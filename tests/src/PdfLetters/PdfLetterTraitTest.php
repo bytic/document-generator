@@ -9,10 +9,9 @@ use ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters\PdfLetters;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Recipients\Recipient;
 use ByTIC\MediaLibrary\Media\Media;
 use Mockery;
-use PhpOffice\PhpSpreadsheet\Writer\Pdf;
-use const setasign\Fpdi\TcpdfFpdi;
-use setasign\Fpdi\TcpdfFpdi;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use const setasign\Fpdi\TcpdfFpdi;
+use setasign\Fpdi\Tcpdf\Fpdi;
 
 /**
  * Class PdfLetterTraitTest
@@ -84,6 +83,6 @@ class PdfLetterTraitTest extends AbstractTest
         $mediaRecord->shouldReceive('addFileFromContent');
 
         $pdf = $letter->generateFile($recipient, $mediaRecord);
-        self::assertInstanceOf(TcpdfFpdi::class, $pdf);
+        self::assertInstanceOf(Fpdi::class, $pdf);
     }
 }

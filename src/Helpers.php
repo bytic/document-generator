@@ -13,7 +13,11 @@ class Helpers
      */
     public static function author()
     {
-        if (!function_exists('app') or !app()->has('config')) {
+        if (!function_exists('app')) {
+            return 'bytic';
+        }
+        $app = app();
+        if (!$app || !app()->has('config')) {
             return 'bytic';
         }
 

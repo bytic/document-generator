@@ -61,12 +61,15 @@ class PdfHelper
 
     /**
      * @param Fpdi $pdf
+     * @param array $colors
+     * @param bool $ret
+     * @return string
      */
-    public static function pdfPrepareColor($pdf, $colors = [])
+    public static function pdfPrepareColor($pdf, $colors = [], $ret = false)
     {
-        $pdf->SetTextColor(0, 0, 0);
         if (is_array($colors) && count($colors) >= 3) {
-            $pdf->SetTextColor($colors);
+            return $pdf->SetTextColorArray($colors, $ret);
         }
+        return $pdf->SetTextColor(0, 0, 0, $ret);
     }
 }

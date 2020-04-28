@@ -31,6 +31,6 @@ class BarcodeTypeTraitTest extends AbstractTest
         $output = $pdf->Output('output.pdf', 'S');
         similar_text($output, file_get_contents(TEST_FIXTURE_PATH . '/files/barcode.pdf'), $perc);
 
-        self::assertGreaterThan(97, $perc);
+        self::assertGreaterThan(94, $perc);
     }
 }

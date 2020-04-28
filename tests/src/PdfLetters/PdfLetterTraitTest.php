@@ -3,10 +3,15 @@
 namespace ByTIC\DocumentGenerator\Tests\PdfLetters;
 
 use ByTIC\DocumentGenerator\Tests\AbstractTest;
+use ByTIC\DocumentGenerator\Tests\Fixtures\Models\MediaRecords\MediaRecord;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters\PdfLetter;
+use ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters\PdfLetters;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Recipients\Recipient;
 use ByTIC\MediaLibrary\Media\Media;
+use Mockery;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use const setasign\Fpdi\TcpdfFpdi;
+use setasign\Fpdi\Tcpdf\Fpdi;
 
 /**
  * Class PdfLetterTraitTest
@@ -14,9 +19,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class PdfLetterTraitTest extends AbstractTest
 {
-    /**
-     *
-     */
+
     public function testUploadFromRequestValid()
     {
         $letter = new PdfLetter();
@@ -54,7 +57,7 @@ class PdfLetterTraitTest extends AbstractTest
         parent::assertSame('INVALID_MIME_TYPE_ERROR', $response);
     }
 
-    public function testGenerateFile()
+    public function testGenerateNewPdfObj()
     {
         $letter = new PdfLetter();
         $letter->id = 99;
@@ -64,5 +67,22 @@ class PdfLetterTraitTest extends AbstractTest
 
         parent::assertStringStartsWith('%PDF-1.7', $output);
         parent::assertStringContainsString('%%EOF', $output);
+    }
+
+    public function testGenerateFileWithMediaObject()
+    {
+        $letter = Mockery::mock(PdfLetter::class);
+        $letter->shouldReceive('getCustomFields')->andReturn([]);
+        $letter = $letter->makePartial();
+
+        $letter->setManagerName(PdfLetters::class);
+        $letter->id = 99;
+
+        $recipient = new Recipient();
+        $mediaRecord = Mockery::mock(MediaRecord::class);
+        $mediaRecord->shouldReceive('addFileFromContent');
+
+        $pdf = $letter->generateFile($recipient, $mediaRecord);
+        self::assertInstanceOf(Fpdi::class, $pdf);
     }
 }

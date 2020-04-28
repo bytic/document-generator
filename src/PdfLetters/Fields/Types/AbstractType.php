@@ -3,6 +3,8 @@
 namespace ByTIC\DocumentGenerator\PdfLetters\Fields\Types;
 
 use ByTIC\DocumentGenerator\PdfLetters\Fields\FieldTrait;
+use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
+use setasign\Fpdi\Tcpdf\Fpdi;
 
 /**
  * Class AbstractType
@@ -12,6 +14,7 @@ use ByTIC\DocumentGenerator\PdfLetters\Fields\FieldTrait;
  */
 abstract class AbstractType extends \ByTIC\Models\SmartProperties\Properties\Types\Generic
 {
+    use TextTypeTrait;
 
     /**
      * @param $model

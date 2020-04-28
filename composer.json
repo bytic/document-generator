@@ -30,14 +30,14 @@
     "bytic/orm": "^0.9|^1.0",
     "bytic/medialibrary": "^0.8|^0.9",
     "bytic/models-smart-properties": "^0.9|^1.0",
-    "symfony/http-foundation": "^2.7|^3.0",
+    "symfony/http-foundation": "^2.7|^3.0|^4.0",
     "setasign/fpdi-tcpdf": "^2.0",
     "phpoffice/phpspreadsheet": "^1.4"
   },
   "require-dev": {
     "bytic/translation": "^0.9|^1.0",
     "bytic/controllers": "^0.9|^1.0",
-    "phpunit/phpunit": "^7.2",
+    "phpunit/phpunit": "^7.2|^8.0|^9.0",
     "mockery/mockery": "^1.1"
   },
   "suggest": {

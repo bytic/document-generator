@@ -31,7 +31,8 @@
     "bytic/medialibrary": "^0.8|^0.9",
     "bytic/models-smart-properties": "^0.9|^1.0",
     "symfony/http-foundation": "^2.7|^3.0|^4.0|^5.0",
-    "setasign/fpdi-tcpdf": "^2.0",
+    "setasign/fpdf": "^1.8",
+    "setasign/fpdi": "^2.3",
     "phpoffice/phpspreadsheet": "^1.4"
   },
   "require-dev": {

@@ -33,6 +33,7 @@
     "symfony/http-foundation": "^2.7|^3.0|^4.0|^5.0",
     "setasign/fpdf": "^1.8",
     "setasign/fpdi": "^2.3",
+    "tecnickcom/tcpdf": "^6.2",
     "phpoffice/phpspreadsheet": "^1.4"
   },
   "require-dev": {

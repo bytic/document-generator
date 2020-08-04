@@ -24,7 +24,7 @@ class PdfLetterTraitTest extends AbstractTest
     {
         $letter = new PdfLetter();
         $letter->id = 10;
-        
+
         $letter->setManager(PdfLetters::instance());
 
         $uploadedFile = new UploadedFile(

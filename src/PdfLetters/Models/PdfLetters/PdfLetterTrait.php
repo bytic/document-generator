@@ -3,12 +3,14 @@
 namespace ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters;
 
 use ByTIC\DocumentGenerator\Helpers;
+use ByTIC\DocumentGenerator\PdfLetters\Models\Downloads\DownloadsTrait;
 use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\FieldTrait;
 use ByTIC\MediaLibrary\Exceptions\FileCannotBeAdded\FileUnacceptableForCollection;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
+use Nip\Records\Record;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as AbstractRecordTrait;
 use setasign\Fpdi;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -118,6 +120,16 @@ trait PdfLetterTrait
         header("Content-Transfer-Encoding: Binary");
         echo $file->read();
         die();
+    }
+
+    /**
+     * @param Record $recipient
+     */
+    public function addDownload($recipient)
+    {
+        /** @var DownloadsTrait $downloadsManager */
+        $downloadsManager = $this->getManager()->getRelation('Downloads')->getWith();
+        $downloadsManager->createForRecipient($recipient, $this);
     }
 
     /**

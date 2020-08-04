@@ -57,12 +57,25 @@ trait PdfLettersTrait
     {
         /** @noinspection PhpUndefinedClassInspection */
         parent::initRelations();
+        $this->initRelationsTrait();
+    }
+
+    protected function initRelationsTrait()
+    {
         $this->initCustomFieldsRelation();
     }
 
     protected function initCustomFieldsRelation()
     {
         $this->hasMany('CustomFields', $this->getCustomFieldsRelationParams());
+    }
+
+    protected function initDownloadsRelation()
+    {
+        $this->hasMany('Downloads', [
+            'class' => $this->getDownloadsManagerClass(),
+            'fk' => $this->getPrimaryFK(),
+        ]);
     }
 
     /**
@@ -80,6 +93,11 @@ trait PdfLettersTrait
      * @return string
      */
     abstract protected function getCustomFieldsManagerClass();
+
+    /**
+     * @return string
+     */
+    abstract protected function getDownloadsManagerClass();
 
     /**
      * @return string

@@ -1,16 +1,16 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Controllers\Fields;
+namespace ByTIC\DocumentGenerator\PdfLetters\Controllers\Admin\Fields;
 
-use ByTIC\DocumentGenerator\PdfLetters\PdfLetterTrait;
+use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
 use Nip\Controllers\Traits\AbstractControllerTrait;
 use Nip\Records\AbstractModels\Record;
 
 /**
- * Trait AdminPdfLetterFieldsControllerTrait
+ * Trait PdfLetterFieldsControllerTrait
  * @package ByTIC\DocumentGenerator\PdfLetters
  */
-trait AdminPdfLetterFieldsControllerTrait
+trait PdfLetterFieldsControllerTrait
 {
     use AbstractControllerTrait;
 

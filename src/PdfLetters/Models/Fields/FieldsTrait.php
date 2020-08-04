@@ -3,7 +3,7 @@
 namespace ByTIC\DocumentGenerator\PdfLetters\Models\Fields;
 
 use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\Types\AbstractType;
-use ByTIC\DocumentGenerator\PdfLetters\PdfLettersTrait;
+use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLettersTrait;
 use Nip\Records\Traits\AbstractTrait\RecordsTrait as AbstractRecordsTrait;
 use ByTIC\Models\SmartProperties\RecordsTraits\HasTypes\RecordsTrait as HasTypeRecordsTrait;
 

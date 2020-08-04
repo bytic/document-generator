@@ -1,9 +1,9 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Controllers;
+namespace ByTIC\DocumentGenerator\PdfLetters\Controllers\Admin;
 
-use ByTIC\DocumentGenerator\PdfLetters\PdfLettersTrait;
-use ByTIC\DocumentGenerator\PdfLetters\PdfLetterTrait;
+use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLettersTrait;
+use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
 use ByTIC\MediaLibrary\Media\Media;
 use Nip\Controllers\Traits\AbstractControllerTrait;
 use Nip\Records\Record;
@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @method PdfLetterTrait getModelFromRequest()
  * @method PdfLettersTrait getModelManager()
  */
-trait AdminPdfLetterControllerTrait
+trait PdfLetterControllerTrait
 {
     use AbstractControllerTrait;
 

@@ -10,6 +10,7 @@ use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
+use DateTime;
 use Nip\Records\Record;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as AbstractRecordTrait;
 use setasign\Fpdi;
@@ -87,11 +88,6 @@ trait PdfLetterTrait
 
         $this->download($result);
     }
-
-    /**
-     * @return AbstractRecordTrait
-     */
-    abstract public function getModelExample();
 
     /**
      * @param AbstractRecordTrait $model
@@ -177,20 +173,6 @@ trait PdfLetterTrait
     }
 
     /**
-     * @param $pdf
-     * @param $model
-     */
-    protected function addFieldsToPDF($pdf, $model)
-    {
-
-        /** @var FieldTrait[] $fields */
-        $fields = $this->getCustomFields();
-        foreach ($fields as $field) {
-            $field->addToPdf($pdf, $model);
-        }
-    }
-
-    /**
      * @return Fpdi\Tcpdf\Fpdi|TCPDF
      * @throws Fpdi\PdfParser\CrossReference\CrossReferenceException
      * @throws Fpdi\PdfParser\Filter\FilterException
@@ -241,9 +223,59 @@ trait PdfLetterTrait
     }
 
     /**
+     * @param UploadedFile $uploadedFile
+     * @return string|boolean
+     */
+    public function uploadFromRequest($uploadedFile)
+    {
+        $fileCollection = $this->getFiles();
+
+        if (!$uploadedFile->isValid()) {
+            return $uploadedFile->getErrorMessage();
+        }
+
+        try {
+            $fileAdder = $this->addFile($uploadedFile);
+            $newMedia = $fileAdder->getMedia();
+        } catch (FileUnacceptableForCollection $exception) {
+            return $exception->violations->getMessageString();
+        }
+
+        foreach ($fileCollection as $name => $media) {
+            if ($name != $newMedia->getName()) {
+                $media->delete();
+            }
+        }
+        return $newMedia;
+    }
+
+    /**
      * @return AbstractRecordTrait
      */
     abstract public function getItemsManager();
+
+    /**
+     * @return AbstractRecordTrait
+     */
+    abstract public function getModelExample();
+
+    /**
+     * @return DateTime
+     */
+    abstract public function getIssueDate(): DateTime;
+
+    /**
+     * @param $pdf
+     * @param $model
+     */
+    protected function addFieldsToPDF($pdf, $model)
+    {
+        /** @var FieldTrait[] $fields */
+        $fields = $this->getCustomFields();
+        foreach ($fields as $field) {
+            $field->addToPdf($pdf, $model);
+        }
+    }
 
     /**
      * @return string
@@ -284,33 +316,6 @@ trait PdfLetterTrait
     protected function getFileNameFromModel($model)
     {
         return $this->getFileNameDefault();
-    }
-
-    /**
-     * @param UploadedFile $uploadedFile
-     * @return string|boolean
-     */
-    public function uploadFromRequest($uploadedFile)
-    {
-        $fileCollection = $this->getFiles();
-
-        if (!$uploadedFile->isValid()) {
-            return $uploadedFile->getErrorMessage();
-        }
-
-        try {
-            $fileAdder = $this->addFile($uploadedFile);
-            $newMedia = $fileAdder->getMedia();
-        } catch (FileUnacceptableForCollection $exception) {
-            return $exception->violations->getMessageString();
-        }
-
-        foreach ($fileCollection as $name => $media) {
-            if ($name != $newMedia->getName()) {
-                $media->delete();
-            }
-        }
-        return $newMedia;
     }
 
     /**

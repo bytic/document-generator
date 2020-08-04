@@ -4,6 +4,7 @@ namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters;
 
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
+use DateTime;
 use Nip\Filesystem\FileDisk;
 use League\Flysystem\Adapter\Local as LocalAdapter;
 use Nip\Records\Record;
@@ -41,6 +42,10 @@ class PdfLetter extends Record implements HasMedia
      */
     public function getModelExample()
     {
-        // TODO: Implement getModelExample() method.
+    }
+
+    public function getIssueDate(): DateTime
+    {
+        return $this->issueDate;
     }
 }

@@ -4,15 +4,12 @@ namespace ByTIC\DocumentGenerator\PdfLetters;
 
 use setasign\Fpdi\Tcpdf\Fpdi;
 
-
 /**
  * Class PdfHelper
  * @package ByTIC\DocumentGenerator\PdfLetters
  */
 class PdfHelper
 {
-
-
     /**
      * @param Fpdi $pdf
      * @param $value

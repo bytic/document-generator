@@ -28,4 +28,19 @@ trait DownloadsTrait
         $download->datetime = date('Y-m-d H:i:s');
         $download->insert();
     }
+
+    /**
+     * @param PdfLetterTrait $letter
+     * @return bool
+     */
+    public function shouldTrackLetter($letter)
+    {
+        $issueDate = $letter->getIssueDate();
+        $now = new \DateTime();
+        $diff = $issueDate->diff($now);
+        if ($diff->days < 60) {
+            return true;
+        }
+        return false;
+    }
 }

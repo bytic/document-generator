@@ -1,8 +1,8 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Fields;
+namespace ByTIC\DocumentGenerator\PdfLetters\Models\Fields;
 
-use ByTIC\DocumentGenerator\PdfLetters\Fields\Types\AbstractType;
+use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\Types\AbstractType;
 use ByTIC\DocumentGenerator\PdfLetters\PdfLetterTrait;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
 use \ByTIC\Models\SmartProperties\RecordsTraits\HasTypes\RecordTrait as HasTypeRecordTrait;
@@ -10,7 +10,7 @@ use setasign\Fpdi\Fpdi;
 
 /**
  * Class FieldTrait
- * @package ByTIC\DocumentGenerator\PdfLetters\Fields
+ * @package ByTIC\DocumentGenerator\PdfLetters\Models\Fields
  *
  * @property string $id_letter
  * @property string $field

@@ -2,9 +2,10 @@
 
 namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters;
 
-use ByTIC\DocumentGenerator\PdfLetters\PdfLettersTrait;
+use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLettersTrait;
 use Nip\Records\RecordManager;
 use Nip\Records\Traits\AbstractTrait\RecordsTrait as AbstractRecordsTrait;
+use Nip\Utility\Traits\SingletonTrait;
 
 /**
  * Class PdfLetter
@@ -13,6 +14,7 @@ use Nip\Records\Traits\AbstractTrait\RecordsTrait as AbstractRecordsTrait;
 class PdfLetters extends RecordManager
 {
     use PdfLettersTrait;
+    use SingletonTrait;
 
     /**
      * @inheritdoc

@@ -2,7 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters\Fields;
 
-use ByTIC\DocumentGenerator\PdfLetters\Fields\FieldTrait;
+use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\FieldTrait;
 use Nip\Records\Record;
 
 /**

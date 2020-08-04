@@ -1,8 +1,8 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Tests\PdfLetters\Fields\Types;
+namespace ByTIC\DocumentGenerator\Tests\PdfLetters\Models\Fields\Types;
 
-use ByTIC\DocumentGenerator\PdfLetters\PdfLetterTrait;
+use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
 use ByTIC\DocumentGenerator\Tests\AbstractTest;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters\Fields\FieldRecord;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters\Fields\Types\CodeField;

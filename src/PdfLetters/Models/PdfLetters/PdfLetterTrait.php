@@ -1,9 +1,9 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfLetters;
+namespace ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters;
 
 use ByTIC\DocumentGenerator\Helpers;
-use ByTIC\DocumentGenerator\PdfLetters\Fields\FieldTrait;
+use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\FieldTrait;
 use ByTIC\MediaLibrary\Exceptions\FileCannotBeAdded\FileUnacceptableForCollection;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;

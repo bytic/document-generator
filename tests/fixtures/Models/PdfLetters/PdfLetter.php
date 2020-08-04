@@ -2,7 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters;
 
-use ByTIC\DocumentGenerator\PdfLetters\PdfLetterTrait;
+use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use Nip\Filesystem\FileDisk;
 use League\Flysystem\Adapter\Local as LocalAdapter;

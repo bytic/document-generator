@@ -1,15 +1,15 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Fields;
+namespace ByTIC\DocumentGenerator\PdfLetters\Models\Fields;
 
-use ByTIC\DocumentGenerator\PdfLetters\Fields\Types\AbstractType;
+use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\Types\AbstractType;
 use ByTIC\DocumentGenerator\PdfLetters\PdfLettersTrait;
 use Nip\Records\Traits\AbstractTrait\RecordsTrait as AbstractRecordsTrait;
 use ByTIC\Models\SmartProperties\RecordsTraits\HasTypes\RecordsTrait as HasTypeRecordsTrait;
 
 /**
  * Class FieldsTrait
- * @package ByTIC\DocumentGenerator\PdfLetters\Fields
+ * @package ByTIC\DocumentGenerator\PdfLetters\Models\Fields
  */
 trait FieldsTrait
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Tests\PdfLetters;
+namespace ByTIC\DocumentGenerator\Tests\PdfLetters\Models\PdfLetters;
 
 use ByTIC\DocumentGenerator\Tests\AbstractTest;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\MediaRecords\MediaRecord;
@@ -24,6 +24,8 @@ class PdfLetterTraitTest extends AbstractTest
     {
         $letter = new PdfLetter();
         $letter->id = 10;
+        
+        $letter->setManager(PdfLetters::instance());
 
         $uploadedFile = new UploadedFile(
             TEST_FIXTURE_PATH . '/files/file.pdf',
@@ -44,6 +46,8 @@ class PdfLetterTraitTest extends AbstractTest
         $letter = new PdfLetter();
         $letter->id = 10;
 
+        $letter->setManager(PdfLetters::instance());
+
         $uploadedFile = new UploadedFile(
             TEST_FIXTURE_PATH . '/files/file.pdf',
             'test original name.doc',
@@ -62,6 +66,8 @@ class PdfLetterTraitTest extends AbstractTest
         $letter = new PdfLetter();
         $letter->id = 99;
 
+        $letter->setManager(PdfLetters::instance());
+
         $pdf = $letter->generateNewPdfObj();
         $output = $pdf->Output('output.pdf', 'S');
 
@@ -71,11 +77,12 @@ class PdfLetterTraitTest extends AbstractTest
 
     public function testGenerateFileWithMediaObject()
     {
+        /** @var PdfLetter|Mockery\Mock $letter */
         $letter = Mockery::mock(PdfLetter::class);
         $letter->shouldReceive('getCustomFields')->andReturn([]);
         $letter = $letter->makePartial();
 
-        $letter->setManagerName(PdfLetters::class);
+        $letter->setManager(PdfLetters::instance());
         $letter->id = 99;
 
         $recipient = new Recipient();

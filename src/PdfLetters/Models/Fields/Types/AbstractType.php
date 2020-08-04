@@ -1,14 +1,14 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Fields\Types;
+namespace ByTIC\DocumentGenerator\PdfLetters\Models\Fields\Types;
 
-use ByTIC\DocumentGenerator\PdfLetters\Fields\FieldTrait;
+use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\FieldTrait;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
 use setasign\Fpdi\Tcpdf\Fpdi;
 
 /**
  * Class AbstractType
- * @package ByTIC\DocumentGenerator\PdfLetters\Fields\Types
+ * @package ByTIC\DocumentGenerator\PdfLetters\Models\Fields\Types
  *
  * @method FieldTrait getItem()
  */

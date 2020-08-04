@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Fields\Types;
+namespace ByTIC\DocumentGenerator\PdfLetters\Models\Fields\Types;
 
 use ByTIC\DocumentGenerator\PdfLetters\PdfHelper;
 use setasign\Fpdi\Tcpdf\Fpdi;
@@ -8,7 +8,7 @@ use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
 
 /**
  * Trait TextTypeTrait
- * @package ByTIC\DocumentGenerator\PdfLetters\Fields\Types
+ * @package ByTIC\DocumentGenerator\PdfLetters\Models\Fields\Types
  */
 trait TextTypeTrait
 {

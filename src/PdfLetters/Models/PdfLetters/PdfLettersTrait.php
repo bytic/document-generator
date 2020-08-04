@@ -1,12 +1,12 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfLetters;
+namespace ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters;
 
 use Nip\Records\Traits\AbstractTrait\RecordsTrait as AbstractRecordsTrait;
 
 /**
  * Class PdfLettersTrait
- * @package ByTIC\DocumentGenerator\PdfLetters
+ * @package ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters
  *
  * @method PdfLetterTrait[] findByParams($params)
  */

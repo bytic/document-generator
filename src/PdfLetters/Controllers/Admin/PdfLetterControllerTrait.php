@@ -227,7 +227,7 @@ trait PdfLetterControllerTrait
      */
     protected function setBreadcrumbs()
     {
-        $this->call('setClassBreadcrumbs', $this->parentManager->getController());
+        $this->call('setClassBreadcrumbs', $this->parentManager->getController(), false);
         $this->call('setItemBreadcrumbs', $this->parentManager->getController(), false, [$this->parent]);
 
         $this->setClassBreadcrumbs();

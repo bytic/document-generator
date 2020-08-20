@@ -4,6 +4,7 @@ namespace ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters;
 
 use ByTIC\DocumentGenerator\PdfLetters\Models\Downloads\DownloadsTrait;
 use ByTIC\DocumentGenerator\PdfLetters\Models\Stats\StatsTrait;
+use ByTIC\MediaLibrary\HasMedia\HasMediaRecordsTrait;
 use Nip\Records\AbstractModels\RecordManager;
 use Nip\Records\Traits\AbstractTrait\RecordsTrait as AbstractRecordsTrait;
 
@@ -16,6 +17,7 @@ use Nip\Records\Traits\AbstractTrait\RecordsTrait as AbstractRecordsTrait;
 trait PdfLettersTrait
 {
     use AbstractRecordsTrait;
+    use HasMediaRecordsTrait;
 
     /**
      * @param string $type

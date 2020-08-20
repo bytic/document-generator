@@ -3,7 +3,10 @@
 namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters;
 
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
+use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
+use ByTIC\MediaLibrary\Loaders\Filesystem;
+use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
 use DateTime;
 use Nip\Filesystem\FileDisk;
 use League\Flysystem\Adapter\Local as LocalAdapter;
@@ -35,6 +38,14 @@ class PdfLetter extends Record implements HasMedia
 
     public function getItemsManager()
     {
+    }
+
+    /**
+     * @param MediaRepository $mediaCollection
+     */
+    public function registerMediaCollections($mediaRepository)
+    {
+        $mediaRepository->getCollection('files')->setLoaderClass(Filesystem::class);
     }
 
     /**

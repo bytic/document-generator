@@ -13,7 +13,6 @@ use Nip\Records\Record;
  */
 trait DownloadTrait
 {
-
     /**
      * @param Record|PdfLetterTrait $letter
      */

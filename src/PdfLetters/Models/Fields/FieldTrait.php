@@ -5,7 +5,7 @@ namespace ByTIC\DocumentGenerator\PdfLetters\Models\Fields;
 use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\Types\AbstractType;
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
-use \ByTIC\Models\SmartProperties\RecordsTraits\HasTypes\RecordTrait as HasTypeRecordTrait;
+use ByTIC\Models\SmartProperties\RecordsTraits\HasTypes\RecordTrait as HasTypeRecordTrait;
 use setasign\Fpdi\Fpdi;
 
 /**
@@ -72,7 +72,7 @@ trait FieldTrait
             return $valueType;
         }
 
-        return '<<'.$this->field.'>>';
+        return '<<' . $this->field . '>>';
     }
 
     /**
@@ -94,7 +94,7 @@ trait FieldTrait
     public function getColorArray()
     {
         if ($this->hasColor()) {
-            list ($red, $green, $blue) = explode(',', $this->color);
+            list($red, $green, $blue) = explode(',', $this->color);
             if ($red && $green && $blue) {
                 return [intval($red), intval($green), intval($blue)];
             }

@@ -19,6 +19,5 @@ trait StatsTrait
      */
     public function compileForLetter($letter)
     {
-
     }
 }

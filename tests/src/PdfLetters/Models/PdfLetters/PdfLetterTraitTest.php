@@ -19,7 +19,6 @@ use setasign\Fpdi\Tcpdf\Fpdi;
  */
 class PdfLetterTraitTest extends AbstractTest
 {
-
     public function testUploadFromRequestValid()
     {
         $letter = new PdfLetter();

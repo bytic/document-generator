@@ -8,7 +8,6 @@ namespace ByTIC\DocumentGenerator\PdfLetters\Forms\Fields;
  */
 trait AdminPdfLetterFieldsFormTrait
 {
-
     protected function initGenericElements()
     {
         $this->initPositionElements();

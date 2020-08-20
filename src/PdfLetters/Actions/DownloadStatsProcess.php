@@ -15,7 +15,6 @@ use Nip\Records\Locator\ModelLocator;
  */
 class DownloadStatsProcess
 {
-
     /**
      * @var PdfLettersManager[]
      */

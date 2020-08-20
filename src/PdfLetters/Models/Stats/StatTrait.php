@@ -11,5 +11,4 @@ use Nip\Records\Traits\AbstractTrait\RecordTrait as AbstractRecordTrait;
 trait StatTrait
 {
     use AbstractRecordTrait;
-
 }

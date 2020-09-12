@@ -6,7 +6,8 @@ use ByTIC\DocumentGenerator\PdfLetters\Models\Downloads\DownloadsTrait;
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLettersTrait;
 use ByTIC\DocumentGenerator\PdfLetters\PdfLettersManager;
 use Nip\MailModule\Models\EmailsTable\EmailsTrait;
-use Nip\Records\AbstractModels\RecordManager;
+use Nip\Records\AbstractModels\RecordManager as AbstractRecordManager;
+use Nip\Records\RecordManager;
 use Nip\Records\Locator\ModelLocator;
 
 /**
@@ -38,10 +39,11 @@ class DownloadStatsProcess
     }
 
     /**
-     * @param RecordManager|PdfLettersTrait $letterManager
+     * @param RecordManager|AbstractRecordManager|PdfLettersTrait $letterManager
      */
-    protected function processForManager(RecordManager $letterManager)
+    protected function processForManager(AbstractRecordManager $letterManager)
     {
+        /** @noinspection PhpUnhandledExceptionInspection */
         if (!$letterManager->hasRelation('Downloads')) {
             return;
         }
@@ -63,15 +65,16 @@ class DownloadStatsProcess
      */
     protected function getLastLettersFromDownloads($letterManager, $downloadsManager)
     {
+        /** @noinspection PhpUnhandledExceptionInspection */
         $letterPK = $letterManager->getRelation('Downloads')->getFK();
 
         $queryDownloads = $downloadsManager->newSelectQuery();
         $queryDownloads->setCols($letterPK);
         $queryDownloads->group($letterPK);
-        $queryDownloads->limit(10);
 
         $queryLetters = $letterManager->newSelectQuery();
         $queryLetters->where('id IN ?', $queryDownloads);
+        $queryLetters->limit(10);
 
         return $letterManager->findByQuery($queryLetters);
     }

@@ -9,6 +9,8 @@ use Nip\Records\Traits\AbstractTrait\RecordsTrait as AbstractRecordsTrait;
 /**
  * Class StatsTrait
  * @package ByTIC\DocumentGenerator\PdfLetters\Models\Stats
+ *
+ * @method StatTrait getNew
  */
 trait StatsTrait
 {
@@ -19,5 +21,21 @@ trait StatsTrait
      */
     public function compileForLetter($letter)
     {
+    }
+
+    /**
+     * @param $letter
+     * @param $related
+     * @param $value
+     * @return StatTrait
+     */
+    public function create($letter, $related, $value)
+    {
+        $stat = $this->getNew();
+        $stat->populateFromLetter($letter);
+        $stat->populateFromRelated($related);
+        $stat->value = $value;
+        $stat->insert();
+        return $stat;
     }
 }

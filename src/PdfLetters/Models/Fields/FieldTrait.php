@@ -32,7 +32,7 @@ trait FieldTrait
      */
     public function getName()
     {
-        return translator()->translate($this->field);
+        return translator()->trans($this->field);
     }
 
     /**

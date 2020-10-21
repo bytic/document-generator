@@ -9,9 +9,10 @@ use ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters\PdfLetters;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Recipients\Recipient;
 use ByTIC\MediaLibrary\Media\Media;
 use Mockery;
+use Nip\Filesystem\File;
+use setasign\Fpdi\Tcpdf\Fpdi;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use const setasign\Fpdi\TcpdfFpdi;
-use setasign\Fpdi\Tcpdf\Fpdi;
 
 /**
  * Class PdfLetterTraitTest
@@ -30,7 +31,6 @@ class PdfLetterTraitTest extends AbstractTest
             TEST_FIXTURE_PATH . '/files/file.pdf',
             'test original name.pdf',
             'application/pdf',
-            null,
             null,
             true
         );
@@ -52,7 +52,6 @@ class PdfLetterTraitTest extends AbstractTest
             'test original name.doc',
             null,
             null,
-            null,
             true
         );
 
@@ -62,8 +61,17 @@ class PdfLetterTraitTest extends AbstractTest
 
     public function testGenerateNewPdfObj()
     {
-        $letter = new PdfLetter();
+        /** @var PdfLetter|Mockery\Mock $letter */
+        $letter = Mockery::mock(PdfLetter::class)->makePartial();
         $letter->id = 99;
+
+        $mediaFile = new Media();
+        $mediaFile->setFile((new File())
+            ->setPath('/files/pdf_letters/99/file.pdf')
+            ->setFilesystem($letter->getMediaFilesystemDisk())
+        );
+
+        $letter->shouldReceive('getFile')->andReturn($mediaFile);
 
         $letter->setManager(PdfLetters::instance());
 
@@ -83,6 +91,14 @@ class PdfLetterTraitTest extends AbstractTest
 
         $letter->setManager(PdfLetters::instance());
         $letter->id = 99;
+
+        $mediaFile = new Media();
+        $mediaFile->setFile((new File())
+            ->setPath('/files/pdf_letters/99/file.pdf')
+            ->setFilesystem($letter->getMediaFilesystemDisk())
+        );
+
+        $letter->shouldReceive('getFile')->andReturn($mediaFile);
 
         $recipient = new Recipient();
         $mediaRecord = Mockery::mock(MediaRecord::class);

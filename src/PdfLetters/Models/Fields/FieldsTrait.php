@@ -90,4 +90,9 @@ trait FieldsTrait
             $this->populateTagsFromType($type);
         }
     }
+
+    protected function registerSmartPropertyType()
+    {
+        $this->registerSmartProperty('field', 'Type');
+    }
 }

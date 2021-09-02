@@ -2,6 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\PdfLetters\Models\Fields\Types;
 
+use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\Attributes\TextTransform;
 use ByTIC\DocumentGenerator\PdfLetters\PdfHelper;
 use setasign\Fpdi\Tcpdf\Fpdi;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
@@ -23,6 +24,8 @@ trait TextTypeTrait
 
         /** Set positions before Fonts and colors */
         $value = $this->getItem()->getValue($model);
+        $value = TextTransform::transform($value, $this->getItem()->getMetaData(TextTransform::NAME));
+
         $y = PdfHelper::pdfYPosition($pdf, $value, $this->getItem()->y);
         $x = PdfHelper::pdfXPosition($pdf, $value, $this->getItem()->x, $this->getItem()->align);
 

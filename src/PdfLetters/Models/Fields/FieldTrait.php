@@ -2,10 +2,13 @@
 
 namespace ByTIC\DocumentGenerator\PdfLetters\Models\Fields;
 
+use ByTIC\DataObjects\Casts\Metadata\Metadata;
+use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\Attributes\TextTransform;
 use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\Types\AbstractType;
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
-use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
 use ByTIC\Models\SmartProperties\RecordsTraits\HasTypes\RecordTrait as HasTypeRecordTrait;
+use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
+use ByTIC\DataObjects\Casts\Metadata\AsMetadataObject;
 use setasign\Fpdi\Fpdi;
 
 /**
@@ -19,6 +22,7 @@ use setasign\Fpdi\Fpdi;
  * @property string $align
  * @property string $x
  * @property string $y
+ * @property string|Metadata $metadata
  *
  * @method FieldsTrait getManager()
  * @method AbstractType getType()
@@ -26,6 +30,11 @@ use setasign\Fpdi\Fpdi;
 trait FieldTrait
 {
     use HasTypeRecordTrait;
+
+    public function bootFieldTrait()
+    {
+        $this->addCast('metadata', AsMetadataObject::class . ':json');
+    }
 
     /**
      * @return string
@@ -101,6 +110,31 @@ trait FieldTrait
         }
 
         return null;
+    }
+
+    public function setTextTransform($value)
+    {
+        $this->addMetaData(TextTransform::NAME, $value);
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     */
+    public function addMetaData($key, $value)
+    {
+        $this->metadata->set($key, $value);
+    }
+
+
+    /**
+     * @param $key
+     * @param null $default
+     * @return Metadata|mixed|string|null
+     */
+    public function getMetaData($key, $default = null)
+    {
+        return $this->metadata->get($key, $default);
     }
 
     /**

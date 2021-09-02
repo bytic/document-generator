@@ -4,6 +4,8 @@ namespace ByTIC\DocumentGenerator\PdfLetters\Models\Fields;
 
 use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\Types\AbstractType;
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLettersTrait;
+use Nip\MailModule\Models\EmailsTable\EmailTrait;
+use Nip\Records\EventManager\Events\Event;
 use Nip\Records\Traits\AbstractTrait\RecordsTrait as AbstractRecordsTrait;
 use ByTIC\Models\SmartProperties\RecordsTraits\HasTypes\RecordsTrait as HasTypeRecordsTrait;
 
@@ -24,6 +26,20 @@ trait FieldsTrait
      * @var null
      */
     protected $mergeFieldsType = null;
+
+
+    public function bootFieldsTrait()
+    {
+        static::creating(function (Event $event) {
+
+            /** @var FieldTrait|\Nip\Records\Record $record */
+            $record = $event->getRecord();
+
+            $record->setIf('metadata', '{}', function () use ($record) {
+                return count($record->metadata) < 1;
+            });
+        });
+    }
 
     /**
      * @return array

@@ -11,6 +11,8 @@ class TextLine extends AbstractObject
 
     protected $size;
 
+    protected $align = null;
+
     protected $colorArray;
 
     protected $multiline = true;
@@ -22,6 +24,7 @@ class TextLine extends AbstractObject
     {
         parent::populateFromField($field);
         $this->size = $field->size;
+        $this->align = $field->align;
         $this->colorArray = $field->getColorArray();
 
         $this->value = TextTransform::transform($this->value, $field->getMetaData(TextTransform::NAME));
@@ -40,6 +43,7 @@ class TextLine extends AbstractObject
 
     protected function writeMultiLine($value)
     {
+        $value = (string) $value;
         $lines = explode("\n", $value);
         $y = $this->y;
         $height = $this->size*0.5;

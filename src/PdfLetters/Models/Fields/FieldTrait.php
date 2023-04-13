@@ -77,6 +77,7 @@ trait FieldTrait
     {
         if ($model->id > 0) {
             $valueType = $this->getType()->getValue($model);
+            $valueType = html_entity_decode($valueType);
 
             return $valueType;
         }

@@ -3,7 +3,6 @@
 namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters;
 
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
-use ByTIC\MediaLibrary\Collections\Collection;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\Loaders\Filesystem;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;

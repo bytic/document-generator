@@ -172,6 +172,130 @@ trait PdfLetterTrait
         return $pdf;
     }
 
+    public function getEditorPayload(): array
+    {
+        return [
+            'pdfSource' => $this->getEditorPdfSource(),
+            'pages' => $this->getEditorPages(),
+            'fields' => $this->getEditorFields(),
+            'availableFields' => $this->getAvailableEditorFields(),
+        ];
+    }
+
+    public function getEditorPages(): array
+    {
+        $pdf = $this->generateNewPdfObj();
+        $pages = [];
+        $pageCount = $pdf->getNumPages();
+        for ($page = 1; $page <= $pageCount; $page++) {
+            $pdf->setPage($page);
+            $pages[] = [
+                'number' => $page,
+                'width' => (float)$pdf->getPageWidth(),
+                'height' => (float)$pdf->getPageHeight(),
+            ];
+        }
+        if ($pageCount > 0) {
+            $pdf->setPage(1);
+        }
+
+        return $pages;
+    }
+
+    public function getEditorFields(): array
+    {
+        $fields = [];
+        foreach ($this->getCustomFields() as $field) {
+            $fields[] = $field->toEditorArray();
+        }
+
+        return $fields;
+    }
+
+    public function getEditorPdfSource(): string
+    {
+        $file = $this->getFile();
+        if (!$file) {
+            return '';
+        }
+
+        return 'data:application/pdf;base64,' . base64_encode($file->read());
+    }
+
+    public function getAvailableEditorFields(): array
+    {
+        $manager = $this->getCustomFieldsManager();
+        $mergeFields = $manager->getMergeFields();
+        $counters = $this->getEditorFieldCounters();
+        $data = [];
+        foreach ($mergeFields as $category => $fields) {
+            $categoryFields = [];
+            foreach ($fields as $field) {
+                $categoryFields[] = [
+                    'name' => $field,
+                    'label' => translator()->trans($field),
+                    'type' => $manager->getFieldTypeFromMergeTag($field),
+                    'count' => $counters[$field] ?? 0,
+                ];
+            }
+            $data[] = [
+                'name' => $category,
+                'label' => translator()->trans($category),
+                'fields' => $categoryFields,
+            ];
+        }
+
+        return $data;
+    }
+
+    public function syncEditorFields(array $fields): array
+    {
+        $manager = $this->getCustomFieldsManager();
+        $existingFields = [];
+        foreach ($this->getCustomFields() as $field) {
+            if (isset($field->id)) {
+                $existingFields[(int)$field->id] = $field;
+            }
+        }
+
+        $persisted = [];
+        $submittedIds = [];
+        foreach ($fields as $definition) {
+            if (!is_array($definition) || empty($definition['field'])) {
+                continue;
+            }
+
+            $fieldId = isset($definition['id']) ? (int)$definition['id'] : 0;
+            $field = $fieldId > 0 && isset($existingFields[$fieldId])
+                ? $existingFields[$fieldId]
+                : $manager->getNew();
+
+            if (!$fieldId || !isset($existingFields[$fieldId])) {
+                $field->populateFromLetter($this);
+            }
+
+            $field->fillFromEditorData($definition);
+            if ($fieldId > 0 && isset($existingFields[$fieldId])) {
+                $field->save();
+            } else {
+                $field->insert();
+            }
+
+            if (isset($field->id)) {
+                $submittedIds[(int)$field->id] = true;
+            }
+            $persisted[] = $field->toEditorArray();
+        }
+
+        foreach ($existingFields as $fieldId => $field) {
+            if (!isset($submittedIds[$fieldId])) {
+                $field->delete();
+            }
+        }
+
+        return $persisted;
+    }
+
     /**
      * @return Fpdi\Tcpdf\Fpdi|TCPDF
      * @throws Fpdi\PdfParser\CrossReference\CrossReferenceException
@@ -327,5 +451,23 @@ trait PdfLetterTrait
         $filesCollection = $mediaRepository->getCollection('files');
         $filesCollection->getConstraint()->mimeTypes = ['application/pdf'];
         return $mediaRepository;
+    }
+
+    protected function getCustomFieldsManager()
+    {
+        return $this->getManager()->getRelation('CustomFields')->getWith();
+    }
+
+    protected function getEditorFieldCounters(): array
+    {
+        $counters = [];
+        foreach ($this->getCustomFields() as $field) {
+            if (!isset($counters[$field->field])) {
+                $counters[$field->field] = 0;
+            }
+            $counters[$field->field]++;
+        }
+
+        return $counters;
     }
 }

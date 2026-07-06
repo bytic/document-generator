@@ -14,6 +14,7 @@ abstract class AbstractObject
 
     protected $x;
     protected $y;
+    protected int $page = 1;
 
     /**
      * @param FieldTrait $field
@@ -36,6 +37,7 @@ abstract class AbstractObject
     {
         $this->x = $field->x;
         $this->y = $field->y;
+        $this->page = method_exists($field, 'getPage') ? $field->getPage() : 1;
     }
 
     abstract public function write();

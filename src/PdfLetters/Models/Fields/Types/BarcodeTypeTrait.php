@@ -19,7 +19,7 @@ trait BarcodeTypeTrait
     public function addToPdf($pdf, $model)
     {
         $value = $this->getItem()->getValue($model);
-        $y = PdfHelper::pdfYPosition($pdf, $value, $this->getItem()->y);
+        $y = PdfHelper::pdfYPosition($pdf, $value, $this->getItem()->y, $this->getItem()->getPage());
         $x = PdfHelper::pdfXPosition($pdf, $value, $this->getItem()->x, $this->getItem()->align);
 
         $style = [

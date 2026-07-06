@@ -82,7 +82,13 @@
                     const row = document.createElement('div');
                     row.className = 'dg-pdf-editor__palette-item';
                     const meta = document.createElement('div');
-                    meta.innerHTML = '<strong>' + (fieldDefinition.label || fieldDefinition.name) + '</strong><br><small>' + countForField(fieldDefinition.name) + ' placed</small>';
+                    const strong = document.createElement('strong');
+                    strong.textContent = fieldDefinition.label || fieldDefinition.name;
+                    const small = document.createElement('small');
+                    small.textContent = countForField(fieldDefinition.name) + ' placed';
+                    meta.appendChild(strong);
+                    meta.appendChild(document.createElement('br'));
+                    meta.appendChild(small);
 
                     const button = document.createElement('button');
                     button.type = 'button';
@@ -116,19 +122,12 @@
         }
 
         function renderPages() {
-            pagesWrap.innerHTML = '';
             state.pages.forEach(function (page) {
-                const pageNode = document.createElement('section');
-                pageNode.className = 'dg-pdf-editor__page';
-                pageNode.style.width = '900px';
-                pageNode.style.height = ((900 / page.width) * page.height) + 'px';
-                pageNode.dataset.page = String(page.number);
-
-                const iframe = document.createElement('iframe');
-                iframe.src = (state.pdfSource || '') + '#page=' + page.number + '&toolbar=0&navpanes=0&scrollbar=0';
-
-                const overlay = document.createElement('div');
-                overlay.className = 'dg-pdf-editor__overlay';
+                const pageNode = pagesWrap.querySelector('[data-page="' + page.number + '"]');
+                if (!pageNode) return;
+                const overlay = pageNode.querySelector('.dg-pdf-editor__overlay');
+                if (!overlay) return;
+                overlay.innerHTML = '';
 
                 state.fields.forEach(function (field, index) {
                     if ((field.page || 1) !== page.number) return;
@@ -149,10 +148,6 @@
                     bindDragging(node, overlay, page, field);
                     overlay.appendChild(node);
                 });
-
-                pageNode.appendChild(iframe);
-                pageNode.appendChild(overlay);
-                pagesWrap.appendChild(pageNode);
             });
         }
 

@@ -52,7 +52,22 @@
         </div>
     </aside>
     <main class="dg-pdf-editor__workspace">
-        <div class="dg-pdf-editor__pages"></div>
+        <div class="dg-pdf-editor__pages">
+            <?php foreach (($payload['pages'] ?? []) as $page) : ?>
+                <?php
+                $width = isset($page['width']) && (float)$page['width'] > 0 ? (float)$page['width'] : 1;
+                $height = isset($page['height']) ? (float)$page['height'] : 1;
+                ?>
+                <section
+                    class="dg-pdf-editor__page"
+                    data-page="<?= (int)$page['number'] ?>"
+                    style="width: 900px; height: <?= (($height / $width) * 900) ?>px;"
+                >
+                    <iframe src="<?= htmlspecialchars(($payload['pdfSource'] ?? '') . '#page=' . (int)$page['number'] . '&toolbar=0&navpanes=0&scrollbar=0', ENT_QUOTES, 'UTF-8') ?>"></iframe>
+                    <div class="dg-pdf-editor__overlay"></div>
+                </section>
+            <?php endforeach; ?>
+        </div>
     </main>
 </div>
 <script><?= $js ?></script>

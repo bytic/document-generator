@@ -309,17 +309,87 @@ trait PdfLetterTrait
         $pdf = static::newPdfBuilder('L');
 
         $mediaFile = $this->getFile();
-        $pageCount = $pdf->setSourceFile($mediaFile->getFile()->readStream());
-        for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
-            $tplidx = $pdf->importPage($pageNo, '/MediaBox');
-
-            $pdf->AddPage(ucfirst($this->orientation), $this->format);
-            $pdf->useTemplate($tplidx);
-            $pdf->endPage();
+        $source = $this->getPdfSource($mediaFile);
+        if ($source === null) {
+            return $pdf;
         }
-        $pdf->setPage(1);
+
+        $shouldDeleteSource = is_string($source);
+        $pageCount = 0;
+        try {
+            $pageCount = $pdf->setSourceFile($source);
+            for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+                $tplidx = $pdf->importPage($pageNo, '/MediaBox');
+
+                $pdf->AddPage(ucfirst($this->orientation), $this->format);
+                $pdf->useTemplate($tplidx);
+                $pdf->endPage();
+            }
+            $pdf->setPage(1);
+        } finally {
+            if ($shouldDeleteSource) {
+                @unlink($source);
+            }
+        }
 
         return $pdf;
+    }
+
+    /**
+     * @param mixed $mediaFile
+     * @return resource|string|null
+     */
+    protected function getPdfSource($mediaFile)
+    {
+        if (!$mediaFile) {
+            return null;
+        }
+
+        $stream = $mediaFile->getFile()->readStream();
+        if (is_resource($stream)) {
+            $metadata = stream_get_meta_data($stream);
+            if (!empty($metadata['seekable'])) {
+                if (!rewind($stream)) {
+                    return null;
+                }
+
+                return $stream;
+            }
+
+            $contents = stream_get_contents($stream);
+            if (!is_string($contents)) {
+                return null;
+            }
+
+            return $this->temporaryPdfFileFromContents($contents);
+        }
+
+        $contents = $mediaFile->read();
+        if (!is_string($contents) || $contents === '') {
+            return null;
+        }
+
+        return $this->temporaryPdfFileFromContents($contents);
+    }
+
+    /**
+     * @param string $contents
+     * @return string|null
+     */
+    protected function temporaryPdfFileFromContents(string $contents)
+    {
+        $tmpFile = tempnam(sys_get_temp_dir(), 'fpdi_');
+        if ($tmpFile === false) {
+            return null;
+        }
+
+        if (file_put_contents($tmpFile, $contents) === false) {
+            @unlink($tmpFile);
+
+            return null;
+        }
+
+        return $tmpFile;
     }
 
     /**
@@ -358,6 +428,10 @@ trait PdfLetterTrait
             return $uploadedFile->getErrorMessage();
         }
 
+        if (!$this->canOpenPdfWithFpdi($uploadedFile)) {
+            return 'INVALID_PDF_CONTENT_ERROR';
+        }
+
         try {
             $fileAdder = $this->addFile($uploadedFile);
             $newMedia = $fileAdder->getMedia();
@@ -371,6 +445,28 @@ trait PdfLetterTrait
             }
         }
         return $newMedia;
+    }
+
+    protected function canOpenPdfWithFpdi(UploadedFile $uploadedFile): bool
+    {
+        $path = $uploadedFile->getRealPath();
+        if (!$path || !is_file($path)) {
+            return false;
+        }
+
+        $pdf = null;
+        try {
+            $pdf = static::newPdfBuilder('L');
+            $pdf->setSourceFile($path);
+
+            return true;
+        } catch (\Throwable $throwable) {
+            return false;
+        } finally {
+            if ($pdf instanceof Fpdi\Tcpdf\Fpdi) {
+                $pdf->close();
+            }
+        }
     }
 
     /**

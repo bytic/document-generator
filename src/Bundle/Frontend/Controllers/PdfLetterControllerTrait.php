@@ -1,17 +1,13 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Controllers\Frontend;
+namespace ByTIC\DocumentGenerator\Bundle\Frontend\Controllers;
 
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLettersTrait;
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
-use ByTIC\MediaLibrary\Media\Media;
-use Nip\Controllers\Traits\AbstractControllerTrait;
-use Nip\Records\Record;
-use Nip\Records\RecordManager;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use ByTIC\DocumentGenerator\Bundle\Frontend\Controllers\AbstractControllerTrait as BundleFrontendAbstractControllerTrait;
 
 /**
- * Trait AdminPdfLetterControllerTrait
+ * Trait FrontendPdfLetterControllerTrait
  * @package ByTIC\DocumentGenerator\PdfLetters
  *
  * @method PdfLetterTrait getModelFromRequest()
@@ -19,7 +15,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 trait PdfLetterControllerTrait
 {
-    use AbstractControllerTrait;
+    use BundleFrontendAbstractControllerTrait;
 
     public function generate()
     {
@@ -28,7 +24,7 @@ trait PdfLetterControllerTrait
         /** @var PdfLetterTrait $diploma */
         $diploma = $this->getLetterFromRecipient($recipient);
 
-        $diploma->addDownload($result);
+        $diploma->addDownload($recipient);
 
         $diploma->download($recipient);
         die();

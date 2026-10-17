@@ -1,29 +1,41 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Controllers\Admin\Fields;
+namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers;
 
 use ByTIC\DocumentGenerator\PdfLetters\Editor\PdfLetterEditorAssets;
-use ByTIC\DocumentGenerator\PdfLetters\Editor\PdfLetterEditorRenderer;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @property mixed $pdfLetter
+ * @method mixed getModelFromRequest($key = false)
+ */
 trait PdfLetterFieldsEditorControllerTrait
 {
-    public function editor(): Response
+    public function editor(): void
     {
         $letter = $this->requirePdfLetterEditorRecord();
-        $content = PdfLetterEditorRenderer::render(
+        $css = file_get_contents(PdfLetterEditorAssets::cssPath());
+        $js = file_get_contents(PdfLetterEditorAssets::jsPath());
+        if (!is_string($css) || !is_string($js)) {
+            throw new \RuntimeException('Unable to load PDF letter editor assets');
+        }
+        if (stripos($css, '</style>') !== false) {
+            throw new \RuntimeException('Invalid CSS content in PDF letter editor assets');
+        }
+        if (stripos($js, '</script>') !== false) {
+            throw new \RuntimeException('Invalid JS content in PDF letter editor assets');
+        }
+
+        $this->payload()->with(
             [
                 'title' => $letter->getName(),
                 'payload' => $letter->getEditorPayload(),
                 'saveUrl' => $this->getPdfLetterEditorSaveUrl(),
                 'dataUrl' => $this->getPdfLetterEditorDataUrl(),
-                'css' => file_get_contents(PdfLetterEditorAssets::cssPath()),
-                'js' => file_get_contents(PdfLetterEditorAssets::jsPath()),
+                'css' => $css,
+                'js' => $js,
             ]
         );
-
-        return new Response($content);
     }
 
     public function editorData(): JsonResponse
@@ -47,11 +59,13 @@ trait PdfLetterFieldsEditorControllerTrait
 
     protected function getPdfLetterEditorDataUrl(): string
     {
+        // Intentionally shared with save URL; routing differentiates by HTTP method.
         return $this->getRequest()->getRequestUri();
     }
 
     protected function getPdfLetterEditorSaveUrl(): string
     {
+        // Intentionally shared with data URL; routing differentiates by HTTP method.
         return $this->getRequest()->getRequestUri();
     }
 

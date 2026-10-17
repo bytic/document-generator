@@ -1,11 +1,10 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Controllers\Admin;
+namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers;
 
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLettersTrait;
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
 use ByTIC\MediaLibrary\Media\Media;
-use Nip\Controllers\Traits\AbstractControllerTrait;
 use Nip\Records\Record;
 use Nip\Records\RecordManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -39,7 +38,7 @@ trait PdfLetterControllerTrait
 
     public function upload()
     {
-        if ($_FILES['letter']) {
+        if ($this->getRequest()->files->has('letter')) {
             $parent = $this->getParent();
             if ($parent) {
                 /** @var UploadedFile $uploadedFile */
@@ -47,6 +46,7 @@ trait PdfLetterControllerTrait
 
                 if (!$uploadedFile->isValid()) {
                     $this->flashRedirectLetter($parent, $uploadedFile->getErrorMessage(), 'error');
+                    return;
                 }
 
                 $letter = $this->getModelFromRequest();
@@ -62,9 +62,9 @@ trait PdfLetterControllerTrait
                     $letter->delete();
                     $this->flashRedirectLetter($parent, $result, 'error');
                 }
-                die('end');
+                return;
             }
-            die('no valid item');
+            return;
         }
     }
 
@@ -75,6 +75,7 @@ trait PdfLetterControllerTrait
 
         if ($letter->hasFile()) {
             $letter->downloadExample();
+            return;
         }
 
         $this->flashRedirectLetter($item, $this->getModelManager()->getMessage('no-file'), 'error');
@@ -86,7 +87,7 @@ trait PdfLetterControllerTrait
         $parent = $letter->getItem();
         if ($letter->hasFile()) {
             $letter->downloadBlank();
-            die('');
+            return;
         }
 
         $this->flashRedirectLetter($parent, $this->getModelManager()->getMessage('no-file'), 'error');
@@ -133,7 +134,7 @@ trait PdfLetterControllerTrait
         $letter = $this->getModelFromRequest();
 
         if (!$letter) {
-            $this->redirect($this->getModelManager()->getUploadURL($_GET));
+            $this->redirect($this->getModelManager()->getUploadURL($this->getRequest()->query->all()));
         }
         return $letter;
     }

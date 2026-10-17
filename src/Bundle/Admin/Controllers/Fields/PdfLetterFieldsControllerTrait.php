@@ -1,9 +1,9 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Controllers\Admin\Fields;
+namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers\Fields;
 
+use ByTIC\DocumentGenerator\Bundle\Admin\Controllers\AbstractControllerTrait;
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
-use Nip\Controllers\Traits\AbstractControllerTrait;
 use Nip\Records\AbstractModels\Record;
 
 /**
@@ -63,7 +63,7 @@ trait PdfLetterFieldsControllerTrait
 
     /**
      * @param bool $key
-     * @return FieldTrait|Record
+     * @return Record
      */
     abstract protected function getModelFromRequest($key = false);
 

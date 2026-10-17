@@ -59,6 +59,25 @@ class PdfLetterTraitTest extends AbstractTest
         parent::assertSame('INVALID_MIME_TYPE_ERROR', $response);
     }
 
+    public function testUploadFromRequestWithInvalidPdfContent()
+    {
+        $letter = new PdfLetter();
+        $letter->id = 10;
+
+        $letter->setManager(PdfLetters::instance());
+
+        $uploadedFile = new UploadedFile(
+            TEST_FIXTURE_PATH . '/files/not-a-pdf.txt',
+            'broken.pdf',
+            'application/pdf',
+            null,
+            true
+        );
+
+        $response = $letter->uploadFromRequest($uploadedFile);
+        parent::assertSame('INVALID_PDF_CONTENT_ERROR', $response);
+    }
+
     public function testGenerateNewPdfObj()
     {
         /** @var PdfLetter|Mockery\Mock $letter */

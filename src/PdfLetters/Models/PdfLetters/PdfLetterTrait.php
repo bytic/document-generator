@@ -428,6 +428,10 @@ trait PdfLetterTrait
             return $uploadedFile->getErrorMessage();
         }
 
+        if (!$this->canOpenPdfWithFpdi($uploadedFile)) {
+            return 'INVALID_PDF_CONTENT_ERROR';
+        }
+
         try {
             $fileAdder = $this->addFile($uploadedFile);
             $newMedia = $fileAdder->getMedia();
@@ -441,6 +445,28 @@ trait PdfLetterTrait
             }
         }
         return $newMedia;
+    }
+
+    protected function canOpenPdfWithFpdi(UploadedFile $uploadedFile): bool
+    {
+        $path = $uploadedFile->getRealPath();
+        if (!$path || !is_file($path)) {
+            return false;
+        }
+
+        $pdf = null;
+        try {
+            $pdf = static::newPdfBuilder('L');
+            $pdf->setSourceFile($path);
+
+            return true;
+        } catch (\Throwable $throwable) {
+            return false;
+        } finally {
+            if ($pdf instanceof Fpdi\Tcpdf\Fpdi) {
+                $pdf->close();
+            }
+        }
     }
 
     /**

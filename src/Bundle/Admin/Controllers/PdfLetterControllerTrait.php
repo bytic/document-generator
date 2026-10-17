@@ -46,6 +46,7 @@ trait PdfLetterControllerTrait
 
                 if (!$uploadedFile->isValid()) {
                     $this->flashRedirectLetter($parent, $uploadedFile->getErrorMessage(), 'error');
+                    return;
                 }
 
                 $letter = $this->getModelFromRequest();

@@ -9,6 +9,9 @@ trait AbstractControllerTrait
 {
     use \Nip\Controllers\Traits\AbstractControllerTrait;
 
+    /**
+     * Consuming controllers must inherit a parent controller that defines registerViewPaths.
+     */
     public function registerViewPaths(View $view): void
     {
         parent::registerViewPaths($view);

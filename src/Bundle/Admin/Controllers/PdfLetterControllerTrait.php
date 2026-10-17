@@ -38,7 +38,7 @@ trait PdfLetterControllerTrait
 
     public function upload()
     {
-        if ($_FILES['letter']) {
+        if ($this->getRequest()->files->has('letter')) {
             $parent = $this->getParent();
             if ($parent) {
                 /** @var UploadedFile $uploadedFile */

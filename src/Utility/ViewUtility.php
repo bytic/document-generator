@@ -11,7 +11,7 @@ class ViewUtility
      */
     public static function registerViewPaths($view, $module = null): void
     {
-        $path = realpath($module ? PathsHelpers::views('/' . $module) : PathsHelpers::views());
+        $path = $module ? realpath(PathsHelpers::views('/' . $module)) : false;
         if (!$path) {
             $path = realpath(PathsHelpers::views());
         }

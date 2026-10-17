@@ -62,9 +62,9 @@ trait PdfLetterControllerTrait
                     $letter->delete();
                     $this->flashRedirectLetter($parent, $result, 'error');
                 }
-                die('end');
+                return;
             }
-            die('no valid item');
+            return;
         }
     }
 
@@ -87,7 +87,7 @@ trait PdfLetterControllerTrait
         $parent = $letter->getItem();
         if ($letter->hasFile()) {
             $letter->downloadBlank();
-            die('');
+            return;
         }
 
         $this->flashRedirectLetter($parent, $this->getModelManager()->getMessage('no-file'), 'error');

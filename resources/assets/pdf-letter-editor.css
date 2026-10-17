@@ -128,6 +128,7 @@
 .dg-pdf-editor__overlay {
     position: absolute;
     inset: 0;
+    touch-action: none;
 }
 
 .dg-pdf-editor__field {
@@ -141,6 +142,7 @@
     cursor: move;
     user-select: none;
     white-space: nowrap;
+    touch-action: none;
 }
 
 .dg-pdf-editor__field.is-selected {

@@ -4,6 +4,7 @@ namespace ByTIC\DocumentGenerator\Bundle\Frontend\Controllers;
 
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLettersTrait;
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
+use ByTIC\DocumentGenerator\Bundle\Frontend\Controllers\AbstractControllerTrait as BundleFrontendAbstractControllerTrait;
 
 /**
  * Trait FrontendPdfLetterControllerTrait
@@ -14,7 +15,7 @@ use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
  */
 trait PdfLetterControllerTrait
 {
-    use \ByTIC\DocumentGenerator\Bundle\Frontend\Controllers\AbstractControllerTrait;
+    use BundleFrontendAbstractControllerTrait;
 
     public function generate()
     {

@@ -2,6 +2,8 @@
 
 namespace ByTIC\DocumentGenerator\Utility;
 
+use Nip\View\View;
+
 class ViewUtility
 {
     public const NAME = 'DocumentGenerator';
@@ -9,7 +11,7 @@ class ViewUtility
     /**
      * Registers module-specific views when available and falls back to the base views directory.
      */
-    public static function registerViewPaths($view, $module = null): void
+    public static function registerViewPaths(View $view, $module = null): void
     {
         $path = $module ? realpath(PathsHelpers::views('/' . $module)) : false;
         if (!$path) {

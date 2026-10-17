@@ -14,6 +14,7 @@ class PdfLetterEditorRenderer
     ): string
     {
         $template = PdfLetterEditorAssets::templatePath();
+        $js = str_replace('</script>', '<\/script>', $js);
 
         ob_start();
         include $template;

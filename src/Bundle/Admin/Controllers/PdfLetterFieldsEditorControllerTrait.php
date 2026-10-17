@@ -20,6 +20,7 @@ trait PdfLetterFieldsEditorControllerTrait
         if (!is_string($css) || !is_string($js)) {
             throw new \RuntimeException('Unable to load PDF letter editor assets');
         }
+        $js = str_replace('</script>', '<\/script>', $js);
 
         $content = $this->getView()->load(
             'pdf-letter-editor',

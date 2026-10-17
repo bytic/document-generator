@@ -134,7 +134,7 @@ trait PdfLetterControllerTrait
         $letter = $this->getModelFromRequest();
 
         if (!$letter) {
-            $this->redirect($this->getModelManager()->getUploadURL($_GET));
+            $this->redirect($this->getModelManager()->getUploadURL($this->getRequest()->query->all()));
         }
         return $letter;
     }

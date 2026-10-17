@@ -4,7 +4,6 @@ namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers;
 
 use ByTIC\DocumentGenerator\PdfLetters\Editor\PdfLetterEditorAssets;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @property mixed $pdfLetter
@@ -12,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 trait PdfLetterFieldsEditorControllerTrait
 {
-    public function editor(): Response
+    public function editor(): void
     {
         $letter = $this->requirePdfLetterEditorRecord();
         $css = file_get_contents(PdfLetterEditorAssets::cssPath());
@@ -23,8 +22,7 @@ trait PdfLetterFieldsEditorControllerTrait
         $css = str_replace('</style>', '<\/style>', $css);
         $js = str_replace('</script>', '<\/script>', $js);
 
-        $content = $this->getView()->load(
-            'pdf-letter-editor',
+        $this->payload()->with(
             [
                 'title' => $letter->getName(),
                 'payload' => $letter->getEditorPayload(),
@@ -32,11 +30,8 @@ trait PdfLetterFieldsEditorControllerTrait
                 'dataUrl' => $this->getPdfLetterEditorDataUrl(),
                 'css' => $css,
                 'js' => $js,
-            ],
-            true
+            ]
         );
-
-        return new Response($content);
     }
 
     public function editorData(): JsonResponse

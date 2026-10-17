@@ -19,6 +19,12 @@ trait PdfLetterFieldsEditorControllerTrait
         if (!is_string($css) || !is_string($js)) {
             throw new \RuntimeException('Unable to load PDF letter editor assets');
         }
+        if (stripos($css, '</style>') !== false) {
+            throw new \RuntimeException('Invalid CSS content in PDF letter editor assets');
+        }
+        if (stripos($js, '</script>') !== false) {
+            throw new \RuntimeException('Invalid JS content in PDF letter editor assets');
+        }
 
         $this->payload()->with(
             [
@@ -26,8 +32,8 @@ trait PdfLetterFieldsEditorControllerTrait
                 'payload' => $letter->getEditorPayload(),
                 'saveUrl' => $this->getPdfLetterEditorSaveUrl(),
                 'dataUrl' => $this->getPdfLetterEditorDataUrl(),
-                'css' => base64_encode($css),
-                'js' => base64_encode($js),
+                'css' => $css,
+                'js' => $js,
             ]
         );
     }

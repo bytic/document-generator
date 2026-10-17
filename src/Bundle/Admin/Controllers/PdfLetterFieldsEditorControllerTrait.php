@@ -22,7 +22,9 @@ trait PdfLetterFieldsEditorControllerTrait
         if (stripos($css, '</style>') !== false) {
             throw new \RuntimeException('Invalid CSS content in PDF letter editor assets');
         }
-        $js = str_replace('</script>', '<\/script>', $js);
+        if (stripos($js, '</script>') !== false) {
+            throw new \RuntimeException('Invalid JS content in PDF letter editor assets');
+        }
 
         $this->payload()->with(
             [
@@ -57,11 +59,13 @@ trait PdfLetterFieldsEditorControllerTrait
 
     protected function getPdfLetterEditorDataUrl(): string
     {
+        // Intentionally shared with save URL; routing differentiates by HTTP method.
         return $this->getRequest()->getRequestUri();
     }
 
     protected function getPdfLetterEditorSaveUrl(): string
     {
+        // Intentionally shared with data URL; routing differentiates by HTTP method.
         return $this->getRequest()->getRequestUri();
     }
 

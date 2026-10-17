@@ -2,6 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\Utility;
 
+use ByTIC\DocumentGenerator\Utility\PathsHelpers;
 use Nip\View\View;
 
 class ViewUtility

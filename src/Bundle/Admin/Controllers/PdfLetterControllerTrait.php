@@ -74,6 +74,7 @@ trait PdfLetterControllerTrait
 
         if ($letter->hasFile()) {
             $letter->downloadExample();
+            return;
         }
 
         $this->flashRedirectLetter($item, $this->getModelManager()->getMessage('no-file'), 'error');

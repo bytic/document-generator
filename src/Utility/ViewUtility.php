@@ -6,6 +6,9 @@ class ViewUtility
 {
     public const NAME = 'DocumentGenerator';
 
+    /**
+     * Registers module-specific views when available and falls back to the base views directory.
+     */
     public static function registerViewPaths($view, $module = null): void
     {
         $path = realpath($module ? PathsHelpers::views('/' . $module) : PathsHelpers::views());

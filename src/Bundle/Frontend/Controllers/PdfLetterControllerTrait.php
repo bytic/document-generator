@@ -14,7 +14,7 @@ use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
  */
 trait PdfLetterControllerTrait
 {
-    use AbstractControllerTrait;
+    use \ByTIC\DocumentGenerator\Bundle\Frontend\Controllers\AbstractControllerTrait;
 
     public function generate()
     {

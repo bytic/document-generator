@@ -21,7 +21,7 @@
     data-save-url="<?= htmlspecialchars((string)$saveUrl, ENT_QUOTES, 'UTF-8') ?>"
     data-data-url="<?= htmlspecialchars((string)$dataUrl, ENT_QUOTES, 'UTF-8') ?>"
 >
-    <script type="application/json" class="dg-pdf-editor__payload"><?= json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+    <script type="application/json" class="dg-pdf-editor__payload"><?= json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) ?></script>
     <aside class="dg-pdf-editor__sidebar">
         <div class="dg-pdf-editor__sidebar-header">
             <h1><?= htmlspecialchars((string)$title, ENT_QUOTES, 'UTF-8') ?></h1>

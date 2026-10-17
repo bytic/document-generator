@@ -7,6 +7,10 @@ use ByTIC\DocumentGenerator\PdfLetters\Editor\PdfLetterEditorRenderer;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @property mixed $pdfLetter
+ * @method mixed getModelFromRequest($key = false)
+ */
 trait PdfLetterFieldsEditorControllerTrait
 {
     public function editor(): Response

@@ -309,7 +309,7 @@ trait PdfLetterTrait
         $pdf = static::newPdfBuilder('L');
 
         $mediaFile = $this->getFile();
-        $pageCount = $pdf->setSourceFile($mediaFile->getFile()->readStream());
+        $pageCount = $pdf->setSourceFile($this->getPdfSource($mediaFile));
         for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
             $tplidx = $pdf->importPage($pageNo, '/MediaBox');
 
@@ -320,6 +320,50 @@ trait PdfLetterTrait
         $pdf->setPage(1);
 
         return $pdf;
+    }
+
+    protected function getPdfSource($mediaFile)
+    {
+        if (!$mediaFile) {
+            return null;
+        }
+
+        $stream = $mediaFile->getFile()->readStream();
+        if (is_resource($stream)) {
+            $metadata = stream_get_meta_data($stream);
+            if (!empty($metadata['seekable'])) {
+                return $stream;
+            }
+            if (is_callable('stream_get_contents')) {
+                $contents = stream_get_contents($stream);
+                if (is_string($contents)) {
+                    $tmpFile = tempnam(sys_get_temp_dir(), 'fpdi_');
+                    if ($tmpFile !== false && file_put_contents($tmpFile, $contents) !== false) {
+                        register_shutdown_function(static function () use ($tmpFile) {
+                            @unlink($tmpFile);
+                        });
+
+                        return $tmpFile;
+                    }
+                }
+            }
+        }
+
+        $contents = $mediaFile->read();
+        if (!is_string($contents) || $contents === '') {
+            return null;
+        }
+
+        $tmpFile = tempnam(sys_get_temp_dir(), 'fpdi_');
+        if ($tmpFile === false || file_put_contents($tmpFile, $contents) === false) {
+            return null;
+        }
+
+        register_shutdown_function(static function () use ($tmpFile) {
+            @unlink($tmpFile);
+        });
+
+        return $tmpFile;
     }
 
     /**

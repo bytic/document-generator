@@ -4,10 +4,16 @@ namespace ByTIC\DocumentGenerator\PdfLetters\Editor;
 
 class PdfLetterEditorRenderer
 {
-    public static function render(array $data = []): string
+    public static function render(
+        string $title,
+        array $payload,
+        string $saveUrl,
+        string $dataUrl,
+        string $css,
+        string $js
+    ): string
     {
         $template = PdfLetterEditorAssets::templatePath();
-        extract($data, EXTR_SKIP);
 
         ob_start();
         include $template;

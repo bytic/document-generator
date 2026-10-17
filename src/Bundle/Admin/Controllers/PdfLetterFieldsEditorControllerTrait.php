@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers\Fields;
+namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers;
 
 use ByTIC\DocumentGenerator\PdfLetters\Editor\PdfLetterEditorAssets;
 use ByTIC\DocumentGenerator\PdfLetters\Editor\PdfLetterEditorRenderer;
@@ -13,14 +13,12 @@ trait PdfLetterFieldsEditorControllerTrait
     {
         $letter = $this->requirePdfLetterEditorRecord();
         $content = PdfLetterEditorRenderer::render(
-            [
-                'title' => $letter->getName(),
-                'payload' => $letter->getEditorPayload(),
-                'saveUrl' => $this->getPdfLetterEditorSaveUrl(),
-                'dataUrl' => $this->getPdfLetterEditorDataUrl(),
-                'css' => file_get_contents(PdfLetterEditorAssets::cssPath()),
-                'js' => file_get_contents(PdfLetterEditorAssets::jsPath()),
-            ]
+            $letter->getName(),
+            $letter->getEditorPayload(),
+            $this->getPdfLetterEditorSaveUrl(),
+            $this->getPdfLetterEditorDataUrl(),
+            file_get_contents(PdfLetterEditorAssets::cssPath()),
+            file_get_contents(PdfLetterEditorAssets::jsPath())
         );
 
         return new Response($content);

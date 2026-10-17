@@ -13,6 +13,7 @@ trait AdminPdfLetterFieldsFormTrait
     protected function initGenericElements()
     {
         $this->initPositionElements();
+        $this->initPageElement();
         $this->initSizeElement();
         $this->initColorElement();
         $this->initAlignElement();
@@ -23,6 +24,11 @@ trait AdminPdfLetterFieldsFormTrait
     {
         $this->addInput('x', 'X', true);
         $this->addInput('y', 'Y', true);
+    }
+
+    protected function initPageElement()
+    {
+        $this->addInput('page', translator()->trans('page'), true);
     }
 
     protected function initColorElement()

@@ -56,7 +56,7 @@ class TextLine extends AbstractObject
     {
         $y = $y ?: $this->y;
         $x = $x ?: $this->x;
-        $y = PdfHelper::pdfYPosition($this->pdf, $value, $y);
+        $y = PdfHelper::pdfYPosition($this->pdf, $value, $y, $this->page);
         $x = PdfHelper::pdfXPosition($this->pdf, $value, $x, $this->align);
 
         $this->pdf->Text($x, $y, $value);

@@ -40,13 +40,16 @@ class PdfHelper
      * @param $y
      * @return int|string
      */
-    public static function pdfYPosition($pdf, $value, $y)
+    public static function pdfYPosition($pdf, $value, $y, $page = null)
     {
-        $page = 1;
-        if ($y > 297) {
-            $page = round($y / 297, 0);
-            $y -= ($page * 297);
-            $page++;
+        $page = (int)$page;
+        if ($page < 1) {
+            $page = 1;
+            if ($y > 297) {
+                $page = round($y / 297, 0);
+                $y -= ($page * 297);
+                $page++;
+            }
         }
 
         if ($pdf->getPage() != $page && $page <= $pdf->getNumPages()) {

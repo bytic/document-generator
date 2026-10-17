@@ -153,27 +153,66 @@
 
         function bindDragging(node, overlay, page, field) {
             let dragging = false;
+            let scheduledUpdate = null;
+
+            function applyFieldPosition(event) {
+                const rect = overlay.getBoundingClientRect();
+                const x = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
+                const y = Math.max(0, Math.min(rect.height, event.clientY - rect.top));
+                const nextX = Number(((x / rect.width) * page.width).toFixed(2));
+                const nextY = Number(((y / rect.height) * page.height).toFixed(2));
+
+                field.x = nextX;
+                field.y = nextY;
+                field.page = page.number;
+
+                node.style.left = ((nextX / page.width) * 100) + '%';
+                node.style.top = ((nextY / page.height) * 100) + '%';
+
+                if (state.selectedFieldId === node.dataset.key) {
+                    renderForm();
+                }
+            }
+
+            function stopDragging(event) {
+                dragging = false;
+                scheduledUpdate = null;
+                if (node.hasPointerCapture && node.hasPointerCapture(event.pointerId)) {
+                    node.releasePointerCapture(event.pointerId);
+                }
+            }
 
             node.addEventListener('pointerdown', function (event) {
-                dragging = true;
-                node.setPointerCapture(event.pointerId);
-            });
+                const key = node.dataset.key;
+                if (key && state.selectedFieldId !== key) {
+                    state.selectedFieldId = key;
+                    renderPages();
+                    renderForm();
+                }
 
-            node.addEventListener('pointerup', function (event) {
-                dragging = false;
-                node.releasePointerCapture(event.pointerId);
+                dragging = true;
+                event.preventDefault();
+                if (node.setPointerCapture) {
+                    node.setPointerCapture(event.pointerId);
+                }
             });
 
             node.addEventListener('pointermove', function (event) {
                 if (!dragging) return;
-                const rect = overlay.getBoundingClientRect();
-                const x = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
-                const y = Math.max(0, Math.min(rect.height, event.clientY - rect.top));
-                field.x = Number(((x / rect.width) * page.width).toFixed(2));
-                field.y = Number(((y / rect.height) * page.height).toFixed(2));
-                field.page = page.number;
-                renderForm();
-                renderPages();
+                event.preventDefault();
+
+                if (scheduledUpdate !== null) return;
+                scheduledUpdate = requestAnimationFrame(function () {
+                    scheduledUpdate = null;
+                    applyFieldPosition(event);
+                });
+            });
+
+            node.addEventListener('pointerup', stopDragging);
+            node.addEventListener('pointercancel', stopDragging);
+            node.addEventListener('lostpointercapture', function () {
+                dragging = false;
+                scheduledUpdate = null;
             });
         }
 

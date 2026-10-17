@@ -12,6 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= htmlspecialchars((string)$title, ENT_QUOTES, 'UTF-8') ?></title>
+    <!-- $css and $js come from package asset files, not request input -->
     <style><?= $css ?></style>
 </head>
 <body>

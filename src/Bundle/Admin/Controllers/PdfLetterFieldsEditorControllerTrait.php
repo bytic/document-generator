@@ -12,13 +12,19 @@ trait PdfLetterFieldsEditorControllerTrait
     public function editor(): Response
     {
         $letter = $this->requirePdfLetterEditorRecord();
+        $css = file_get_contents(PdfLetterEditorAssets::cssPath());
+        $js = file_get_contents(PdfLetterEditorAssets::jsPath());
+        if (!is_string($css) || !is_string($js)) {
+            throw new \RuntimeException('Unable to load PDF letter editor assets');
+        }
+
         $content = PdfLetterEditorRenderer::render(
             $letter->getName(),
             $letter->getEditorPayload(),
             $this->getPdfLetterEditorSaveUrl(),
             $this->getPdfLetterEditorDataUrl(),
-            file_get_contents(PdfLetterEditorAssets::cssPath()),
-            file_get_contents(PdfLetterEditorAssets::jsPath())
+            $css,
+            $js
         );
 
         return new Response($content);

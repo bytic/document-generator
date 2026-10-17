@@ -22,7 +22,7 @@ trait PdfLetterFieldsEditorControllerTrait
         }
 
         $content = $this->getView()->load(
-            PdfLetterEditorAssets::templatePath(),
+            'pdf-letter-editor',
             [
                 'title' => $letter->getName(),
                 'payload' => $letter->getEditorPayload(),

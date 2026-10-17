@@ -8,7 +8,7 @@ class PdfLetterEditorAssets
 {
     public static function templatePath(): string
     {
-        return PathsHelpers::views('/pdf-letter-editor.php');
+        return PathsHelpers::views('/admin/pdf-letter-editor.php');
     }
 
     public static function cssPath(): string

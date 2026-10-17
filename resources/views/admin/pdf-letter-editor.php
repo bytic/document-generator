@@ -12,8 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= htmlspecialchars((string)$title, ENT_QUOTES, 'UTF-8') ?></title>
-    <!-- $css and $js come from package asset files, not request input -->
-    <style><?= $css ?></style>
+    <link rel="stylesheet" href="data:text/css;base64,<?= htmlspecialchars((string)$css, ENT_QUOTES, 'UTF-8') ?>">
 </head>
 <body>
 <div
@@ -71,6 +70,6 @@
         </div>
     </main>
 </div>
-<script><?= $js ?></script>
+<script src="data:text/javascript;base64,<?= htmlspecialchars((string)$js, ENT_QUOTES, 'UTF-8') ?>"></script>
 </body>
 </html>

@@ -14,6 +14,9 @@ class ViewUtility
     public static function registerViewPaths(View $view, $module = null): void
     {
         if ($module !== null && $module !== '') {
+            if (!preg_match('/^[a-zA-Z0-9_-]+$/', (string)$module)) {
+                return;
+            }
             $path = realpath(PathsHelpers::views('/' . $module));
         } else {
             $path = realpath(PathsHelpers::views());

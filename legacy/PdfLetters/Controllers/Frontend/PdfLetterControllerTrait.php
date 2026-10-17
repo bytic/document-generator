@@ -3,7 +3,7 @@
 namespace ByTIC\DocumentGenerator\PdfLetters\Controllers\Frontend;
 
 /**
- * Trait AdminPdfLetterControllerTrait
+ * Trait FrontendPdfLetterControllerTrait
  * @package ByTIC\DocumentGenerator\PdfLetters
  *
  * @deprecated Use \ByTIC\DocumentGenerator\Bundle\Frontend\Controllers\PdfLetterControllerTrait instead.

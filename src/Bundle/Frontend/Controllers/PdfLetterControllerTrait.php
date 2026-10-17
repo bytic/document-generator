@@ -6,7 +6,7 @@ use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLettersTrait;
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
 
 /**
- * Trait AdminPdfLetterControllerTrait
+ * Trait FrontendPdfLetterControllerTrait
  * @package ByTIC\DocumentGenerator\PdfLetters
  *
  * @method PdfLetterTrait getModelFromRequest()
@@ -23,7 +23,7 @@ trait PdfLetterControllerTrait
         /** @var PdfLetterTrait $diploma */
         $diploma = $this->getLetterFromRecipient($recipient);
 
-        $diploma->addDownload($result);
+        $diploma->addDownload($recipient);
 
         $diploma->download($recipient);
         die();

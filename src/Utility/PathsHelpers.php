@@ -9,18 +9,18 @@ class PathsHelpers
         return dirname(__DIR__, 2);
     }
 
-    public static function resources($path = null): string
+    public static function resources(?string $path = null): string
     {
-        return static::basePath() . '/resources' . $path;
+        return static::basePath() . '/resources' . ($path ?? '');
     }
 
-    public static function assets($path = null): string
+    public static function assets(?string $path = null): string
     {
-        return static::resources() . '/assets' . $path;
+        return static::resources() . '/assets' . ($path ?? '');
     }
 
-    public static function views($path = null): string
+    public static function views(?string $path = null): string
     {
-        return static::resources() . '/views' . $path;
+        return static::resources() . '/views' . ($path ?? '');
     }
 }

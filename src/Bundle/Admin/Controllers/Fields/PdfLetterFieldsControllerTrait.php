@@ -63,7 +63,7 @@ trait PdfLetterFieldsControllerTrait
 
     /**
      * @param bool $key
-     * @return FieldTrait|Record
+     * @return Record
      */
     abstract protected function getModelFromRequest($key = false);
 

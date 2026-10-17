@@ -3,7 +3,6 @@
 namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers;
 
 use ByTIC\DocumentGenerator\PdfLetters\Editor\PdfLetterEditorAssets;
-use ByTIC\DocumentGenerator\PdfLetters\Editor\PdfLetterEditorRenderer;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,13 +21,17 @@ trait PdfLetterFieldsEditorControllerTrait
             throw new \RuntimeException('Unable to load PDF letter editor assets');
         }
 
-        $content = PdfLetterEditorRenderer::render(
-            $letter->getName(),
-            $letter->getEditorPayload(),
-            $this->getPdfLetterEditorSaveUrl(),
-            $this->getPdfLetterEditorDataUrl(),
-            $css,
-            $js
+        $content = $this->getView()->load(
+            PdfLetterEditorAssets::templatePath(),
+            [
+                'title' => $letter->getName(),
+                'payload' => $letter->getEditorPayload(),
+                'saveUrl' => $this->getPdfLetterEditorSaveUrl(),
+                'dataUrl' => $this->getPdfLetterEditorDataUrl(),
+                'css' => $css,
+                'js' => $js,
+            ],
+            true
         );
 
         return new Response($content);

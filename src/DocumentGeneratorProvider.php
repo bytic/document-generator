@@ -4,6 +4,8 @@ namespace ByTIC\DocumentGenerator;
 
 use ByTIC\DocumentGenerator\PdfLetters\Console\DownloadStatsProcess;
 use ByTIC\DocumentGenerator\PdfLetters\PdfLettersManager;
+use ByTIC\DocumentGenerator\Utility\PackageConfig;
+use ByTIC\DocumentGenerator\Utility\PathsHelpers;
 use Nip\Container\ServiceProviders\Providers\AbstractSignatureServiceProvider;
 
 /**
@@ -12,6 +14,8 @@ use Nip\Container\ServiceProviders\Providers\AbstractSignatureServiceProvider;
  */
 class DocumentGeneratorProvider extends AbstractSignatureServiceProvider
 {
+    public const NAME = 'document-generator';
+
     /**
      * @inheritdoc
      */
@@ -40,5 +44,14 @@ class DocumentGeneratorProvider extends AbstractSignatureServiceProvider
         $this->commands(
             DownloadStatsProcess::class
         );
+    }
+
+    public function migrations(): ?string
+    {
+        if (!PackageConfig::shouldRunMigrations()) {
+            return null;
+        }
+
+        return PathsHelpers::migrations();
     }
 }

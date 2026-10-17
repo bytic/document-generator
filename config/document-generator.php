@@ -13,7 +13,7 @@ return [
         'pdf_letter_fields' => 'pdf_letter_fields',
     ],
     'database' => [
-        'connection' => 'main',
-        'migrations' => true,
+        'connection' => null,
+        'migrations' => false,
     ],
 ];

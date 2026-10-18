@@ -1,13 +1,13 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters\Fields;
+namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Fields;
 
-use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\FieldTrait;
+use ByTIC\DocumentGenerator\Letters\Models\Fields\FieldTrait;
 use Nip\Records\Record;
 
 /**
  * Class FieldRecord
- * @package ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters\Fields
+ * @package ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Fields
  */
 class FieldRecord extends Record
 {
@@ -16,7 +16,7 @@ class FieldRecord extends Record
     /**
      * @inheritDoc
      */
-    public function getPdfLetter()
+    public function getLetter()
     {
     }
 

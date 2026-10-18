@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace ByTIC\DocumentGenerator;
 
-use ByTIC\DocumentGenerator\PdfLetters\Console\DownloadStatsProcess;
-use ByTIC\DocumentGenerator\PdfLetters\PdfLettersManager;
+use ByTIC\DocumentGenerator\Letters\Console\DownloadStatsProcess;
+use ByTIC\DocumentGenerator\Letters\LettersManager;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use ByTIC\DocumentGenerator\Utility\PathsHelpers;
 use Nip\Container\ServiceProviders\Providers\AbstractSignatureServiceProvider;
@@ -30,13 +30,13 @@ class DocumentGeneratorProvider extends AbstractSignatureServiceProvider
      */
     public function register()
     {
-        $this->registerPdfLettersManager();
+        $this->registerLettersManager();
     }
 
-    protected function registerPdfLettersManager()
+    protected function registerLettersManager()
     {
         $this->getContainer()->share('dg.pdf-letters.manager', function () {
-            return new PdfLettersManager();
+            return new LettersManager();
         });
     }
 

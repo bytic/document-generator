@@ -1,14 +1,14 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Controllers\Frontend;
+namespace ByTIC\DocumentGenerator\Letters\Controllers\Frontend;
 
 /**
- * Trait FrontendPdfLetterControllerTrait
- * @package ByTIC\DocumentGenerator\PdfLetters
+ * Trait FrontendLetterControllerTrait
+ * @package ByTIC\DocumentGenerator\Letters
  *
- * @deprecated Use \ByTIC\DocumentGenerator\Bundle\Frontend\Controllers\PdfLetterControllerTrait instead.
+ * @deprecated Use \ByTIC\DocumentGenerator\Bundle\Frontend\Controllers\LetterControllerTrait instead.
  */
-trait PdfLetterControllerTrait
+trait LetterControllerTrait
 {
-    use \ByTIC\DocumentGenerator\Bundle\Frontend\Controllers\PdfLetterControllerTrait;
+    use \ByTIC\DocumentGenerator\Bundle\Frontend\Controllers\LetterControllerTrait;
 }

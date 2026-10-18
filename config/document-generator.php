@@ -1,18 +1,18 @@
 <?php
 
-use ByTIC\DocumentGenerator\PdfDownloads\Models\PdfDownloads;
-use ByTIC\DocumentGenerator\PdfFields\Models\PdfLetterFields;
-use ByTIC\DocumentGenerator\PdfIssuers\Models\PdfIssuers;
-use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters;
-use ByTIC\DocumentGenerator\PdfStats\Models\PdfStats;
+use ByTIC\DocumentGenerator\LetterDownloads\Models\LetterDownloads;
+use ByTIC\DocumentGenerator\LetterFields\Models\LetterFields;
+use ByTIC\DocumentGenerator\LetterIssuers\Models\LetterIssuers;
+use ByTIC\DocumentGenerator\Letters\Models\Letters;
+use ByTIC\DocumentGenerator\LetterStats\Models\LetterStats;
 
 return [
     'models' => [
-        'letters' => PdfLetters::class,
-        'letter_fields' => PdfLetterFields::class,
-        'letter_downloads' => PdfDownloads::class,
-        'letter_stats' => PdfStats::class,
-        'letter_issuers' => PdfIssuers::class,
+        'letters' => Letters::class,
+        'letter_fields' => LetterFields::class,
+        'letter_downloads' => LetterDownloads::class,
+        'letter_stats' => LetterStats::class,
+        'letter_issuers' => LetterIssuers::class,
     ],
     'tables' => [
         'letters' => 'letter_letters',

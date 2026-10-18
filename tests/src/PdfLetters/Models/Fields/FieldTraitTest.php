@@ -1,9 +1,9 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Tests\PdfLetters\Models\Fields;
+namespace ByTIC\DocumentGenerator\Tests\Letters\Models\Fields;
 
 use ByTIC\DocumentGenerator\Tests\AbstractTest;
-use ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters\Fields\FieldRecord;
+use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Fields\FieldRecord;
 
 class FieldTraitTest extends AbstractTest
 {

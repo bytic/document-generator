@@ -1,19 +1,19 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters;
+namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters;
 
-use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLettersTrait;
+use ByTIC\DocumentGenerator\Letters\Models\Letters\LettersTrait;
 use Nip\Records\RecordManager;
 use Nip\Records\Traits\AbstractTrait\RecordsTrait as AbstractRecordsTrait;
 use Nip\Utility\Traits\SingletonTrait;
 
 /**
- * Class PdfLetter
- * @package ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters
+ * Class Letter
+ * @package ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters
  */
-class PdfLetters extends RecordManager
+class Letters extends RecordManager
 {
-    use PdfLettersTrait;
+    use LettersTrait;
     use SingletonTrait;
 
     /**
@@ -26,7 +26,7 @@ class PdfLetters extends RecordManager
 
     public function generateTable()
     {
-        return 'pdf_letters';
+        return 'letter_letters';
     }
 
     /**

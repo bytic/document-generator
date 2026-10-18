@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace ByTIC\DocumentGenerator\Utility;
 
 use ByTIC\DocumentGenerator\DocumentGeneratorProvider;
-use ByTIC\DocumentGenerator\PdfDownloads\Models\PdfDownloads;
-use ByTIC\DocumentGenerator\PdfFields\Models\PdfLetterFields;
-use ByTIC\DocumentGenerator\PdfIssuers\Models\PdfIssuers;
-use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters;
-use ByTIC\DocumentGenerator\PdfStats\Models\PdfStats;
+use ByTIC\DocumentGenerator\LetterDownloads\Models\LetterDownloads;
+use ByTIC\DocumentGenerator\LetterFields\Models\LetterFields;
+use ByTIC\DocumentGenerator\LetterIssuers\Models\LetterIssuers;
+use ByTIC\DocumentGenerator\Letters\Models\Letters;
+use ByTIC\DocumentGenerator\LetterStats\Models\LetterStats;
 use ByTIC\PackageBase\Utility\ModelFinder;
 use Nip\Records\RecordManager;
 
@@ -24,43 +24,43 @@ class DocumentGeneratorModels extends ModelFinder
     public const LETTER_ISSUERS = 'letter_issuers';
 
     /**
-     * @return RecordManager|PdfLetters
+     * @return RecordManager|Letters
      */
     public static function letters(): RecordManager
     {
-        return static::getModels(self::LETTERS, PdfLetters::class);
+        return static::getModels(self::LETTERS, Letters::class);
     }
 
     /**
-     * @return RecordManager|PdfLetterFields
+     * @return RecordManager|LetterFields
      */
     public static function letterFields(): RecordManager
     {
-        return static::getModels(self::LETTER_FIELDS, PdfLetterFields::class);
+        return static::getModels(self::LETTER_FIELDS, LetterFields::class);
     }
 
     /**
-     * @return RecordManager|PdfDownloads
+     * @return RecordManager|LetterDownloads
      */
     public static function letterDownloads(): RecordManager
     {
-        return static::getModels(self::LETTER_DOWNLOADS, PdfDownloads::class);
+        return static::getModels(self::LETTER_DOWNLOADS, LetterDownloads::class);
     }
 
     /**
-     * @return RecordManager|PdfStats
+     * @return RecordManager|LetterStats
      */
     public static function letterStats(): RecordManager
     {
-        return static::getModels(self::LETTER_STATS, PdfStats::class);
+        return static::getModels(self::LETTER_STATS, LetterStats::class);
     }
 
     /**
-     * @return RecordManager|PdfIssuers
+     * @return RecordManager|LetterIssuers
      */
     public static function letterIssuers(): RecordManager
     {
-        return static::getModels(self::LETTER_ISSUERS, PdfIssuers::class);
+        return static::getModels(self::LETTER_ISSUERS, LetterIssuers::class);
     }
 
     /**

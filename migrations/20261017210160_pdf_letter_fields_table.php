@@ -5,7 +5,7 @@ declare(strict_types=1);
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Phinx\Migration\AbstractMigration;
 
-final class PdfLetterFieldsTable extends AbstractMigration
+final class LetterFieldsTable extends AbstractMigration
 {
     public function up(): void
     {

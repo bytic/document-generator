@@ -1,22 +1,22 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Tests\PdfLetters\Models\Fields\Types;
+namespace ByTIC\DocumentGenerator\Tests\Letters\Models\Fields\Types;
 
-use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
+use ByTIC\DocumentGenerator\Letters\Models\Letters\LetterTrait;
 use ByTIC\DocumentGenerator\Tests\AbstractTest;
-use ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters\Fields\FieldRecord;
-use ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters\Fields\Types\CodeField;
+use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Fields\FieldRecord;
+use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Fields\Types\CodeField;
 use Nip\Records\Record;
 
 /**
  * Class BarcodeTypeTraitTest
- * @package ByTIC\DocumentGenerator\Tests\PdfLetters\Fields\Types
+ * @package ByTIC\DocumentGenerator\Tests\Letters\Fields\Types
  */
 class BarcodeTypeTraitTest extends AbstractTest
 {
     public function test_addToPdf()
     {
-        $pdf = PdfLetterTrait::newPdfBuilder();
+        $pdf = LetterTrait::newPdfBuilder();
         $pdf->AddPage();
         $codeField = new CodeField();
 

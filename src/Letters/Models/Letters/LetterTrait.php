@@ -3,13 +3,14 @@
 namespace ByTIC\DocumentGenerator\Letters\Models\Letters;
 
 use ByTIC\DocumentGenerator\Helpers;
-use ByTIC\DocumentGenerator\Letters\Models\Downloads\DownloadsTrait;
-use ByTIC\DocumentGenerator\Letters\Models\Fields\FieldTrait;
+use ByTIC\DocumentGenerator\LetterDownloads\Models\DownloadsTrait;
+use ByTIC\DocumentGenerator\LetterFields\Models\FieldTrait;
 use ByTIC\MediaLibrary\Exceptions\FileCannotBeAdded\FileUnacceptableForCollection;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\Media\Media;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
+use ByTIC\Records\Behaviors\HasSerializedOptions\HasSerializedOptionsRecordTrait;
 use DateTime;
 use Nip\Records\Record;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as AbstractRecordTrait;
@@ -32,6 +33,7 @@ trait LetterTrait
 {
     use AbstractRecordTrait;
     use HasMediaTrait;
+    use HasSerializedOptionsRecordTrait;
 
     /**
      * @return string
@@ -39,6 +41,24 @@ trait LetterTrait
     public function getName()
     {
         return $this->getManager()->getLabel('title.singular') . ' #' . $this->id;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function insert()
+    {
+        $this->serializeOptions();
+        return parent::insert();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function update()
+    {
+        $this->serializeOptions();
+        return parent::update();
     }
 
     /**

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ByTIC\DocumentGenerator\LetterStats\Models;
 
 use ByTIC\DocumentGenerator\Base\Models\BaseModel;
-use ByTIC\DocumentGenerator\Letters\Models\Stats\StatTrait;
+use ByTIC\DocumentGenerator\LetterStats\Models\StatTrait;
 use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 

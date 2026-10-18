@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ByTIC\DocumentGenerator\LetterDownloads\Models;
 
 use ByTIC\DocumentGenerator\Base\Models\BaseManager;
-use ByTIC\DocumentGenerator\Letters\Models\Downloads\DownloadsTrait;
+use ByTIC\DocumentGenerator\LetterDownloads\Models\DownloadsTrait;
 use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Nip\Utility\Traits\SingletonTrait;

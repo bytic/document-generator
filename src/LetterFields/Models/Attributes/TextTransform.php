@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Letters\Models\Fields\Attributes;
+namespace ByTIC\DocumentGenerator\LetterFields\Models\Attributes;
 
 use Nip\Utility\Str;
 

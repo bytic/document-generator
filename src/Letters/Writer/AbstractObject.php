@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace ByTIC\DocumentGenerator\Letters\Writer;
 
-use ByTIC\DocumentGenerator\Letters\Models\Fields\FieldTrait;
+use ByTIC\DocumentGenerator\LetterFields\Models\FieldTrait;
 use setasign\Fpdi\Tcpdf\Fpdi;
 
 abstract class AbstractObject

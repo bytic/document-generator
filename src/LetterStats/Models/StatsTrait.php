@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Letters\Models\Stats;
+namespace ByTIC\DocumentGenerator\LetterStats\Models;
 
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Letter;
 use Nip\Records\AbstractModels\Record;

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\Letters\Models\Fields\Types;
+namespace ByTIC\DocumentGenerator\LetterFields\Types;
 
-use ByTIC\DocumentGenerator\Letters\Models\Fields\Attributes\TextTransform;
+use ByTIC\DocumentGenerator\LetterFields\Models\Attributes\TextTransform;
 use ByTIC\DocumentGenerator\Letters\LetterHelper;
 use ByTIC\DocumentGenerator\Letters\Writer\TextLine;
 use setasign\Fpdi\Tcpdf\Fpdi;
@@ -11,7 +11,7 @@ use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
 
 /**
  * Trait TextTypeTrait
- * @package ByTIC\DocumentGenerator\Letters\Models\Fields\Types
+ * @package ByTIC\DocumentGenerator\LetterFields\Types
  */
 trait TextTypeTrait
 {

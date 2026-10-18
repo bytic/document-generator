@@ -1,8 +1,8 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Letters\Models\Fields;
+namespace ByTIC\DocumentGenerator\LetterFields\Models;
 
-use ByTIC\DocumentGenerator\Letters\Models\Fields\Types\AbstractType;
+use ByTIC\DocumentGenerator\LetterFields\Models\Types\AbstractType;
 use ByTIC\DocumentGenerator\Letters\Models\Letters\LettersTrait;
 use Nip\MailModule\Models\EmailsTable\EmailTrait;
 use Nip\Records\EventManager\Events\Event;
@@ -11,7 +11,7 @@ use ByTIC\Models\SmartProperties\RecordsTraits\HasTypes\RecordsTrait as HasTypeR
 
 /**
  * Class FieldsTrait
- * @package ByTIC\DocumentGenerator\Letters\Models\Fields
+ * @package ByTIC\DocumentGenerator\LetterFields\Models
  */
 trait FieldsTrait
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Letters\Models\Fields;
+namespace ByTIC\DocumentGenerator\LetterFields\Models;
 
 use ByTIC\DataObjects\Casts\Metadata\Metadata;
-use ByTIC\DocumentGenerator\Letters\Models\Fields\Attributes\TextTransform;
-use ByTIC\DocumentGenerator\Letters\Models\Fields\Types\AbstractType;
+use ByTIC\DocumentGenerator\LetterFields\Models\Attributes\TextTransform;
+use ByTIC\DocumentGenerator\LetterFields\Models\Types\AbstractType;
 use ByTIC\DocumentGenerator\Letters\Models\Letters\LetterTrait;
 use ByTIC\Models\SmartProperties\RecordsTraits\HasTypes\RecordTrait as HasTypeRecordTrait;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
@@ -13,7 +13,7 @@ use setasign\Fpdi\Fpdi;
 
 /**
  * Class FieldTrait
- * @package ByTIC\DocumentGenerator\Letters\Models\Fields
+ * @package ByTIC\DocumentGenerator\LetterFields\Models
  *
  * @property string $id_letter
  * @property string $field

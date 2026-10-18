@@ -3,12 +3,12 @@
 namespace ByTIC\DocumentGenerator\Letters\Actions;
 
 use ByTIC\DocumentGenerator\LetterDownloads\Models\DownloadsTrait;
-use ByTIC\DocumentGenerator\Letters\Models\Letters\LettersTrait;
 use ByTIC\DocumentGenerator\Letters\LettersManager;
+use ByTIC\DocumentGenerator\Letters\Models\LettersTrait;
 use Nip\MailModule\Models\EmailsTable\EmailsTrait;
 use Nip\Records\AbstractModels\RecordManager as AbstractRecordManager;
-use Nip\Records\RecordManager;
 use Nip\Records\Locator\ModelLocator;
+use Nip\Records\RecordManager;
 
 /**
  * Class DownloadStatsProcess

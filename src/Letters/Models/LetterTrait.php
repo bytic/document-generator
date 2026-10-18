@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\Letters\Models\Letters;
+namespace ByTIC\DocumentGenerator\Letters\Models;
 
 use ByTIC\DocumentGenerator\Helpers;
 use ByTIC\DocumentGenerator\LetterDownloads\Models\DownloadsTrait;
@@ -22,7 +23,7 @@ use TCPDF;
  * Class LetterTrait
  * @package ByTIC\DocumentGenerator\Letters
  *
- * @method FieldTrait[] getCustomFields()
+ * @method FieldTrait[] getLetterFields()
  *
  * @property int $id_item
  * @property string $type

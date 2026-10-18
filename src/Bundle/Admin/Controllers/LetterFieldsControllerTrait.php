@@ -1,9 +1,8 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers\Fields;
+namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers;
 
-use ByTIC\DocumentGenerator\Bundle\Admin\Controllers\AbstractControllerTrait;
-use ByTIC\DocumentGenerator\Letters\Models\Letters\LetterTrait;
+use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
 use Nip\Records\AbstractModels\Record;
 
 /**
@@ -42,6 +41,7 @@ trait LetterFieldsControllerTrait
 
         return $this->forward('index', 'error');
     }
+
 
     /**
      * Called before action

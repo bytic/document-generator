@@ -2,13 +2,13 @@
 
 namespace ByTIC\DocumentGenerator\LetterFields\Models;
 
+use ByTIC\DataObjects\Casts\Metadata\AsMetadataObject;
 use ByTIC\DataObjects\Casts\Metadata\Metadata;
 use ByTIC\DocumentGenerator\LetterFields\Models\Attributes\TextTransform;
 use ByTIC\DocumentGenerator\LetterFields\Models\Types\AbstractType;
-use ByTIC\DocumentGenerator\Letters\Models\Letters\LetterTrait;
+use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
 use ByTIC\Models\SmartProperties\RecordsTraits\HasTypes\RecordTrait as HasTypeRecordTrait;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
-use ByTIC\DataObjects\Casts\Metadata\AsMetadataObject;
 use setasign\Fpdi\Fpdi;
 
 /**

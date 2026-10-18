@@ -2,7 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters;
 
-use ByTIC\DocumentGenerator\Letters\Models\Letters\LettersTrait;
+use ByTIC\DocumentGenerator\Letters\Models\LettersTrait;
 use Nip\Records\RecordManager;
 use Nip\Records\Traits\AbstractTrait\RecordsTrait as AbstractRecordsTrait;
 use Nip\Utility\Traits\SingletonTrait;

@@ -2,8 +2,11 @@
 
 namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers;
 
-use ByTIC\DocumentGenerator\Letters\Models\Letters\LettersTrait;
-use ByTIC\DocumentGenerator\Letters\Models\Letters\LetterTrait;
+use ByTIC\DocumentGenerator\Letters\Actions\Finder\GetLetterByParent;
+use ByTIC\DocumentGenerator\Letters\Actions\ImportFieldsFrom;
+use ByTIC\DocumentGenerator\Letters\Models\LettersTrait;
+use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
+use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\MediaLibrary\Media\Media;
 use Nip\Records\Record;
 use Nip\Records\RecordManager;
@@ -35,6 +38,21 @@ trait LetterControllerTrait
      */
     protected $parent;
 
+    public function view()
+    {
+        $letter = $this->viewCheckItem();
+
+        parent::view();
+
+        $this->forms['letter'] = $letter->getForm();
+        $this->payload()->with(
+            [
+                'letter_fields' => $letter->getCustomFields(),
+                'letter' => $letter,
+                'title' => DocumentGeneratorModels::letters()->getLabel('title'),
+            ]
+        );
+    }
 
     public function upload()
     {
@@ -91,6 +109,37 @@ trait LetterControllerTrait
         }
 
         $this->flashRedirectLetter($parent, $this->getModelManager()->getMessage('no-file'), 'error');
+    }
+
+    public function importFrom()
+    {
+        $letter = $this->getModelFromRequest();
+
+        $from = $this->checkForeignModelFromRequest(
+            $this->getRequest()->query('from'),
+            'from_id'
+        );
+        if (!$from) {
+            $this->flashRedirectLetter($letter, $this->getModelManager()->getMessage('no-from'), 'error');
+            return;
+        }
+
+        $fromLetter = GetLetterByParent::byItemType($from->getManager()->getMorphName(), $from->id);
+
+        if (!$fromLetter) {
+            $this->flashRedirectLetter($letter, $this->getModelManager()->getMessage('no-letter'), 'error');
+            return;
+        }
+
+        $count = ImportFieldsFrom::for($letter)->from($fromLetter);
+        if ($count > 0) {
+            $_type = 'success';
+            $messageSlug = 'success';
+        } else {
+            $messageSlug = 'no-fields';
+        }
+
+        $this->flashRedirectLetter($letter, $this->getModelManager()->getMessage($messageSlug), $_type);
     }
 
     /**

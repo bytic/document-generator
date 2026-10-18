@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace ByTIC\DocumentGenerator\Letters\Models;
 
 use ByTIC\DocumentGenerator\Base\Models\BaseModel;
-use ByTIC\DocumentGenerator\Letters\Models\Letters\LetterTrait;
 use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;

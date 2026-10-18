@@ -2,7 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\Tests\Letters\Models\Fields\Types;
 
-use ByTIC\DocumentGenerator\Letters\Models\Letters\LetterTrait;
+use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
 use ByTIC\DocumentGenerator\Tests\AbstractTest;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Fields\FieldRecord;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Fields\Types\CodeField;

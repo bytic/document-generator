@@ -2,9 +2,9 @@
 
 namespace ByTIC\DocumentGenerator\Bundle\Frontend\Controllers;
 
-use ByTIC\DocumentGenerator\Letters\Models\Letters\LettersTrait;
-use ByTIC\DocumentGenerator\Letters\Models\Letters\LetterTrait;
 use ByTIC\DocumentGenerator\Bundle\Frontend\Controllers\AbstractControllerTrait as BundleFrontendAbstractControllerTrait;
+use ByTIC\DocumentGenerator\Letters\Models\LettersTrait;
+use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
 
 /**
  * Trait FrontendLetterControllerTrait

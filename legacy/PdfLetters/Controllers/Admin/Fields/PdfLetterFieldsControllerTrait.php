@@ -9,5 +9,5 @@ namespace ByTIC\DocumentGenerator\PdfLetters\Controllers\Admin\Fields;
  */
 trait LetterFieldsControllerTrait
 {
-    use \ByTIC\DocumentGenerator\Bundle\Admin\Controllers\Fields\LetterFieldsControllerTrait;
+    use \ByTIC\DocumentGenerator\Bundle\Admin\Controllers\LetterFieldsControllerTrait;
 }

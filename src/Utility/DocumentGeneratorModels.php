@@ -31,12 +31,22 @@ class DocumentGeneratorModels extends ModelFinder
         return static::getModels(self::LETTERS, Letters::class);
     }
 
+    public static function lettersClass(): string
+    {
+        return static::getModelsClass(self::LETTERS, Letters::class);
+    }
+
     /**
      * @return RecordManager|LetterFields
      */
     public static function letterFields(): RecordManager
     {
         return static::getModels(self::LETTER_FIELDS, LetterFields::class);
+    }
+
+    public static function letterFieldsClass(): string
+    {
+        return static::getModelsClass(self::LETTER_FIELDS, LetterFields::class);
     }
 
     /**
@@ -47,12 +57,22 @@ class DocumentGeneratorModels extends ModelFinder
         return static::getModels(self::LETTER_DOWNLOADS, LetterDownloads::class);
     }
 
+    public static function letterDownloadsClass(): string
+    {
+        return static::getModelsClass(self::LETTER_DOWNLOADS, LetterDownloads::class);
+    }
+
     /**
      * @return RecordManager|LetterStats
      */
     public static function letterStats(): RecordManager
     {
         return static::getModels(self::LETTER_STATS, LetterStats::class);
+    }
+
+    public static function letterStatsClass(): string
+    {
+        return static::getModelsClass(self::LETTER_STATS, LetterStats::class);
     }
 
     /**

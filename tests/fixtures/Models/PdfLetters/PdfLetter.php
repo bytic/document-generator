@@ -2,13 +2,13 @@
 
 namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters;
 
-use ByTIC\DocumentGenerator\Letters\Models\Letters\LetterTrait;
+use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\Loaders\Filesystem;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
 use DateTime;
-use Nip\Filesystem\FileDisk;
 use League\Flysystem\Adapter\Local as LocalAdapter;
+use Nip\Filesystem\FileDisk;
 use Nip\Records\Record;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as AbstractRecordTrait;
 

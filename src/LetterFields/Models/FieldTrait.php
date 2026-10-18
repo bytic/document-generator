@@ -13,7 +13,7 @@ use setasign\Fpdi\Fpdi;
 
 /**
  * Class FieldTrait
- * @package ByTIC\DocumentGenerator\Letters\Models\Fields
+ * @package ByTIC\DocumentGenerator\LetterFields\Models
  *
  * @property string $id_letter
  * @property string $field

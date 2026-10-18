@@ -8,7 +8,7 @@ use setasign\Fpdi\Tcpdf\Fpdi;
 
 /**
  * Class AbstractType
- * @package ByTIC\DocumentGenerator\Letters\Models\Fields\Types
+ * @package ByTIC\DocumentGenerator\LetterFields\Models\Types
  *
  * @method FieldTrait getItem()
  */

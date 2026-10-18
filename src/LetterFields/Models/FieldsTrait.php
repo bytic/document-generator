@@ -11,7 +11,7 @@ use ByTIC\Models\SmartProperties\RecordsTraits\HasTypes\RecordsTrait as HasTypeR
 
 /**
  * Class FieldsTrait
- * @package ByTIC\DocumentGenerator\Letters\Models\Fields
+ * @package ByTIC\DocumentGenerator\LetterFields\Models
  */
 trait FieldsTrait
 {

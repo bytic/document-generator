@@ -11,7 +11,7 @@ use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
 
 /**
  * Trait TextTypeTrait
- * @package ByTIC\DocumentGenerator\Letters\Models\Fields\Types
+ * @package ByTIC\DocumentGenerator\LetterFields\Models\Types
  */
 trait TextTypeTrait
 {

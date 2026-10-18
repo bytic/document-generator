@@ -8,7 +8,7 @@ use setasign\Fpdi\Tcpdf\Fpdi;
 
 /**
  * Trait BarcodeTypeTrait
- * @package ByTIC\DocumentGenerator\Letters\Models\Fields\Types
+ * @package ByTIC\DocumentGenerator\LetterFields\Models\Types
  */
 trait BarcodeTypeTrait
 {

@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace ByTIC\DocumentGenerator\Utility;
 
 use ByTIC\DocumentGenerator\DocumentGeneratorProvider;
+use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\PdfLetterFields;
+use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetters;
 use ByTIC\PackageBase\Utility\ModelFinder;
 use Nip\Records\RecordManager;
 
@@ -13,7 +15,7 @@ use Nip\Records\RecordManager;
 class DocumentGeneratorModels extends ModelFinder
 {
     public const PDF_LETTERS = 'pdf_letters';
-    public const PDF_LETTERS_FIELDS = 'pdf_letters_fields';
+    public const PDF_LETTERS_FIELDS = 'pdf_letter_fields';
 
     /**
      * @return RecordManager|Forms
@@ -28,7 +30,7 @@ class DocumentGeneratorModels extends ModelFinder
      */
     public static function pdfLetterFields()
     {
-        return static::getModels('fields', PdfLetterFields::class);
+        return static::getModels(self::PDF_LETTERS_FIELDS, PdfLetterFields::class);
     }
 
     protected static function packageName(): string

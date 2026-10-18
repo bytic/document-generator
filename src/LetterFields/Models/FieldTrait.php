@@ -3,8 +3,8 @@
 namespace ByTIC\DocumentGenerator\LetterFields\Models;
 
 use ByTIC\DataObjects\Casts\Metadata\Metadata;
-use ByTIC\DocumentGenerator\Letters\Models\Fields\Attributes\TextTransform;
-use ByTIC\DocumentGenerator\Letters\Models\Fields\Types\AbstractType;
+use ByTIC\DocumentGenerator\LetterFields\Models\Attributes\TextTransform;
+use ByTIC\DocumentGenerator\LetterFields\Models\Types\AbstractType;
 use ByTIC\DocumentGenerator\Letters\Models\Letters\LetterTrait;
 use ByTIC\Models\SmartProperties\RecordsTraits\HasTypes\RecordTrait as HasTypeRecordTrait;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;

@@ -2,7 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\Letters\Forms\Fields;
 
-use ByTIC\DocumentGenerator\Letters\Models\Fields\Attributes\TextTransform;
+use ByTIC\DocumentGenerator\LetterFields\Models\Attributes\TextTransform;
 
 /**
  * Trait AdminLetterFieldsControllerTrait

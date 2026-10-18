@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\Letters\Models\Fields\Types;
+namespace ByTIC\DocumentGenerator\LetterFields\Models\Types;
 
-use ByTIC\DocumentGenerator\Letters\Models\Fields\Attributes\TextTransform;
+use ByTIC\DocumentGenerator\LetterFields\Models\Attributes\TextTransform;
 use ByTIC\DocumentGenerator\Letters\LetterHelper;
 use ByTIC\DocumentGenerator\Letters\Writer\TextLine;
 use setasign\Fpdi\Tcpdf\Fpdi;

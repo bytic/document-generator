@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace ByTIC\DocumentGenerator\Letters\Writer;
 
-use ByTIC\DocumentGenerator\Letters\Models\Fields\Attributes\TextTransform;
+use ByTIC\DocumentGenerator\LetterFields\Models\Attributes\TextTransform;
 use ByTIC\DocumentGenerator\Letters\LetterHelper;
 
 class TextLine extends AbstractObject

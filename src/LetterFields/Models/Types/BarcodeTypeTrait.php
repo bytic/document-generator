@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Letters\Models\Fields\Types;
+namespace ByTIC\DocumentGenerator\LetterFields\Models\Types;
 
 use ByTIC\DocumentGenerator\Letters\LetterHelper;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;

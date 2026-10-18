@@ -2,7 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\LetterFields\Models;
 
-use ByTIC\DocumentGenerator\Letters\Models\Fields\Types\AbstractType;
+use ByTIC\DocumentGenerator\LetterFields\Models\Types\AbstractType;
 use ByTIC\DocumentGenerator\Letters\Models\Letters\LettersTrait;
 use Nip\MailModule\Models\EmailsTable\EmailTrait;
 use Nip\Records\EventManager\Events\Event;

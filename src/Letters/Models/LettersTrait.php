@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\Letters\Models;
+namespace ByTIC\DocumentGenerator\PdfWriter\Models;
 
 use ByTIC\DocumentGenerator\LetterDownloads\Models\DownloadsTrait;
-use ByTIC\DocumentGenerator\Letters\Actions\Finder\GetLetterByParent;
+use ByTIC\DocumentGenerator\PdfWriter\Actions\Finder\GetLetterByParent;
 use ByTIC\DocumentGenerator\LetterStats\Models\StatsTrait;
 use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\MediaLibrary\HasMedia\HasMediaRecordsTrait;

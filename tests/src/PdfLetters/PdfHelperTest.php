@@ -2,7 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\Tests\Letters;
 
-use ByTIC\DocumentGenerator\Letters\LetterHelper;
+use ByTIC\DocumentGenerator\PdfWriter\LetterHelper;
 use ByTIC\DocumentGenerator\Tests\AbstractTest;
 
 class LetterHelperTest extends AbstractTest

@@ -2,7 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\LetterDownloads\Models;
 
-use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
+use ByTIC\DocumentGenerator\PdfWriter\Models\LetterTrait;
 use Nip\Records\Record;
 
 /**

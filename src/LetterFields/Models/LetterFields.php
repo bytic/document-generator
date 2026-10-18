@@ -6,7 +6,7 @@ namespace ByTIC\DocumentGenerator\LetterFields\Models;
 
 use ByTIC\DocumentGenerator\Base\Models\BaseManager;
 use ByTIC\DocumentGenerator\LetterFields\Models\FieldsTrait;
-use ByTIC\DocumentGenerator\Letters\Models\Letters;
+use ByTIC\DocumentGenerator\PdfWriter\Models\Letters;
 use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Nip\Utility\Traits\SingletonTrait;

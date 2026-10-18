@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\Letters\Writer;
+namespace ByTIC\DocumentGenerator\PdfWriter;
 
 use setasign\Fpdi\Tcpdf\Fpdi;
 use TCPDF;

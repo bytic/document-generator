@@ -6,7 +6,7 @@ use ByTIC\DataObjects\Casts\Metadata\AsMetadataObject;
 use ByTIC\DataObjects\Casts\Metadata\Metadata;
 use ByTIC\DocumentGenerator\LetterFields\Models\Attributes\TextTransform;
 use ByTIC\DocumentGenerator\LetterFields\Models\Types\AbstractType;
-use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
+use ByTIC\DocumentGenerator\PdfWriter\Models\LetterTrait;
 use ByTIC\Models\SmartProperties\RecordsTraits\HasTypes\RecordTrait as HasTypeRecordTrait;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
 use setasign\Fpdi\Fpdi;

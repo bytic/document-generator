@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace ByTIC\DocumentGenerator\LetterFields\Types\Behaviors;
 
-use ByTIC\DocumentGenerator\Letters\LetterHelper;
+use ByTIC\DocumentGenerator\PdfWriter\PdfHelper;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
 use setasign\Fpdi\Tcpdf\Fpdi;
 
@@ -20,8 +20,8 @@ trait BarcodeTypeTrait
     public function addToPdf($pdf, $model)
     {
         $value = $this->getItem()->getValue($model);
-        $y = LetterHelper::pdfYPosition($pdf, $value, $this->getItem()->y, $this->getItem()->getPage());
-        $x = LetterHelper::pdfXPosition($pdf, $value, $this->getItem()->x, $this->getItem()->align);
+        $y = PdfHelper::pdfYPosition($pdf, $value, $this->getItem()->y, $this->getItem()->getPage());
+        $x = PdfHelper::pdfXPosition($pdf, $value, $this->getItem()->x, $this->getItem()->align);
 
         $style = [
             'position' => '',

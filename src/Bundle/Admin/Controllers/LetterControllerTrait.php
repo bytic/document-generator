@@ -2,14 +2,14 @@
 
 namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers;
 
-use ByTIC\DocumentGenerator\Letters\Actions\Finder\GetLetterByParent;
-use ByTIC\DocumentGenerator\Letters\Actions\Finder\GetOrCreateLetterByParent;
-use ByTIC\DocumentGenerator\Letters\Actions\Manage\ImportFieldsFrom;
-use ByTIC\DocumentGenerator\Letters\Actions\Manage\UploadFromRequest;
-use ByTIC\DocumentGenerator\Letters\Actions\Url\GenerateLetterViewUrl;
-use ByTIC\DocumentGenerator\Letters\Models\Letter;
-use ByTIC\DocumentGenerator\Letters\Models\LettersTrait;
-use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
+use ByTIC\DocumentGenerator\PdfWriter\Actions\Finder\GetLetterByParent;
+use ByTIC\DocumentGenerator\PdfWriter\Actions\Finder\GetOrCreateLetterByParent;
+use ByTIC\DocumentGenerator\PdfWriter\Actions\Manage\ImportFieldsFrom;
+use ByTIC\DocumentGenerator\PdfWriter\Actions\Manage\UploadFromRequest;
+use ByTIC\DocumentGenerator\PdfWriter\Actions\Url\GenerateLetterViewUrl;
+use ByTIC\DocumentGenerator\PdfWriter\Models\Letter;
+use ByTIC\DocumentGenerator\PdfWriter\Models\LettersTrait;
+use ByTIC\DocumentGenerator\PdfWriter\Models\LetterTrait;
 use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PathsHelpers;
 use ByTIC\MediaLibrary\Media\Media;
@@ -129,14 +129,14 @@ trait LetterControllerTrait
             'from_id'
         );
         if (!$from) {
-            $this->flashRedirectLetter($letter, $this->getModelManager()->getMessage('no-from'), 'error');
+            $this->flashRedirect($this->getModelManager()->getMessage('no-from'), 'error');
             return;
         }
 
-        $fromLetter = GetLetterByParent::byItemType($from->getManager()->getMorphName(), $from->id);
+        $fromLetter = GetLetterByParent::byItemType($from->getManager()->getMorphName(), $from->id)->handle();
 
         if (!$fromLetter) {
-            $this->flashRedirectLetter($letter, $this->getModelManager()->getMessage('no-letter'), 'error');
+            $this->flashRedirect($this->getModelManager()->getMessage('no-letter'), 'error');
             return;
         }
 
@@ -148,7 +148,7 @@ trait LetterControllerTrait
             $messageSlug = 'no-fields';
         }
 
-        $this->flashRedirectLetter($letter, $this->getModelManager()->getMessage($messageSlug), $_type);
+        $this->flashRedirect($this->getModelManager()->getMessage($messageSlug), $_type);
     }
 
     public function editor(): void
@@ -172,6 +172,7 @@ trait LetterControllerTrait
                 'payload' => $letter->getEditorPayload(),
                 'saveUrl' => $this->getLetterEditorSaveUrl(),
                 'dataUrl' => $this->getLetterEditorDataUrl(),
+                'downloadDemoUrl' => $letter->compileURL('downloadExample'),
                 'css' => $css,
                 'js' => $js,
             ]

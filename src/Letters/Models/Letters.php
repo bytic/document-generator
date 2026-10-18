@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\Letters\Models;
+namespace ByTIC\DocumentGenerator\PdfWriter\Models;
 
 use ByTIC\DocumentGenerator\Base\Models\BaseManager;
 use ByTIC\DocumentGenerator\LetterFields\Models\LetterFields;

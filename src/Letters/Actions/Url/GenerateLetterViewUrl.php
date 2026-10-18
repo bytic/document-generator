@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\Letters\Actions\Url;
+namespace ByTIC\DocumentGenerator\PdfWriter\Actions\Url;
 
 use Bytic\Actions\Action;
 use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;

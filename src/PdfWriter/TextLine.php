@@ -1,10 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\Letters\Writer;
+namespace ByTIC\DocumentGenerator\PdfWriter;
 
 use ByTIC\DocumentGenerator\LetterFields\Models\Attributes\TextTransform;
-use ByTIC\DocumentGenerator\Letters\LetterHelper;
 
 class TextLine extends AbstractObject
 {
@@ -56,8 +55,8 @@ class TextLine extends AbstractObject
     {
         $y = $y ?: $this->y;
         $x = $x ?: $this->x;
-        $y = LetterHelper::pdfYPosition($this->pdf, $value, $y, $this->page);
-        $x = LetterHelper::pdfXPosition($this->pdf, $value, $x, $this->align);
+        $y = PdfHelper::pdfYPosition($this->pdf, $value, $y, $this->page);
+        $x = PdfHelper::pdfXPosition($this->pdf, $value, $x, $this->align);
 
         $this->pdf->Text($x, $y, $value);
     }
@@ -65,6 +64,6 @@ class TextLine extends AbstractObject
     protected function prepareStyles()
     {
         $this->pdf->setFont('freesans', '', $this->size, '', true);
-        LetterHelper::pdfPrepareColor($this->pdf, $this->colorArray);
+        PdfHelper::pdfPrepareColor($this->pdf, $this->colorArray);
     }
 }

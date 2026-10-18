@@ -1,11 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\Letters\Writer;
+namespace ByTIC\DocumentGenerator\PdfWriter;
 
 use ByTIC\DocumentGenerator\LetterFields\Models\FieldTrait;
 use setasign\Fpdi\Tcpdf\Fpdi;
 
+/**
+ *
+ */
 abstract class AbstractObject
 {
     protected Fpdi $pdf;

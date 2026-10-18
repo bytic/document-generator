@@ -3,7 +3,7 @@
 namespace ByTIC\DocumentGenerator\LetterFields\Models;
 
 use ByTIC\DocumentGenerator\LetterFields\Models\Types\AbstractType;
-use ByTIC\DocumentGenerator\Letters\Models\LettersTrait;
+use ByTIC\DocumentGenerator\PdfWriter\Models\LettersTrait;
 use ByTIC\Models\SmartProperties\RecordsTraits\HasTypes\RecordsTrait as HasTypeRecordsTrait;
 use Nip\MailModule\Models\EmailsTable\EmailTrait;
 use Nip\Records\EventManager\Events\Event;

@@ -16,6 +16,9 @@
         const palette = root.querySelector('.dg-pdf-editor__fields-palette');
         const pagesWrap = root.querySelector('.dg-pdf-editor__pages');
         const form = root.querySelector('.dg-pdf-editor__form');
+        const modal = root.querySelector('.dg-pdf-editor__modal');
+        const modalBackdrop = root.querySelector('.dg-pdf-editor__modal-backdrop');
+        const modalCloseButtons = root.querySelectorAll('.dg-pdf-editor__modal-close');
         const status = document.createElement('div');
         status.className = 'dg-pdf-editor__status';
         root.querySelector('.dg-pdf-editor__sidebar').appendChild(status);
@@ -131,11 +134,24 @@
 
                 state.fields.forEach(function (field, index) {
                     if ((field.page || 1) !== page.number) return;
-                    const node = document.createElement('button');
-                    node.type = 'button';
+                    const node = document.createElement('div');
                     node.className = 'dg-pdf-editor__field';
                     if (fieldKey(field, index) === state.selectedFieldId) node.classList.add('is-selected');
-                    node.textContent = field.label || field.field;
+                    const label = document.createElement('span');
+                    label.className = 'dg-pdf-editor__field-label';
+                    label.textContent = field.label || field.field;
+                    const editButton = document.createElement('button');
+                    editButton.type = 'button';
+                    editButton.className = 'dg-pdf-editor__field-edit';
+                    editButton.textContent = 'Edit';
+                    editButton.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        state.selectedFieldId = node.dataset.key;
+                        openModal();
+                    });
+                    node.appendChild(label);
+                    node.appendChild(editButton);
                     node.style.left = ((field.x / page.width) * 100) + '%';
                     node.style.top = ((field.y / page.height) * 100) + '%';
                     node.style.color = normalizeColor(field.color);
@@ -149,6 +165,19 @@
                     overlay.appendChild(node);
                 });
             });
+        }
+
+        function openModal() {
+            if (!modal) return;
+            renderForm();
+            modal.hidden = false;
+            document.body.classList.add('dg-pdf-editor-modal-open');
+        }
+
+        function closeModal() {
+            if (!modal) return;
+            modal.hidden = true;
+            document.body.classList.remove('dg-pdf-editor-modal-open');
         }
 
         function bindDragging(node, overlay, page, field) {
@@ -183,6 +212,9 @@
             }
 
             node.addEventListener('pointerdown', function (event) {
+                if (event.target && event.target.closest('.dg-pdf-editor__field-edit')) {
+                    return;
+                }
                 const key = node.dataset.key;
                 if (key && state.selectedFieldId !== key) {
                     state.selectedFieldId = key;
@@ -264,6 +296,19 @@
             });
             state.selectedFieldId = state.fields[0] ? fieldKey(state.fields[0], 0) : null;
             renderAll();
+            closeModal();
+        });
+
+        modalCloseButtons.forEach(function (button) {
+            button.addEventListener('click', closeModal);
+        });
+        if (modalBackdrop) {
+            modalBackdrop.addEventListener('click', closeModal);
+        }
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && modal && !modal.hidden) {
+                closeModal();
+            }
         });
 
         saveButton.addEventListener('click', function () {

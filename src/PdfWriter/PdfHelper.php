@@ -1,14 +1,15 @@
 <?php
+declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\Letters;
+namespace ByTIC\DocumentGenerator\PdfWriter;
 
 use setasign\Fpdi\Tcpdf\Fpdi;
 
 /**
- * Class LetterHelper
+ * Class PdfHelper
  * @package ByTIC\DocumentGenerator\Letters
  */
-class LetterHelper
+class PdfHelper
 {
     /**
      * @param Fpdi $pdf

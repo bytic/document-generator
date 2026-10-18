@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\Letters\Models;
+namespace ByTIC\DocumentGenerator\PdfWriter\Models;
 
 use ByTIC\DocumentGenerator\Helpers;
-use ByTIC\DocumentGenerator\Letters\Actions\Manage\UploadFromRequest;
-use ByTIC\DocumentGenerator\Letters\Writer\DrawGuidelines;
 use ByTIC\DocumentGenerator\LetterDownloads\Models\DownloadsTrait;
 use ByTIC\DocumentGenerator\LetterFields\Models\FieldTrait;
+use ByTIC\DocumentGenerator\PdfWriter\Actions\Manage\UploadFromRequest;
+use ByTIC\DocumentGenerator\PdfWriter\DrawGuidelines;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\Media\Media;

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace ByTIC\DocumentGenerator\LetterFields\Types\Behaviors;
 
-use ByTIC\DocumentGenerator\Letters\Writer\TextLine;
+use ByTIC\DocumentGenerator\PdfWriter\TextLine;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
 use setasign\Fpdi\Tcpdf\Fpdi;
 

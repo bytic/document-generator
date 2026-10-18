@@ -2,7 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters;
 
-use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
+use ByTIC\DocumentGenerator\PdfWriter\Models\LetterTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\Loaders\Filesystem;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;

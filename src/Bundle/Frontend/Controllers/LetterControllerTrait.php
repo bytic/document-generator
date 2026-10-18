@@ -3,8 +3,8 @@
 namespace ByTIC\DocumentGenerator\Bundle\Frontend\Controllers;
 
 use ByTIC\DocumentGenerator\Bundle\Frontend\Controllers\AbstractControllerTrait as BundleFrontendAbstractControllerTrait;
-use ByTIC\DocumentGenerator\Letters\Models\LettersTrait;
-use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
+use ByTIC\DocumentGenerator\PdfWriter\Models\LettersTrait;
+use ByTIC\DocumentGenerator\PdfWriter\Models\LetterTrait;
 
 /**
  * Trait FrontendLetterControllerTrait

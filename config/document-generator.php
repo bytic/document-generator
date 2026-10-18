@@ -3,7 +3,7 @@
 use ByTIC\DocumentGenerator\LetterDownloads\Models\LetterDownloads;
 use ByTIC\DocumentGenerator\LetterFields\Models\LetterFields;
 use ByTIC\DocumentGenerator\LetterIssuers\Models\LetterIssuers;
-use ByTIC\DocumentGenerator\Letters\Models\Letters;
+use ByTIC\DocumentGenerator\PdfWriter\Models\Letters;
 use ByTIC\DocumentGenerator\LetterStats\Models\LetterStats;
 
 return [

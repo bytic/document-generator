@@ -4,11 +4,13 @@ declare(strict_types=1);
 /** @var array $payload */
 /** @var string $saveUrl */
 /** @var string $dataUrl */
+/** @var string $downloadDemoUrl */
 
 use ByTIC\DocumentGenerator\Utility\ViewUtility;
 
 $this->Stylesheets()->addRaw(ViewUtility::loadAssetContent('/scss/letter-editor.css'));
 $this->Scripts()->addRaw(ViewUtility::loadAssetContent('/js/letter-editor.js'));
+$downloadDemoUrl = $downloadDemoUrl ?? '';
 ?>
 <div
     class="dg-pdf-editor"
@@ -19,31 +21,18 @@ $this->Scripts()->addRaw(ViewUtility::loadAssetContent('/js/letter-editor.js'));
     <aside class="dg-pdf-editor__sidebar">
         <div class="dg-pdf-editor__sidebar-header">
             <h1><?= htmlspecialchars((string)$title, ENT_QUOTES, 'UTF-8') ?></h1>
-            <button type="button" class="dg-pdf-editor__save">Save layout</button>
+            <div class="dg-pdf-editor__header-actions">
+                <form action="<?= htmlspecialchars((string)$downloadDemoUrl, ENT_QUOTES, 'UTF-8') ?>" method="post">
+                    <button type="submit" class="dg-pdf-editor__download-demo">Download DEMO</button>
+                </form>
+                <button type="button" class="dg-pdf-editor__save">Save layout</button>
+            </div>
         </div>
         <div class="dg-pdf-editor__pages-nav"></div>
         <div class="dg-pdf-editor__fields-palette"></div>
         <div class="dg-pdf-editor__properties">
-            <h2>Field properties</h2>
-            <form class="dg-pdf-editor__form">
-                <label><span>Field</span><input type="text" name="field" readonly></label>
-                <label><span>Page</span><input type="number" min="1" name="page"></label>
-                <label><span>X</span><input type="number" step="0.01" name="x"></label>
-                <label><span>Y</span><input type="number" step="0.01" name="y"></label>
-                <label><span>Size</span><input type="number" min="1" name="size"></label>
-                <label><span>Align</span>
-                    <select name="align">
-                        <option value="left">Left</option>
-                        <option value="center">Center</option>
-                        <option value="right">Right</option>
-                    </select>
-                </label>
-                <label><span>Color</span><input type="color" name="color"></label>
-                <label><span>Transform</span><input type="text" name="textTransform"></label>
-                <div class="dg-pdf-editor__form-actions">
-                    <button type="button" class="dg-pdf-editor__remove">Remove field</button>
-                </div>
-            </form>
+            <h2>Field editing</h2>
+            <p>Use each field's <strong>Edit</strong> button on the page to update its properties.</p>
         </div>
     </aside>
     <main class="dg-pdf-editor__workspace">
@@ -64,4 +53,34 @@ $this->Scripts()->addRaw(ViewUtility::loadAssetContent('/js/letter-editor.js'));
             <?php endforeach; ?>
         </div>
     </main>
+
+    <div class="dg-pdf-editor__modal" hidden>
+        <div class="dg-pdf-editor__modal-backdrop"></div>
+        <div class="dg-pdf-editor__modal-dialog" role="dialog" aria-modal="true" aria-label="Edit field">
+            <div class="dg-pdf-editor__modal-header">
+                <h2>Edit field</h2>
+                <button type="button" class="dg-pdf-editor__modal-close" aria-label="Close">×</button>
+            </div>
+            <form class="dg-pdf-editor__form">
+                <label><span>Field</span><input type="text" name="field" readonly></label>
+                <label><span>Page</span><input type="number" min="1" name="page"></label>
+                <label><span>X</span><input type="number" step="0.01" name="x"></label>
+                <label><span>Y</span><input type="number" step="0.01" name="y"></label>
+                <label><span>Size</span><input type="number" min="1" name="size"></label>
+                <label><span>Align</span>
+                    <select name="align">
+                        <option value="left">Left</option>
+                        <option value="center">Center</option>
+                        <option value="right">Right</option>
+                    </select>
+                </label>
+                <label><span>Color</span><input type="color" name="color"></label>
+                <label><span>Transform</span><input type="text" name="textTransform"></label>
+                <div class="dg-pdf-editor__form-actions">
+                    <button type="button" class="dg-pdf-editor__remove">Remove field</button>
+                    <button type="button" class="dg-pdf-editor__modal-close">Done</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

@@ -1,11 +1,11 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Tests\PdfLetters\Models\PdfLetters;
+namespace ByTIC\DocumentGenerator\Tests\Letters\Models\Letters;
 
 use ByTIC\DocumentGenerator\Tests\AbstractTest;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\MediaRecords\MediaRecord;
-use ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters\PdfLetter;
-use ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters\PdfLetters;
+use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Letter;
+use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Letters;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Recipients\Recipient;
 use ByTIC\MediaLibrary\Media\Media;
 use Mockery;
@@ -15,17 +15,17 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use const setasign\Fpdi\TcpdfFpdi;
 
 /**
- * Class PdfLetterTraitTest
- * @package ByTIC\DocumentGenerator\Tests\PdfLetters
+ * Class LetterTraitTest
+ * @package ByTIC\DocumentGenerator\Tests\Letters
  */
-class PdfLetterTraitTest extends AbstractTest
+class LetterTraitTest extends AbstractTest
 {
     public function testUploadFromRequestValid()
     {
-        $letter = new PdfLetter();
+        $letter = new Letter();
         $letter->id = 10;
 
-        $letter->setManager(PdfLetters::instance());
+        $letter->setManager(Letters::instance());
 
         $uploadedFile = new UploadedFile(
             TEST_FIXTURE_PATH . '/files/file.pdf',
@@ -37,15 +37,15 @@ class PdfLetterTraitTest extends AbstractTest
 
         $response = $letter->uploadFromRequest($uploadedFile);
         parent::assertInstanceOf(Media::class, $response);
-        self::assertFileExists(TEST_FIXTURE_PATH . '/files/pdf_letters/10/file.pdf');
+        self::assertFileExists(TEST_FIXTURE_PATH . '/files/letter_letters/10/file.pdf');
     }
 
     public function testUploadFromRequestWithInvalidFileType()
     {
-        $letter = new PdfLetter();
+        $letter = new Letter();
         $letter->id = 10;
 
-        $letter->setManager(PdfLetters::instance());
+        $letter->setManager(Letters::instance());
 
         $uploadedFile = new UploadedFile(
             TEST_FIXTURE_PATH . '/files/file.pdf',
@@ -61,10 +61,10 @@ class PdfLetterTraitTest extends AbstractTest
 
     public function testUploadFromRequestWithInvalidPdfContent()
     {
-        $letter = new PdfLetter();
+        $letter = new Letter();
         $letter->id = 10;
 
-        $letter->setManager(PdfLetters::instance());
+        $letter->setManager(Letters::instance());
 
         $uploadedFile = new UploadedFile(
             TEST_FIXTURE_PATH . '/files/not-a-pdf.txt',
@@ -80,19 +80,19 @@ class PdfLetterTraitTest extends AbstractTest
 
     public function testGenerateNewPdfObj()
     {
-        /** @var PdfLetter|Mockery\Mock $letter */
-        $letter = Mockery::mock(PdfLetter::class)->makePartial();
+        /** @var Letter|Mockery\Mock $letter */
+        $letter = Mockery::mock(Letter::class)->makePartial();
         $letter->id = 99;
 
         $mediaFile = new Media();
         $mediaFile->setFile((new File())
-            ->setPath('/files/pdf_letters/99/file.pdf')
+            ->setPath('/files/letter_letters/99/file.pdf')
             ->setFilesystem($letter->getMediaFilesystemDisk())
         );
 
         $letter->shouldReceive('getFile')->andReturn($mediaFile);
 
-        $letter->setManager(PdfLetters::instance());
+        $letter->setManager(Letters::instance());
 
         $pdf = $letter->generateNewPdfObj();
         $output = $pdf->Output('output.pdf', 'S');
@@ -103,17 +103,17 @@ class PdfLetterTraitTest extends AbstractTest
 
     public function testGenerateFileWithMediaObject()
     {
-        /** @var PdfLetter|Mockery\Mock $letter */
-        $letter = Mockery::mock(PdfLetter::class);
+        /** @var Letter|Mockery\Mock $letter */
+        $letter = Mockery::mock(Letter::class);
         $letter->shouldReceive('getCustomFields')->andReturn([]);
         $letter = $letter->makePartial();
 
-        $letter->setManager(PdfLetters::instance());
+        $letter->setManager(Letters::instance());
         $letter->id = 99;
 
         $mediaFile = new Media();
         $mediaFile->setFile((new File())
-            ->setPath('/files/pdf_letters/99/file.pdf')
+            ->setPath('/files/letter_letters/99/file.pdf')
             ->setFilesystem($letter->getMediaFilesystemDisk())
         );
 

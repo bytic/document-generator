@@ -1,11 +1,11 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Tests\PdfLetters;
+namespace ByTIC\DocumentGenerator\Tests\Letters;
 
-use ByTIC\DocumentGenerator\PdfLetters\PdfHelper;
+use ByTIC\DocumentGenerator\Letters\LetterHelper;
 use ByTIC\DocumentGenerator\Tests\AbstractTest;
 
-class PdfHelperTest extends AbstractTest
+class LetterHelperTest extends AbstractTest
 {
     public function testPdfYPositionUsesExplicitPageWithoutChangingCoordinates()
     {
@@ -28,7 +28,7 @@ class PdfHelperTest extends AbstractTest
             }
         };
 
-        $y = PdfHelper::pdfYPosition($pdf, 'test', 24, 3);
+        $y = LetterHelper::pdfYPosition($pdf, 'test', 24, 3);
 
         self::assertSame(24, $y);
         self::assertSame(3, $pdf->getPage());

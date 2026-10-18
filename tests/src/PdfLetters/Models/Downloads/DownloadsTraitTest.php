@@ -1,10 +1,10 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Tests\PdfLetters\Models\Downloads;
+namespace ByTIC\DocumentGenerator\Tests\Letters\Models\Downloads;
 
 use ByTIC\DocumentGenerator\Tests\AbstractTest;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Downloads\Downloads;
-use ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters\PdfLetter;
+use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Letter;
 use DateInterval;
 
 /**
@@ -15,7 +15,7 @@ class DownloadsTraitTest extends AbstractTest
 {
     public function test_shouldTrackLetter()
     {
-        $letter = new PdfLetter();
+        $letter = new Letter();
 
         $letter->issueDate = (new \DateTime())->add(new DateInterval('P10D'));
         self::assertTrue(Downloads::instance()->shouldTrackLetter($letter));

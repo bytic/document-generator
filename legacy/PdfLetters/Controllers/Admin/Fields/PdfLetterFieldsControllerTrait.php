@@ -3,11 +3,11 @@
 namespace ByTIC\DocumentGenerator\PdfLetters\Controllers\Admin\Fields;
 
 /**
- * Trait PdfLetterFieldsControllerTrait
- * @package ByTIC\DocumentGenerator\PdfLetters
- * @deprecated Use \ByTIC\DocumentGenerator\Bundle\Admin\Controllers\Fields\PdfLetterFieldsControllerTrait instead.
+ * Trait LetterFieldsControllerTrait
+ * @package ByTIC\DocumentGenerator\Letters
+ * @deprecated Use \ByTIC\DocumentGenerator\Bundle\Admin\Controllers\Fields\LetterFieldsControllerTrait instead.
  */
-trait PdfLetterFieldsControllerTrait
+trait LetterFieldsControllerTrait
 {
-    use \ByTIC\DocumentGenerator\Bundle\Admin\Controllers\Fields\PdfLetterFieldsControllerTrait;
+    use \ByTIC\DocumentGenerator\Bundle\Admin\Controllers\Fields\LetterFieldsControllerTrait;
 }

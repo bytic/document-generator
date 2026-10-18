@@ -3,12 +3,12 @@
 namespace ByTIC\DocumentGenerator\PdfLetters\Controllers\Admin;
 
 /**
- * Trait AdminPdfLetterControllerTrait
- * @package ByTIC\DocumentGenerator\PdfLetters
+ * Trait AdminLetterControllerTrait
+ * @package ByTIC\DocumentGenerator\Letters
  *
- * @deprecated Use \ByTIC\DocumentGenerator\Bundle\Admin\Controllers\PdfLetterControllerTrait instead.
+ * @deprecated Use \ByTIC\DocumentGenerator\Bundle\Admin\Controllers\LetterControllerTrait instead.
  */
-trait PdfLetterControllerTrait
+trait LetterControllerTrait
 {
-    use \ByTIC\DocumentGenerator\Bundle\Admin\Controllers\PdfLetterControllerTrait;
+    use \ByTIC\DocumentGenerator\Bundle\Admin\Controllers\LetterControllerTrait;
 }

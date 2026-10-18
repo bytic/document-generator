@@ -1,8 +1,8 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters;
+namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters;
 
-use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
+use ByTIC\DocumentGenerator\Letters\Models\Letters\LetterTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\Loaders\Filesystem;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
@@ -13,12 +13,12 @@ use Nip\Records\Record;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as AbstractRecordTrait;
 
 /**
- * Class PdfLetter
- * @package ByTIC\DocumentGenerator\Tests\Fixtures\Models\PdfLetters
+ * Class Letter
+ * @package ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters
  */
-class PdfLetter extends Record implements HasMedia
+class Letter extends Record implements HasMedia
 {
-    use PdfLetterTrait;
+    use LetterTrait;
 
     /**
      * @return FileDisk

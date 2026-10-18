@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\LetterFields\Models\Types;
+namespace ByTIC\DocumentGenerator\LetterFields\Types;
 
 use ByTIC\DocumentGenerator\Letters\LetterHelper;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
@@ -8,7 +8,7 @@ use setasign\Fpdi\Tcpdf\Fpdi;
 
 /**
  * Trait BarcodeTypeTrait
- * @package ByTIC\DocumentGenerator\LetterFields\Models\Types
+ * @package ByTIC\DocumentGenerator\LetterFields\Types
  */
 trait BarcodeTypeTrait
 {

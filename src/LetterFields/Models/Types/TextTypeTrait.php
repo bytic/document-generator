@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\LetterFields\Models\Types;
+namespace ByTIC\DocumentGenerator\LetterFields\Types;
 
 use ByTIC\DocumentGenerator\LetterFields\Models\Attributes\TextTransform;
 use ByTIC\DocumentGenerator\Letters\LetterHelper;
@@ -11,7 +11,7 @@ use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
 
 /**
  * Trait TextTypeTrait
- * @package ByTIC\DocumentGenerator\LetterFields\Models\Types
+ * @package ByTIC\DocumentGenerator\LetterFields\Types
  */
 trait TextTypeTrait
 {

@@ -4,9 +4,26 @@ namespace ByTIC\DocumentGenerator\Utility;
 
 use Nip\View\View;
 
+/**
+ *
+ */
 class ViewUtility
 {
     public const NAME = 'DocumentGenerator';
+    /**
+     * @param $path
+     *
+     * @return string|null
+     */
+    public static function loadAssetContent($path)
+    {
+        $fullPath = PathsHelpers::assets($path)
+        if (file_exists($fullPath)) {
+            return file_get_contents($fullPath);
+        }
+
+        return '';
+    }
 
     /**
      * Registers module-specific views when available and falls back to the base views directory.

@@ -1,20 +1,15 @@
 <?php
+declare(strict_types=1);
 /** @var string $title */
 /** @var array $payload */
 /** @var string $saveUrl */
 /** @var string $dataUrl */
-/** @var string $css */
-/** @var string $js */
+
+use ByTIC\DocumentGenerator\Utility\ViewUtility;
+
+$this->Stylesheets()->addRaw(ViewUtility::loadAssetContent('/scss/pdf-letter-editor.css'));
+$this->Scripts()->addRaw(ViewUtility::loadAssetContent('/js/pdf-letter-editor.js'));
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= htmlspecialchars((string)$title, ENT_QUOTES, 'UTF-8') ?></title>
-    <style><?= $css ?></style>
-</head>
-<body>
 <div
     class="dg-pdf-editor"
     data-save-url="<?= htmlspecialchars((string)$saveUrl, ENT_QUOTES, 'UTF-8') ?>"
@@ -70,6 +65,3 @@
         </div>
     </main>
 </div>
-<script><?= $js ?></script>
-</body>
-</html>

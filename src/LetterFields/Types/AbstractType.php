@@ -1,10 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace ByTIC\DocumentGenerator\LetterFields\Types;
 
 use ByTIC\DocumentGenerator\LetterFields\Models\FieldTrait;
-use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
-use setasign\Fpdi\Tcpdf\Fpdi;
+use ByTIC\DocumentGenerator\LetterFields\Types\Behaviors\TextTypeTrait;
 
 /**
  * Class AbstractType

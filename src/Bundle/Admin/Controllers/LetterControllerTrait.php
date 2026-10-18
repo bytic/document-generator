@@ -11,10 +11,13 @@ use ByTIC\DocumentGenerator\Letters\Models\Letter;
 use ByTIC\DocumentGenerator\Letters\Models\LettersTrait;
 use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
 use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
+use ByTIC\DocumentGenerator\Utility\PathsHelpers;
 use ByTIC\MediaLibrary\Media\Media;
 use Nip\Records\Record;
 use Nip\Records\RecordManager;
+use RuntimeException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Trait AdminLetterControllerTrait
@@ -148,6 +151,52 @@ trait LetterControllerTrait
         $this->flashRedirectLetter($letter, $this->getModelManager()->getMessage($messageSlug), $_type);
     }
 
+    public function editor(): void
+    {
+        $letter = $this->requireLetterEditorRecord();
+        $css = file_get_contents(PathsHelpers::assets('/scss/letter-editor.css'));
+        $js = file_get_contents(PathsHelpers::assets('/js/letter-editor.js'));
+        if (!is_string($css) || !is_string($js)) {
+            throw new RuntimeException('Unable to load PDF letter editor assets');
+        }
+        if (stripos($css, '</style>') !== false) {
+            throw new RuntimeException('Invalid CSS content in PDF letter editor assets');
+        }
+        if (stripos($js, '</script>') !== false) {
+            throw new RuntimeException('Invalid JS content in PDF letter editor assets');
+        }
+
+        $this->payload()->with(
+            [
+                'title' => $letter->getName(),
+                'payload' => $letter->getEditorPayload(),
+                'saveUrl' => $this->getLetterEditorSaveUrl(),
+                'dataUrl' => $this->getLetterEditorDataUrl(),
+                'css' => $css,
+                'js' => $js,
+            ]
+        );
+    }
+
+    public function editorData(): JsonResponse
+    {
+        return new JsonResponse($this->requireLetterEditorRecord()->getEditorPayload());
+    }
+
+    public function editorSave(): JsonResponse
+    {
+        $letter = $this->requireLetterEditorRecord();
+        $payload = $this->getLetterEditorRequestPayload();
+        $fields = is_array($payload['fields'] ?? null) ? $payload['fields'] : [];
+
+        return new JsonResponse(
+            [
+                'fields' => $letter->syncEditorFields($fields),
+                'availableFields' => $letter->getAvailableEditorFields(),
+            ]
+        );
+    }
+
     /**
      * @param Record $parent
      * @param $message
@@ -173,6 +222,47 @@ trait LetterControllerTrait
             $this->redirect($this->getModelManager()->getUploadURL($this->getRequest()->query->all()));
         }
         return $letter;
+    }
+
+    protected function getLetterEditorDataUrl(): string
+    {
+        return $this->getRequest()->getRequestUri();
+    }
+
+    protected function getLetterEditorSaveUrl(): string
+    {
+        return $this->getRequest()->getRequestUri();
+    }
+
+    protected function getLetterEditorRequestPayload(): array
+    {
+        $request = $this->getRequest();
+        $content = $request->getContent();
+        if (is_string($content) && $content !== '') {
+            $decoded = json_decode($content, true);
+            if (is_array($decoded)) {
+                return $decoded;
+            }
+        }
+
+        return $request->request->all();
+    }
+
+    /**
+     * @return Letter|LetterTrait
+     */
+    protected function requireLetterEditorRecord()
+    {
+        if ($this->letter) {
+            return $this->letter;
+        }
+
+        $letter = $this->getModelFromRequest();
+        if ($letter) {
+            return $letter;
+        }
+
+        throw new RuntimeException('No letter available for editor');
     }
 
     /**

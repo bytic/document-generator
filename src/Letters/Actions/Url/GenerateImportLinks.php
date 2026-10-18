@@ -15,11 +15,12 @@ use Nip\Records\AbstractModels\RecordManager;
 class GenerateImportLinks extends Action
 {
     use HasSubject;
+    use HasRepository;
 
     protected $siblings = [];
     protected $manager;
 
-    public function forItems($subject, $items)
+    public static function forItems($subject, $items)
     {
         $action = static::for($subject);
         $action->setSiblings($items);
@@ -28,7 +29,7 @@ class GenerateImportLinks extends Action
     }
 
 
-    protected function handle()
+    public function handle()
     {
         $return = [];
         foreach ($this->siblings as $item) {
@@ -68,5 +69,11 @@ class GenerateImportLinks extends Action
     public function setSiblings($siblings): void
     {
         $this->siblings = $siblings;
+    }
+
+
+    protected function generateRepository(): RecordManager
+    {
+        return DocumentGeneratorModels::letters();
     }
 }

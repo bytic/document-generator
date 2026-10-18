@@ -1,7 +1,7 @@
 
-<div class="card card-inverse">
+<div class="card mb-3">
     <div class="card-header">
-        <h4 class="card-title">
+        <h4 class="card-title mb-0">
             <?php echo \ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels::letters()->getLabel('form'); ?>
         </h4>
     </div>

@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\LetterFields\Types;
+namespace ByTIC\DocumentGenerator\LetterFields\Types\Behaviors;
 
 use ByTIC\DocumentGenerator\Letters\LetterHelper;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;

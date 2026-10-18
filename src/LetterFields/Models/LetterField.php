@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ByTIC\DocumentGenerator\LetterFields\Models;
 
 use ByTIC\DocumentGenerator\Base\Models\BaseModel;
-use ByTIC\DocumentGenerator\Letters\Models\Fields\FieldTrait;
+use ByTIC\DocumentGenerator\LetterFields\Models\FieldTrait;
 use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 

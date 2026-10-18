@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Letters\Models\Downloads;
+namespace ByTIC\DocumentGenerator\LetterDownloads\Models;
 
 use ByTIC\DocumentGenerator\Letters\Models\Letters\LetterTrait;
 use Nip\Records\Record;

@@ -2,7 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\Letters\Models\Fields\Types;
 
-use ByTIC\DocumentGenerator\Letters\Models\Fields\FieldTrait;
+use ByTIC\DocumentGenerator\LetterFields\Models\FieldTrait;
 use Nip\Records\Traits\AbstractTrait\RecordTrait as Record;
 use setasign\Fpdi\Tcpdf\Fpdi;
 

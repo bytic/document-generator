@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Letters\Models\Fields;
+namespace ByTIC\DocumentGenerator\LetterFields\Models;
 
 use ByTIC\DocumentGenerator\Letters\Models\Fields\Types\AbstractType;
 use ByTIC\DocumentGenerator\Letters\Models\Letters\LettersTrait;

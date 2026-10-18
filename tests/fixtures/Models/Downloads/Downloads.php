@@ -2,7 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\Downloads;
 
-use ByTIC\DocumentGenerator\Letters\Models\Downloads\DownloadsTrait;
+use ByTIC\DocumentGenerator\LetterDownloads\Models\DownloadsTrait;
 use Nip\Records\RecordManager;
 use Nip\Utility\Traits\SingletonTrait;
 

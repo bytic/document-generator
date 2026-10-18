@@ -2,7 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\Letters\Actions;
 
-use ByTIC\DocumentGenerator\Letters\Models\Downloads\DownloadsTrait;
+use ByTIC\DocumentGenerator\LetterDownloads\Models\DownloadsTrait;
 use ByTIC\DocumentGenerator\Letters\Models\Letters\LettersTrait;
 use ByTIC\DocumentGenerator\Letters\LettersManager;
 use Nip\MailModule\Models\EmailsTable\EmailsTrait;

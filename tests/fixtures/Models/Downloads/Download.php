@@ -2,7 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\Downloads;
 
-use ByTIC\DocumentGenerator\Letters\Models\Downloads\DownloadTrait;
+use ByTIC\DocumentGenerator\LetterDownloads\Models\DownloadTrait;
 use Nip\Records\Record;
 
 /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Letters\Models\Fields;
+namespace ByTIC\DocumentGenerator\LetterFields\Models;
 
 use ByTIC\DataObjects\Casts\Metadata\Metadata;
 use ByTIC\DocumentGenerator\Letters\Models\Fields\Attributes\TextTransform;

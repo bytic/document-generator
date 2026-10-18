@@ -2,8 +2,8 @@
 
 namespace ByTIC\DocumentGenerator\Letters\Models\Letters;
 
-use ByTIC\DocumentGenerator\Letters\Models\Downloads\DownloadsTrait;
-use ByTIC\DocumentGenerator\Letters\Models\Stats\StatsTrait;
+use ByTIC\DocumentGenerator\LetterDownloads\Models\DownloadsTrait;
+use ByTIC\DocumentGenerator\LetterStats\Models\StatsTrait;
 use ByTIC\MediaLibrary\HasMedia\HasMediaRecordsTrait;
 use Nip\Records\AbstractModels\RecordManager;
 use Nip\Records\Traits\AbstractTrait\RecordsTrait as AbstractRecordsTrait;

@@ -3,8 +3,8 @@
 namespace ByTIC\DocumentGenerator\Letters\Models\Letters;
 
 use ByTIC\DocumentGenerator\Helpers;
-use ByTIC\DocumentGenerator\Letters\Models\Downloads\DownloadsTrait;
-use ByTIC\DocumentGenerator\Letters\Models\Fields\FieldTrait;
+use ByTIC\DocumentGenerator\LetterDownloads\Models\DownloadsTrait;
+use ByTIC\DocumentGenerator\LetterFields\Models\FieldTrait;
 use ByTIC\MediaLibrary\Exceptions\FileCannotBeAdded\FileUnacceptableForCollection;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;

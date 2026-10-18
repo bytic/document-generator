@@ -7,6 +7,7 @@ use ByTIC\DocumentGenerator\Letters\Actions\Finder\GetOrCreateLetterByParent;
 use ByTIC\DocumentGenerator\Letters\Actions\Manage\ImportFieldsFrom;
 use ByTIC\DocumentGenerator\Letters\Actions\Manage\UploadFromRequest;
 use ByTIC\DocumentGenerator\Letters\Actions\Url\GenerateLetterViewUrl;
+use ByTIC\DocumentGenerator\Letters\Models\Letter;
 use ByTIC\DocumentGenerator\Letters\Models\LettersTrait;
 use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
 use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
@@ -50,7 +51,7 @@ trait LetterControllerTrait
         $this->forms['letter'] = $letter->getForm();
         $this->payload()->with(
             [
-                'letter_fields' => $letter->getCustomFields(),
+                'letter_fields' => $letter->getLetterFields(),
                 'letter' => $letter,
                 'title' => DocumentGeneratorModels::letters()->getLabel('title'),
             ]
@@ -162,7 +163,7 @@ trait LetterControllerTrait
     }
 
     /**
-     * @return mixed
+     * @return Letter
      */
     protected function viewCheckItem()
     {

@@ -10,6 +10,9 @@ use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Nip\Utility\Traits\SingletonTrait;
 
+/**
+ *
+ */
 class Letters extends BaseManager
 {
     use LettersTrait;
@@ -28,10 +31,5 @@ class Letters extends BaseManager
     public function getParentManagerFromType($type)
     {
         return null;
-    }
-
-    protected function getCustomFieldsManagerClass(): string
-    {
-        return LetterFields::class;
     }
 }

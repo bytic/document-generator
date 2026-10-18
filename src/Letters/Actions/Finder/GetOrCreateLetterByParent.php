@@ -42,13 +42,15 @@ class GetOrCreateLetterByParent extends Action
         /** @var LettersTrait $letters */
         $type = $subject->getManager()->getMorphName();
         $type = inflector()->singularize($type);
-        $letter = $letters->getByItem($type, (int)$subject->id);
+
+        $repository = $this->getRepository();
+        $letter = $repository->getByItem($type, (int)$subject->id);
 
         if ($letter || !$this->createIfMissing) {
             return $letter;
         }
 
-        $letter = $letters->getNew();
+        $letter = $repository->getNew();
         $letter->id_item = $subject->id;
         $letter->type = $type;
         $letter->insert();

@@ -5,6 +5,7 @@ namespace ByTIC\DocumentGenerator\Letters\Models;
 
 use ByTIC\DocumentGenerator\Helpers;
 use ByTIC\DocumentGenerator\Letters\Actions\Manage\UploadFromRequest;
+use ByTIC\DocumentGenerator\Letters\Writer\DrawGuidelines;
 use ByTIC\DocumentGenerator\LetterDownloads\Models\DownloadsTrait;
 use ByTIC\DocumentGenerator\LetterFields\Models\FieldTrait;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
@@ -159,7 +160,7 @@ trait LetterTrait
         $pdf = $this->generatePdfObj($model);
 
         if ($model->demo === true) {
-            $this->pdfDrawGuidelines($pdf);
+            DrawGuidelines::forPdf($pdf)->draw();
         }
         $fileName = $this->getFileNameFromModel($model) . '.pdf';
         if (is_string($output) && is_dir($output)) {
@@ -185,7 +186,7 @@ trait LetterTrait
 
         /** @noinspection PhpUndefinedFieldInspection */
         if ($model->demo === true) {
-            $this->pdfDrawGuidelines($pdf);
+            DrawGuidelines::forPdf($pdf)->draw();
         }
 
         $this->addFieldsToPDF($pdf, $model);
@@ -226,7 +227,7 @@ trait LetterTrait
     public function getEditorFields(): array
     {
         $fields = [];
-        foreach ($this->getCustomFields() as $field) {
+        foreach ($this->getLetterFields() as $field) {
             $fields[] = $field->toEditorArray();
         }
 
@@ -245,7 +246,7 @@ trait LetterTrait
 
     public function getAvailableEditorFields(): array
     {
-        $manager = $this->getCustomFieldsManager();
+        $manager = $this->getLetterFieldsManager();
         $mergeFields = $manager->getMergeFields();
         $counters = $this->getEditorFieldCounters();
         $data = [];
@@ -271,9 +272,9 @@ trait LetterTrait
 
     public function syncEditorFields(array $fields): array
     {
-        $manager = $this->getCustomFieldsManager();
+        $manager = $this->getLetterFieldsManager();
         $existingFields = [];
-        foreach ($this->getCustomFields() as $field) {
+        foreach ($this->getLetterFields() as $field) {
             if (isset($field->id)) {
                 $existingFields[(int)$field->id] = $field;
             }
@@ -468,7 +469,7 @@ trait LetterTrait
     protected function addFieldsToPDF($pdf, $model)
     {
         /** @var FieldTrait[] $fields */
-        $fields = $this->getCustomFields();
+        $fields = $this->getLetterFields();
         foreach ($fields as $field) {
             $field->addToPdf($pdf, $model);
         }
@@ -480,30 +481,6 @@ trait LetterTrait
     protected function getFileNameDefault()
     {
         return 'letter';
-    }
-
-    /**
-     * @param FPDI|TCPDF $pdf
-     */
-    protected function pdfDrawGuidelines($pdf)
-    {
-        for ($pos = 5; $pos < 791; $pos = $pos + 5) {
-            if (($pos % 100) == 0) {
-                $pdf->SetDrawColor(0, 0, 200);
-                $pdf->SetLineWidth(.7);
-            } elseif (($pos % 50) == 0) {
-                $pdf->SetDrawColor(200, 0, 0);
-                $pdf->SetLineWidth(.4);
-            } else {
-                $pdf->SetDrawColor(128, 128, 128);
-                $pdf->SetLineWidth(.05);
-            }
-
-            $pdf->Line(0, $pos, 611, $pos);
-            if ($pos < 611) {
-                $pdf->Line($pos, 0, $pos, 791);
-            }
-        }
     }
 
     /** @noinspection PhpUnusedParameterInspection
@@ -526,15 +503,15 @@ trait LetterTrait
         return $mediaRepository;
     }
 
-    protected function getCustomFieldsManager()
+    protected function getLetterFieldsManager()
     {
-        return $this->getManager()->getRelation('CustomFields')->getWith();
+        return $this->getManager()->getRelation('LetterFields')->getWith();
     }
 
     protected function getEditorFieldCounters(): array
     {
         $counters = [];
-        foreach ($this->getCustomFields() as $field) {
+        foreach ($this->getLetterFields() as $field) {
             if (!isset($counters[$field->field])) {
                 $counters[$field->field] = 0;
             }

@@ -4,12 +4,18 @@ declare(strict_types=1);
 
 namespace ByTIC\DocumentGenerator\PdfIssuers\Models;
 
-use Nip\Records\Record;
+use ByTIC\DocumentGenerator\Base\Models\BaseModel;
+use ByTIC\DocumentGenerator\Utility\PackageConfig;
 
-class PdfIssuer extends Record
+class PdfIssuer extends BaseModel
 {
     public function getName()
     {
         return $this->name ?? 'Issuer';
+    }
+
+    public function generateTable(): string
+    {
+        return PackageConfig::tableName('letter_issuers', 'letter_issuers');
     }
 }

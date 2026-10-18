@@ -2,7 +2,7 @@
     <div class="card-header">
         <h4 class="card-title">
             <?= \ByTIC\Icons\Icons::list_ul(); ?>
-            <?php echo ConfirmationLetters::instance()->getLabel('title'); ?>
+            <?php echo \ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels::letters()->getLabel('title'); ?>
         </h4>
     </div>
 

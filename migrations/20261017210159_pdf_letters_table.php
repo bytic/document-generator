@@ -9,8 +9,11 @@ final class PdfLettersTable extends AbstractMigration
 {
     public function up(): void
     {
-        $tableName = PackageConfig::tableName('pdf_letters');
-        if ($tableName === null || $this->hasTable($tableName)) {
+        $tableName = PackageConfig::tableName('letters');
+        if ($tableName === null) {
+            throw new RuntimeException('Missing config table mapping for "letters".');
+        }
+        if ($this->hasTable($tableName)) {
             return;
         }
 
@@ -29,7 +32,7 @@ final class PdfLettersTable extends AbstractMigration
 
     public function down(): void
     {
-        $tableName = PackageConfig::tableName('pdf_letters');
+        $tableName = PackageConfig::tableName('letters');
         if ($tableName !== null && $this->hasTable($tableName)) {
             $this->table($tableName)->drop()->save();
         }

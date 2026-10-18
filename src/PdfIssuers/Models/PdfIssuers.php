@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace ByTIC\DocumentGenerator\PdfIssuers\Models;
 
-use Nip\Records\RecordManager;
+use ByTIC\DocumentGenerator\Base\Models\BaseManager;
+use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Nip\Utility\Traits\SingletonTrait;
 
-class PdfIssuers extends RecordManager
+class PdfIssuers extends BaseManager
 {
     use SingletonTrait;
 
@@ -18,6 +19,6 @@ class PdfIssuers extends RecordManager
 
     public function generateTable(): string
     {
-        return 'letter_issuers';
+        return PackageConfig::tableName('letter_issuers', 'letter_issuers');
     }
 }

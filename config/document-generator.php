@@ -15,11 +15,11 @@ return [
         'letter_issuers' => PdfIssuers::class,
     ],
     'tables' => [
-        'letters' => 'pdf_letters',
-        'letter_fields' => 'pdf_letter_fields',
-        'letter_downloads' => 'pdf_downloads',
-        'letter_stats' => 'pdf_stats',
-        'letter_issuers' => 'pdf_issuers',
+        'letters' => 'letter_letters',
+        'letter_fields' => 'letter_fields',
+        'letter_downloads' => 'letter_downloads',
+        'letter_stats' => 'letter_stats',
+        'letter_issuers' => 'letter_issuers',
     ],
     'database' => [
         'connection' => null,

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace ByTIC\DocumentGenerator\PdfLetters\Models;
 
+use ByTIC\DocumentGenerator\Base\Models\BaseManager;
 use ByTIC\DocumentGenerator\PdfFields\Models\PdfLetterFields;
 use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLettersTrait;
-use Nip\Records\RecordManager;
+use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Nip\Utility\Traits\SingletonTrait;
 
-class PdfLetters extends RecordManager
+class PdfLetters extends BaseManager
 {
     use PdfLettersTrait;
     use SingletonTrait;
@@ -21,7 +22,7 @@ class PdfLetters extends RecordManager
 
     public function generateTable(): string
     {
-        return 'letters';
+        return PackageConfig::tableName('letters', 'letter_letters');
     }
 
     public function getParentManagerFromType($type)

@@ -15,7 +15,7 @@
             <td class="value"><?= $this->item->type; ?></td>
         </tr>
         <tr>
-            <td class="name"><?php echo ConfirmationLetters::instance()->getLabel('title.singular'); ?>:</td>
+            <td class="name"><?php echo \ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels::letters()->getLabel('title.singular'); ?>:</td>
             <td class="value">
                 <a href="<?= $this->letter->getDownloadBlankURL(); ?>" class="btn btn-info">
                     Download BLANK

@@ -5,7 +5,7 @@ namespace ByTIC\DocumentGenerator\Utility;
 use Nip\View\View;
 
 /**
- *
+ * Utility helpers for managing module-specific view paths and asset content.
  */
 class ViewUtility
 {
@@ -13,11 +13,11 @@ class ViewUtility
     /**
      * @param $path
      *
-     * @return string|null
+     * @return string
      */
     public static function loadAssetContent($path)
     {
-        $fullPath = PathsHelpers::assets($path)
+        $fullPath = PathsHelpers::assets($path);
         if (file_exists($fullPath)) {
             return file_get_contents($fullPath);
         }

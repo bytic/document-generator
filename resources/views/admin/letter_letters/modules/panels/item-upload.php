@@ -2,7 +2,7 @@
 <div class="card card-inverse">
     <div class="card-header">
         <h4 class="card-title">
-            <?php echo ConfirmationLetters::instance()->getLabel('upload'); ?>
+            <?php echo \ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels::letters()->getLabel('upload'); ?>
         </h4>
     </div>
 

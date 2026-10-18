@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace ByTIC\DocumentGenerator\PdfFields\Models;
 
+use ByTIC\DocumentGenerator\Base\Models\BaseModel;
 use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\FieldTrait;
-use Nip\Records\Record;
+use ByTIC\DocumentGenerator\Utility\PackageConfig;
 
-class PdfLetterField extends Record
+class PdfLetterField extends BaseModel
 {
     use FieldTrait;
 
@@ -19,5 +20,10 @@ class PdfLetterField extends Record
     public function getRegistry()
     {
         return $this->getManager();
+    }
+
+    public function generateTable(): string
+    {
+        return PackageConfig::tableName('letter_fields', 'letter_fields');
     }
 }

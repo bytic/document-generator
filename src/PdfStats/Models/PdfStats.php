@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace ByTIC\DocumentGenerator\PdfStats\Models;
 
+use ByTIC\DocumentGenerator\Base\Models\BaseManager;
 use ByTIC\DocumentGenerator\PdfLetters\Models\Stats\StatsTrait;
-use Nip\Records\RecordManager;
+use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Nip\Utility\Traits\SingletonTrait;
 
-class PdfStats extends RecordManager
+class PdfStats extends BaseManager
 {
     use StatsTrait;
     use SingletonTrait;
@@ -20,6 +21,6 @@ class PdfStats extends RecordManager
 
     public function generateTable(): string
     {
-        return 'letter_stats';
+        return PackageConfig::tableName('letter_stats', 'letter_stats');
     }
 }

@@ -1,7 +1,5 @@
 <?php declare(strict_types=1);
 
-use ByTIC\Icons\Icons;
-use KM42\Register\Library\Records\Locator\ModelLocator;
 use Nip\View\View;
 
 /** @var View $this */

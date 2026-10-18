@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace ByTIC\DocumentGenerator\PdfStats\Models;
 
+use ByTIC\DocumentGenerator\Base\Models\BaseModel;
 use ByTIC\DocumentGenerator\PdfLetters\Models\Stats\StatTrait;
-use Nip\Records\Record;
+use ByTIC\DocumentGenerator\Utility\PackageConfig;
 
-class PdfStat extends Record
+class PdfStat extends BaseModel
 {
     use StatTrait;
 
@@ -15,5 +16,10 @@ class PdfStat extends Record
     {
         $this->stat_type = $related->getManager()->getController();
         $this->stat_id = $related->getPrimaryKey();
+    }
+
+    public function generateTable(): string
+    {
+        return PackageConfig::tableName('letter_stats', 'letter_stats');
     }
 }

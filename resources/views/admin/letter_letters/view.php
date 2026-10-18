@@ -1,18 +1,22 @@
-<?php declare(strict_types=1);
+<?php
 
-use Nip\View\View;
+declare(strict_types=1);
+
+use \Nip\View\View;
 
 /** @var View $this */
 $record = $this->item ?? $this->model ?? null;
 $recordId = $record && isset($record->id) ? (int)$record->id : 0;
 ?>
 <?= $this->Flash()->render($this->controller); ?>
-<?= $this->load('/abstract/view'); ?>
-<?php if ($recordId > 0) : ?>
-    <div class="mt-3">
-        <form method="get" action="">
-            <input type="hidden" name="id" value="<?= $recordId ?>">
-            <button type="submit" name="action" value="editor" class="btn btn-primary">Edit PDF layout</button>
-        </form>
+
+<div class="row">
+    <div class="col-sm-5">
+        <?= $this->load('/letter_letters/modules/panels/item-details'); ?>
+        <?= $this->load('/letter_letters/modules/panels/item-form'); ?>
+        <?= $this->load('/letter_letters/modules/panels/item-upload'); ?>
     </div>
-<?php endif; ?>
+    <div class="col-sm-7">
+        <?= $this->load('/letter_letters/modules/panels/item-fields'); ?>
+    </div>
+</div>

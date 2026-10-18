@@ -6,6 +6,7 @@ namespace ByTIC\DocumentGenerator\LetterFields\Models;
 
 use ByTIC\DocumentGenerator\Base\Models\BaseModel;
 use ByTIC\DocumentGenerator\Letters\Models\Fields\FieldTrait;
+use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 
 class LetterField extends BaseModel
@@ -24,6 +25,6 @@ class LetterField extends BaseModel
 
     public function generateTable(): string
     {
-        return PackageConfig::tableName('letter_fields', 'letter_fields');
+        return PackageConfig::tableName(DocumentGeneratorModels::LETTER_FIELDS, 'letter_fields');
     }
 }

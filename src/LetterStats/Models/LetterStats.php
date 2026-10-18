@@ -6,6 +6,7 @@ namespace ByTIC\DocumentGenerator\LetterStats\Models;
 
 use ByTIC\DocumentGenerator\Base\Models\BaseManager;
 use ByTIC\DocumentGenerator\Letters\Models\Stats\StatsTrait;
+use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Nip\Utility\Traits\SingletonTrait;
 
@@ -21,6 +22,6 @@ class LetterStats extends BaseManager
 
     public function generateTable(): string
     {
-        return PackageConfig::tableName('letter_stats', 'letter_stats');
+        return PackageConfig::tableName(DocumentGeneratorModels::LETTER_STATS, 'letter_stats');
     }
 }

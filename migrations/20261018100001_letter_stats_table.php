@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
+use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Phinx\Migration\AbstractMigration;
 
 final class LetterStatsTable extends AbstractMigration
 {
-    public function up(): void
+    public function change(): void
     {
-        $tableName = PackageConfig::tableName('letter_stats');
+        $tableName = PackageConfig::tableName(DocumentGeneratorModels::LETTER_STATS);
         if ($tableName === null) {
             throw new RuntimeException('Missing config table mapping for "letter_stats".');
         }
@@ -26,13 +27,5 @@ final class LetterStatsTable extends AbstractMigration
             ->addIndex(['stat_type'])
             ->addIndex(['stat_id'])
             ->create();
-    }
-
-    public function down(): void
-    {
-        $tableName = PackageConfig::tableName('letter_stats');
-        if ($tableName !== null && $this->hasTable($tableName)) {
-            $this->table($tableName)->drop()->save();
-        }
     }
 }

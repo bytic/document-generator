@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ByTIC\DocumentGenerator\LetterIssuers\Models;
 
 use ByTIC\DocumentGenerator\Base\Models\BaseModel;
+use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 
 class LetterIssuer extends BaseModel
@@ -16,6 +17,6 @@ class LetterIssuer extends BaseModel
 
     public function generateTable(): string
     {
-        return PackageConfig::tableName('letter_issuers', 'letter_issuers');
+        return PackageConfig::tableName(DocumentGeneratorModels::LETTER_ISSUERS, 'letter_issuers');
     }
 }

@@ -7,6 +7,7 @@ namespace ByTIC\DocumentGenerator\LetterFields\Models;
 use ByTIC\DocumentGenerator\Base\Models\BaseManager;
 use ByTIC\DocumentGenerator\Letters\Models\Fields\FieldsTrait;
 use ByTIC\DocumentGenerator\Letters\Models\Letters;
+use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Nip\Utility\Traits\SingletonTrait;
 
@@ -22,7 +23,7 @@ class LetterFields extends BaseManager
 
     public function generateTable(): string
     {
-        return PackageConfig::tableName('letter_fields', 'letter_fields');
+        return PackageConfig::tableName(DocumentGeneratorModels::LETTER_FIELDS, 'letter_fields');
     }
 
     public function getLetterManager()

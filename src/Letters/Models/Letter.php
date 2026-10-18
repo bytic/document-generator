@@ -6,6 +6,7 @@ namespace ByTIC\DocumentGenerator\Letters\Models;
 
 use ByTIC\DocumentGenerator\Base\Models\BaseModel;
 use ByTIC\DocumentGenerator\Letters\Models\Letters\LetterTrait;
+use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
@@ -41,6 +42,6 @@ class Letter extends BaseModel implements HasMedia
 
     public function generateTable(): string
     {
-        return PackageConfig::tableName('letters', 'letter_letters');
+        return PackageConfig::tableName(DocumentGeneratorModels::LETTERS, 'letter_letters');
     }
 }

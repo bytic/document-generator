@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
+use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Phinx\Migration\AbstractMigration;
 
 final class LetterFieldsTable extends AbstractMigration
 {
-    public function up(): void
+    public function change(): void
     {
-        $tableName = PackageConfig::tableName('letter_fields');
-        $parentTableName = PackageConfig::tableName('letters');
+        $tableName = PackageConfig::tableName(DocumentGeneratorModels::LETTER_FIELDS);
+        $parentTableName = PackageConfig::tableName(DocumentGeneratorModels::LETTERS);
         if ($tableName === null) {
             throw new RuntimeException('Missing config table mapping for "letter_fields".');
         }
@@ -25,8 +26,7 @@ final class LetterFieldsTable extends AbstractMigration
             throw new RuntimeException(sprintf('Parent table "%s" for "%s" does not exist.', $parentTableName, $tableName));
         }
 
-        $table = $this->table($tableName);
-        $table
+        $this->table($tableName)
             ->addColumn('id_letter', 'integer', ['signed' => false])
             ->addColumn('field', 'string', ['limit' => 255])
             ->addColumn('x', 'decimal', ['precision' => 10, 'scale' => 2])
@@ -39,13 +39,5 @@ final class LetterFieldsTable extends AbstractMigration
             ->addIndex(['field'])
             ->addForeignKey('id_letter', $parentTableName, 'id', ['delete' => 'CASCADE', 'update' => 'CASCADE'])
             ->create();
-    }
-
-    public function down(): void
-    {
-        $tableName = PackageConfig::tableName('letter_fields');
-        if ($tableName !== null && $this->hasTable($tableName)) {
-            $this->table($tableName)->dropForeignKey('id_letter')->drop()->save();
-        }
     }
 }

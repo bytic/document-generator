@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
+use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Phinx\Migration\AbstractMigration;
 
 final class LettersTable extends AbstractMigration
 {
-    public function up(): void
+    public function change(): void
     {
-        $tableName = PackageConfig::tableName('letters');
+        $tableName = PackageConfig::tableName(DocumentGeneratorModels::LETTERS);
         if ($tableName === null) {
             throw new RuntimeException('Missing config table mapping for "letters".');
         }
@@ -17,8 +18,7 @@ final class LettersTable extends AbstractMigration
             return;
         }
 
-        $table = $this->table($tableName);
-        $table
+        $this->table($tableName)
             ->addColumn('id_item', 'integer', ['signed' => false])
             ->addColumn('type', 'string', ['limit' => 64])
             // 'l' = landscape; 'p' = portrait
@@ -28,13 +28,5 @@ final class LettersTable extends AbstractMigration
             ->addIndex(['id_item'])
             ->addIndex(['type'])
             ->create();
-    }
-
-    public function down(): void
-    {
-        $tableName = PackageConfig::tableName('letters');
-        if ($tableName !== null && $this->hasTable($tableName)) {
-            $this->table($tableName)->drop()->save();
-        }
     }
 }

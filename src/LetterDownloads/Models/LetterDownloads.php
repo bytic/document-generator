@@ -6,6 +6,7 @@ namespace ByTIC\DocumentGenerator\LetterDownloads\Models;
 
 use ByTIC\DocumentGenerator\Base\Models\BaseManager;
 use ByTIC\DocumentGenerator\Letters\Models\Downloads\DownloadsTrait;
+use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Nip\Utility\Traits\SingletonTrait;
 
@@ -21,6 +22,6 @@ class LetterDownloads extends BaseManager
 
     public function generateTable(): string
     {
-        return PackageConfig::tableName('letter_downloads', 'letter_downloads');
+        return PackageConfig::tableName(DocumentGeneratorModels::LETTER_DOWNLOADS, 'letter_downloads');
     }
 }

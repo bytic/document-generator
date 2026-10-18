@@ -7,6 +7,9 @@ namespace ByTIC\DocumentGenerator\Base\Models;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Nip\Records\RecordManager;
 
+/**
+ *
+ */
 abstract class BaseManager extends RecordManager
 {
     public function generateTable(): string

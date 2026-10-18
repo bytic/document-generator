@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfWriter\Console;
+namespace ByTIC\DocumentGenerator\Letters\Console;
 
 use ByTIC\Console\Command;
 
@@ -18,6 +18,6 @@ class DownloadStatsProcess extends Command
 
     protected function handle()
     {
-        (new \ByTIC\DocumentGenerator\PdfWriter\Actions\DownloadStatsProcess())->handle();
+        (new \ByTIC\DocumentGenerator\Letters\Actions\DownloadStatsProcess())->handle();
     }
 }

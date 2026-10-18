@@ -10,6 +10,9 @@ use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Nip\Utility\Traits\SingletonTrait;
 
+/**
+ *
+ */
 class LetterDownloads extends BaseManager
 {
     use DownloadsTrait;

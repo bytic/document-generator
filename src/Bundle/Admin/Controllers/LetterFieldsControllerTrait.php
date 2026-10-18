@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers;
 
-use ByTIC\DocumentGenerator\PdfWriter\Models\LetterTrait;
+use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
 use Nip\Records\AbstractModels\Record;
 
 /**

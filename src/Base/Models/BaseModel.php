@@ -7,6 +7,9 @@ namespace ByTIC\DocumentGenerator\Base\Models;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 use Nip\Records\Record;
 
+/**
+ *
+ */
 abstract class BaseModel extends Record
 {
     protected static function tableNameKey(): string

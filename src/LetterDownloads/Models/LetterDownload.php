@@ -9,6 +9,9 @@ use ByTIC\DocumentGenerator\LetterDownloads\Models\DownloadTrait;
 use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PackageConfig;
 
+/**
+ *
+ */
 class LetterDownload extends BaseModel
 {
     use DownloadTrait;

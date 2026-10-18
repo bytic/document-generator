@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\PdfWriter\Actions\Manage;
+namespace ByTIC\DocumentGenerator\Letters\Actions\Manage;
 
 use Bytic\Actions\Action;
 use Bytic\Actions\Behaviours\Entities\HasRepository;
 use Bytic\Actions\Behaviours\HasSubject\HasSubject;
-use ByTIC\DocumentGenerator\PdfWriter\Models\Letter;
+use ByTIC\DocumentGenerator\Letters\Models\Letter;
 use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use Nip\Records\AbstractModels\RecordManager;
 

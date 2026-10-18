@@ -2,14 +2,14 @@
 
 namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers;
 
-use ByTIC\DocumentGenerator\PdfWriter\Actions\Finder\GetLetterByParent;
-use ByTIC\DocumentGenerator\PdfWriter\Actions\Finder\GetOrCreateLetterByParent;
-use ByTIC\DocumentGenerator\PdfWriter\Actions\Manage\ImportFieldsFrom;
-use ByTIC\DocumentGenerator\PdfWriter\Actions\Manage\UploadFromRequest;
-use ByTIC\DocumentGenerator\PdfWriter\Actions\Url\GenerateLetterViewUrl;
-use ByTIC\DocumentGenerator\PdfWriter\Models\Letter;
-use ByTIC\DocumentGenerator\PdfWriter\Models\LettersTrait;
-use ByTIC\DocumentGenerator\PdfWriter\Models\LetterTrait;
+use ByTIC\DocumentGenerator\Letters\Actions\Finder\GetLetterByParent;
+use ByTIC\DocumentGenerator\Letters\Actions\Finder\GetOrCreateLetterByParent;
+use ByTIC\DocumentGenerator\Letters\Actions\Manage\ImportFieldsFrom;
+use ByTIC\DocumentGenerator\Letters\Actions\Manage\UploadFromRequest;
+use ByTIC\DocumentGenerator\Letters\Actions\Url\GenerateLetterViewUrl;
+use ByTIC\DocumentGenerator\Letters\Models\Letter;
+use ByTIC\DocumentGenerator\Letters\Models\LettersTrait;
+use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
 use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
 use ByTIC\DocumentGenerator\Utility\PathsHelpers;
 use ByTIC\MediaLibrary\Media\Media;

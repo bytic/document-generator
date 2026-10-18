@@ -1,9 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace ByTIC\DocumentGenerator\LetterFields\Models\Attributes;
 
 use Nip\Utility\Str;
 
+/**
+ *
+ */
 class TextTransform
 {
     public const NAME = "text_transform";

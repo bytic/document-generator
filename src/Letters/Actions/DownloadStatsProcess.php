@@ -1,11 +1,10 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\PdfWriter\Actions;
+namespace ByTIC\DocumentGenerator\Letters\Actions;
 
 use ByTIC\DocumentGenerator\LetterDownloads\Models\DownloadsTrait;
-use ByTIC\DocumentGenerator\PdfWriter\LettersManager;
-use ByTIC\DocumentGenerator\PdfWriter\Models\LettersTrait;
-use Nip\MailModule\Models\EmailsTable\EmailsTrait;
+use ByTIC\DocumentGenerator\Letters\LettersManager;
+use ByTIC\DocumentGenerator\Letters\Models\LettersTrait;
 use Nip\Records\AbstractModels\RecordManager as AbstractRecordManager;
 use Nip\Records\Locator\ModelLocator;
 use Nip\Records\RecordManager;

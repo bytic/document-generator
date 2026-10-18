@@ -1,10 +1,14 @@
 <?php
+declare(strict_types=1);
 
 namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers;
 
 use ByTIC\DocumentGenerator\Utility\ViewUtility;
 use Nip\View\View;
 
+/**
+ *
+ */
 trait AbstractControllerTrait
 {
     use \Nip\Controllers\Traits\AbstractControllerTrait;

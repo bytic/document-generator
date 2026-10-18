@@ -1,10 +1,10 @@
 <?php
 
-use ByTIC\DocumentGenerator\PdfLetters\Models\Downloads\PdfDownloads;
-use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\PdfLetterFields;
-use ByTIC\DocumentGenerator\PdfLetters\Models\Issuers\PdfIssuers;
-use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetters;
-use ByTIC\DocumentGenerator\PdfLetters\Models\Stats\PdfStats;
+use ByTIC\DocumentGenerator\PdfDownloads\Models\PdfDownloads;
+use ByTIC\DocumentGenerator\PdfFields\Models\PdfLetterFields;
+use ByTIC\DocumentGenerator\PdfIssuers\Models\PdfIssuers;
+use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters;
+use ByTIC\DocumentGenerator\PdfStats\Models\PdfStats;
 
 return [
     'models' => [

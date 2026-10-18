@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Models\Issuers;
+namespace ByTIC\DocumentGenerator\PdfIssuers\Models;
 
 use Nip\Records\RecordManager;
 use Nip\Utility\Traits\SingletonTrait;

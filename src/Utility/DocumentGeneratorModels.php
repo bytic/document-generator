@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace ByTIC\DocumentGenerator\Utility;
 
 use ByTIC\DocumentGenerator\DocumentGeneratorProvider;
-use ByTIC\DocumentGenerator\PdfLetters\Models\Fields\PdfLetterFields;
-use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetters;
+use ByTIC\DocumentGenerator\PdfFields\Models\PdfLetterFields;
+use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters;
 use ByTIC\PackageBase\Utility\ModelFinder;
 use Nip\Records\RecordManager;
 

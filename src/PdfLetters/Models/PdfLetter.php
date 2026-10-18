@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters;
+namespace ByTIC\DocumentGenerator\PdfLetters\Models;
 
+use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLetterTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\MediaRepository\MediaRepository;
 use DateTime;

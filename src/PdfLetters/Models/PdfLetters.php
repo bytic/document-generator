@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters;
+namespace ByTIC\DocumentGenerator\PdfLetters\Models;
 
+use ByTIC\DocumentGenerator\PdfFields\Models\PdfLetterFields;
+use ByTIC\DocumentGenerator\PdfLetters\Models\PdfLetters\PdfLettersTrait;
 use Nip\Records\RecordManager;
 use Nip\Utility\Traits\SingletonTrait;
 

@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Models\Fields;
+namespace ByTIC\DocumentGenerator\PdfStats\Models;
 
+use ByTIC\DocumentGenerator\PdfLetters\Models\Stats\StatsTrait;
 use Nip\Records\RecordManager;
 use Nip\Utility\Traits\SingletonTrait;
 
-class PdfLetterFields extends RecordManager
+class PdfStats extends RecordManager
 {
-    use FieldsTrait;
+    use StatsTrait;
     use SingletonTrait;
 
     public function getPrimaryKey(): string
@@ -19,11 +20,6 @@ class PdfLetterFields extends RecordManager
 
     public function generateTable(): string
     {
-        return 'pdf_letter_fields';
-    }
-
-    public function getLetterManager()
-    {
-        return PdfLetters::instance();
+        return 'pdf_stats';
     }
 }

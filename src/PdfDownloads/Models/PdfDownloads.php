@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Models\Stats;
+namespace ByTIC\DocumentGenerator\PdfDownloads\Models;
 
+use ByTIC\DocumentGenerator\PdfLetters\Models\Downloads\DownloadsTrait;
 use Nip\Records\RecordManager;
 use Nip\Utility\Traits\SingletonTrait;
 
-class PdfStats extends RecordManager
+class PdfDownloads extends RecordManager
 {
-    use StatsTrait;
+    use DownloadsTrait;
     use SingletonTrait;
 
     public function getPrimaryKey(): string
@@ -19,6 +20,6 @@ class PdfStats extends RecordManager
 
     public function generateTable(): string
     {
-        return 'pdf_stats';
+        return 'pdf_downloads';
     }
 }

@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\PdfLetters\Models\Stats;
+namespace ByTIC\DocumentGenerator\PdfStats\Models;
 
+use ByTIC\DocumentGenerator\PdfLetters\Models\Stats\StatTrait;
 use Nip\Records\Record;
 
 class PdfStat extends Record

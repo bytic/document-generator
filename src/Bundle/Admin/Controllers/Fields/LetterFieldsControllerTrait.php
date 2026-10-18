@@ -17,7 +17,7 @@ trait LetterFieldsControllerTrait
     /**
      * @var LetterTrait
      */
-    protected $pdfLetter;
+    protected $letter;
 
     /**
      * @var Record
@@ -31,8 +31,8 @@ trait LetterFieldsControllerTrait
     {
         /** @var LetterTrait $item */
         $item = $this->getModelManager()->getNew();
-        if ($this->pdfLetter) {
-            $item->populateFromLetter($this->pdfLetter);
+        if ($this->letter) {
+            $item->populateFromLetter($this->letter);
             $this->getView()->Breadcrumbs()->addItem(
                 $this->getModelManager()->getLetterManager()->getLabel('add'),
                 '#'
@@ -49,16 +49,16 @@ trait LetterFieldsControllerTrait
     protected function parseRequestLetterField()
     {
         if ($this->getRequest()->get('id_letter')) {
-            $this->pdfLetter = $this->checkForeignModelFromRequest(
+            $this->letter = $this->checkForeignModelFromRequest(
                 $this->getModelManager()->getLetterManager()->getTable(),
                 'id_letter'
             );
         } else {
             $field = $this->getModelFromRequest();
-            $this->pdfLetter = $field->getLetter();
+            $this->letter = $field->getLetter();
         }
 
-        $this->parent = $this->pdfLetter->getItem();
+        $this->parent = $this->letter->getItem();
     }
 
     /**

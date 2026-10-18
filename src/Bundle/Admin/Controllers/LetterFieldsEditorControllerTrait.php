@@ -6,7 +6,7 @@ use ByTIC\DocumentGenerator\Letters\Editor\LetterEditorAssets;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * @property mixed $pdfLetter
+ * @property mixed $letter
  * @method mixed getModelFromRequest($key = false)
  */
 trait LetterFieldsEditorControllerTrait
@@ -85,8 +85,8 @@ trait LetterFieldsEditorControllerTrait
 
     protected function requireLetterEditorRecord()
     {
-        if ($this->pdfLetter) {
-            return $this->pdfLetter;
+        if ($this->letter) {
+            return $this->letter;
         }
 
         $letter = $this->getModelFromRequest();
@@ -94,6 +94,6 @@ trait LetterFieldsEditorControllerTrait
             return $letter;
         }
 
-        throw new \RuntimeException('No PDF letter available for editor');
+        throw new \RuntimeException('No letter available for editor');
     }
 }

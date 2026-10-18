@@ -22,7 +22,7 @@ class DocumentGeneratorProvider extends AbstractSignatureServiceProvider
      */
     public function provides()
     {
-        return ['dg.pdf-letters.manager'];
+        return ['dg.letters.manager'];
     }
 
     /**
@@ -35,7 +35,7 @@ class DocumentGeneratorProvider extends AbstractSignatureServiceProvider
 
     protected function registerLettersManager()
     {
-        $this->getContainer()->share('dg.pdf-letters.manager', function () {
+        $this->getContainer()->share('dg.letters.manager', function () {
             return new LettersManager();
         });
     }

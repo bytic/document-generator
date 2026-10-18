@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 use ByTIC\DocumentGenerator\Utility\ViewUtility;
 
-$this->Stylesheets()->addRaw(ViewUtility::loadAssetContent('/scss/pdf-letter-editor.css'));
-$this->Scripts()->addRaw(ViewUtility::loadAssetContent('/js/pdf-letter-editor.js'));
+$this->Stylesheets()->addRaw(ViewUtility::loadAssetContent('/scss/letter-editor.css'));
+$this->Scripts()->addRaw(ViewUtility::loadAssetContent('/js/letter-editor.js'));
 ?>
 <div
     class="dg-pdf-editor"

@@ -13,7 +13,7 @@ class DownloadStatsProcess extends Command
     protected function configure()
     {
         parent::configure();
-        $this->setName('document-generator:pdf-letters:downloads-stats-process');
+        $this->setName('document-generator:letters:downloads-stats-process');
     }
 
     protected function handle()

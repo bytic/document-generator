@@ -9,11 +9,11 @@ class LetterEditorAssets
 {
     public static function cssPath(): string
     {
-        return PathsHelpers::assets('/pdf-letter-editor.css');
+        return PathsHelpers::assets('/letter-editor.css');
     }
 
     public static function jsPath(): string
     {
-        return PathsHelpers::assets('/pdf-letter-editor.js');
+        return PathsHelpers::assets('/letter-editor.js');
     }
 }

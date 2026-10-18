@@ -27,7 +27,7 @@ class DownloadStatsProcess
      */
     public function __construct(array $managers = null)
     {
-        $this->managers = is_array($managers) ? $managers : app('dg.pdf-letters.manager')->getManagerClasses();
+        $this->managers = is_array($managers) ? $managers : app('dg.letters.manager')->getManagerClasses();
     }
 
     public function handle()

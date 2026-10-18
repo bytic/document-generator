@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Letters\Controllers\Admin\Fields;
+namespace ByTIC\DocumentGenerator\PdfLetters\Controllers\Admin\Fields;
 
 /**
  * @deprecated Use \ByTIC\DocumentGenerator\Bundle\Admin\Controllers\LetterFieldsEditorControllerTrait instead.

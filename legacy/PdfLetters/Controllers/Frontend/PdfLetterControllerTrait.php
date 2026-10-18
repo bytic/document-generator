@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Letters\Controllers\Frontend;
+namespace ByTIC\DocumentGenerator\PdfLetters\Controllers\Frontend;
 
 /**
  * Trait FrontendLetterControllerTrait

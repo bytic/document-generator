@@ -3,6 +3,7 @@
 namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers;
 
 use ByTIC\DocumentGenerator\Letters\Actions\Finder\GetLetterByParent;
+use ByTIC\DocumentGenerator\Letters\Actions\Finder\GetOrCreateLetterByParent;
 use ByTIC\DocumentGenerator\Letters\Actions\Manage\ImportFieldsFrom;
 use ByTIC\DocumentGenerator\Letters\Actions\Manage\UploadFromRequest;
 use ByTIC\DocumentGenerator\Letters\Actions\Url\GenerateLetterViewUrl;
@@ -73,9 +74,10 @@ trait LetterControllerTrait
             return;
         }
 
-        $letter = $this->getModelFromRequest();
+        $letter = GetOrCreateLetterByParent::for($parent)->andCreate()            ->handle();
+
         if (!$letter) {
-            $letter = $this->newLetterRecordFromItemType($parent, $this->getLetterType());
+            return;
         }
 
         $result = UploadFromRequest::for($letter)->withUploadedFile($uploadedFile)->handle();
@@ -156,17 +158,7 @@ trait LetterControllerTrait
             $message,
             GenerateLetterViewUrl::forParent($parent),
             $type,
-            $this->getLettersPageController($parent)
         );
-    }
-
-    /**
-     * @param Record $parent
-     * @return mixed
-     */
-    protected function getLettersPageController($parent)
-    {
-        return $parent->getManager()->getController();
     }
 
     /**
@@ -191,7 +183,7 @@ trait LetterControllerTrait
     {
         $letter = $this->newLetterRecord();
         $letter->id_item = $item->id;
-        $letter->type = $type;
+        $letter->type = inflector()->singularize($type);
         $letter->insert();
         return $letter;
     }

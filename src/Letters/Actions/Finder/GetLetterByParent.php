@@ -32,12 +32,14 @@ class GetLetterByParent extends \ByTIC\Actions\Action
 
     public function handle()
     {
+        $types = [$this->type];
+        $types[] = inflector()->singularize($this->type);
         /** @var LetterTrait[] $letters */
         $letters = $this->getRepository()->findByParams(
             [
                 'where' => [
                     ['id_item = ?', $this->item_id],
-                    ['type = ?', $this->type],
+                    ['type IN ?', $types],
                 ],
                 'order' => [['id', 'DESC']],
             ]

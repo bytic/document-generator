@@ -23,7 +23,7 @@ class GenerateLetterViewUrl extends Action
             'view',
             [
                 'type' => $parent->getManager()->getMorphName(),
-                'id' => $parent->id,
+                'id_item' => $parent->id,
             ]
         );
     }

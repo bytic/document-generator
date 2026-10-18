@@ -2,10 +2,10 @@
 
 namespace ByTIC\DocumentGenerator\Tests\Letters\Models\Fields\Types;
 
-use ByTIC\DocumentGenerator\PdfWriter\Models\LetterTrait;
 use ByTIC\DocumentGenerator\Tests\AbstractTest;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Fields\FieldRecord;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Fields\Types\CodeField;
+use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Letter;
 use Nip\Records\Record;
 
 /**
@@ -16,7 +16,7 @@ class BarcodeTypeTraitTest extends AbstractTest
 {
     public function test_addToPdf()
     {
-        $pdf = LetterTrait::newPdfBuilder();
+        $pdf = Letter::newPdfBuilder();
         $pdf->AddPage();
         $codeField = new CodeField();
 

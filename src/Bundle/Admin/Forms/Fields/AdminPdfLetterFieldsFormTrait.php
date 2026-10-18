@@ -1,6 +1,6 @@
 <?php
 
-namespace ByTIC\DocumentGenerator\Letters\Forms\Fields;
+namespace ByTIC\DocumentGenerator\Bundle\Admin\Forms\Fields;
 
 use ByTIC\DocumentGenerator\LetterFields\Models\Attributes\TextTransform;
 

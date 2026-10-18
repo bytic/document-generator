@@ -2,8 +2,8 @@
 
 namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Fields\Types;
 
-use ByTIC\DocumentGenerator\LetterFields\Models\Types\AbstractType;
-use ByTIC\DocumentGenerator\LetterFields\Models\Types\BarcodeTypeTrait;
+use ByTIC\DocumentGenerator\LetterFields\Types\AbstractType;
+use ByTIC\DocumentGenerator\LetterFields\Types\Behaviors\BarcodeTypeTrait;
 
 /**
  * Class CodeField

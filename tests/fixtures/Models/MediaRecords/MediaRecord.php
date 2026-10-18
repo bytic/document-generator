@@ -4,7 +4,7 @@ namespace ByTIC\DocumentGenerator\Tests\Fixtures\Models\MediaRecords;
 
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
-use League\Flysystem\Adapter\Local as LocalAdapter;
+use League\Flysystem\Local\LocalFilesystemAdapter as LocalAdapter;
 use Nip\Filesystem\FileDisk;
 use Nip\Records\Record;
 

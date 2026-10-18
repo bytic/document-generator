@@ -150,6 +150,12 @@ trait FieldTrait
 
     public function fillFromEditorData(array $data): void
     {
+        $page = null;
+        if (array_key_exists('page', $data)) {
+            $page = max(static::DEFAULT_PAGE, (int)$data['page']);
+            $this->setPage($page);
+        }
+
         if (isset($data['field'])) {
             $this->field = trim((string)$data['field']);
         }
@@ -157,7 +163,11 @@ trait FieldTrait
             $this->x = round((float)$data['x'], 2);
         }
         if (isset($data['y'])) {
-            $this->y = round((float)$data['y'], 2);
+            $y = round((float)$data['y'], 2);
+            if ($page !== null && $page > static::DEFAULT_PAGE) {
+                $y += (($page - 1) * 297);
+            }
+            $this->y = $y;
         }
         if (isset($data['size'])) {
             $this->size = max(1, (int)$data['size']);
@@ -167,9 +177,6 @@ trait FieldTrait
         }
         if (array_key_exists('color', $data)) {
             $this->color = $this->normalizeEditorColor($data['color']);
-        }
-        if (array_key_exists('page', $data)) {
-            $this->setPage($data['page']);
         }
         if (array_key_exists('textTransform', $data)) {
             $this->setTextTransform($data['textTransform']);

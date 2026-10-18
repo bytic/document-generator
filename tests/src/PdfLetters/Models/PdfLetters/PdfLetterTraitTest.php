@@ -8,11 +8,9 @@ use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Letter;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Letters\Letters;
 use ByTIC\DocumentGenerator\Tests\Fixtures\Models\Recipients\Recipient;
 use ByTIC\MediaLibrary\Media\Media;
-use Mockery;
 use Nip\Filesystem\File;
 use setasign\Fpdi\Tcpdf\Fpdi;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use const setasign\Fpdi\TcpdfFpdi;
 
 /**
  * Class LetterTraitTest
@@ -37,7 +35,7 @@ class LetterTraitTest extends AbstractTest
 
         $response = $letter->uploadFromRequest($uploadedFile);
         parent::assertInstanceOf(Media::class, $response);
-        self::assertFileExists(TEST_FIXTURE_PATH . '/files/letter_letters/10/file.pdf');
+        self::assertFileExists(TEST_FIXTURE_PATH . '/files/letter_letters/10/test original name.pdf');
     }
 
     public function testUploadFromRequestWithInvalidFileType()
@@ -80,17 +78,21 @@ class LetterTraitTest extends AbstractTest
 
     public function testGenerateNewPdfObj()
     {
-        /** @var Letter|Mockery\Mock $letter */
-        $letter = Mockery::mock(Letter::class)->makePartial();
+        $letter = new class() extends Letter {
+            public Media $mockedFile;
+
+            public function getFile()
+            {
+                return $this->mockedFile;
+            }
+        };
         $letter->id = 99;
+        $letter->orientation = 'L';
+        $letter->format = 'A4';
 
         $mediaFile = new Media();
-        $mediaFile->setFile((new File())
-            ->setPath('/files/letter_letters/99/file.pdf')
-            ->setFilesystem($letter->getMediaFilesystemDisk())
-        );
-
-        $letter->shouldReceive('getFile')->andReturn($mediaFile);
+        $mediaFile->setFile(new File($letter->getMediaFilesystemDisk(), '/files/file.pdf'));
+        $letter->mockedFile = $mediaFile;
 
         $letter->setManager(Letters::instance());
 
@@ -103,25 +105,36 @@ class LetterTraitTest extends AbstractTest
 
     public function testGenerateFileWithMediaObject()
     {
-        /** @var Letter|Mockery\Mock $letter */
-        $letter = Mockery::mock(Letter::class);
-        $letter->shouldReceive('getCustomFields')->andReturn([]);
-        $letter = $letter->makePartial();
+        $letter = new class() extends Letter {
+            public Media $mockedFile;
+
+            public function getFile()
+            {
+                return $this->mockedFile;
+            }
+
+            public function getLetterFields()
+            {
+                return [];
+            }
+        };
 
         $letter->setManager(Letters::instance());
         $letter->id = 99;
+        $letter->orientation = 'L';
+        $letter->format = 'A4';
 
         $mediaFile = new Media();
-        $mediaFile->setFile((new File())
-            ->setPath('/files/letter_letters/99/file.pdf')
-            ->setFilesystem($letter->getMediaFilesystemDisk())
-        );
-
-        $letter->shouldReceive('getFile')->andReturn($mediaFile);
+        $mediaFile->setFile(new File($letter->getMediaFilesystemDisk(), '/files/file.pdf'));
+        $letter->mockedFile = $mediaFile;
 
         $recipient = new Recipient();
-        $mediaRecord = Mockery::mock(MediaRecord::class);
-        $mediaRecord->shouldReceive('addFileFromContent');
+        $mediaRecord = new class() extends MediaRecord {
+            public function addFileFromContent($content, $name)
+            {
+                return null;
+            }
+        };
 
         $pdf = $letter->generateFile($recipient, $mediaRecord);
         self::assertInstanceOf(Fpdi::class, $pdf);

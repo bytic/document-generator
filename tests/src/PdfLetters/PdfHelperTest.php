@@ -2,7 +2,7 @@
 
 namespace ByTIC\DocumentGenerator\Tests\Letters;
 
-use ByTIC\DocumentGenerator\PdfWriter\LetterHelper;
+use ByTIC\DocumentGenerator\PdfWriter\PdfHelper;
 use ByTIC\DocumentGenerator\Tests\AbstractTest;
 
 class LetterHelperTest extends AbstractTest
@@ -28,7 +28,7 @@ class LetterHelperTest extends AbstractTest
             }
         };
 
-        $y = LetterHelper::pdfYPosition($pdf, 'test', 24, 3);
+        $y = PdfHelper::pdfYPosition($pdf, 'test', 24, 3);
 
         self::assertSame(24, $y);
         self::assertSame(3, $pdf->getPage());

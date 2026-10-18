@@ -48,7 +48,7 @@ class UploadFromRequest extends Action
         }
 
         if (!$this->canOpenPdfWithFpdi($uploadedFile)) {
-            return 'INVALID_PDF: Pdf engine cannot open the file.';
+            return 'INVALID_PDF_CONTENT_ERROR';
         }
 
         try {

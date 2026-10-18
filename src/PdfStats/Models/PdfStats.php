@@ -20,6 +20,6 @@ class PdfStats extends RecordManager
 
     public function generateTable(): string
     {
-        return 'pdf_stats';
+        return 'letter_stats';
     }
 }

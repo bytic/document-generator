@@ -14,15 +14,15 @@ use Nip\Records\RecordManager;
  */
 class DocumentGeneratorModels extends ModelFinder
 {
-    public const PDF_LETTERS = 'pdf_letters';
-    public const PDF_LETTERS_FIELDS = 'pdf_letter_fields';
+    public const LETTERS = 'letters';
+    public const LETTER_FIELDS = 'letter_fields';
 
     /**
      * @return RecordManager|Forms
      */
     public static function pdfLetters()
     {
-        return static::getModels(self::PDF_LETTERS, PdfLetters::class);
+        return static::getModels(self::LETTERS, PdfLetters::class);
     }
 
     /**
@@ -30,7 +30,7 @@ class DocumentGeneratorModels extends ModelFinder
      */
     public static function pdfLetterFields()
     {
-        return static::getModels(self::PDF_LETTERS_FIELDS, PdfLetterFields::class);
+        return static::getModels(self::LETTER_FIELDS, PdfLetterFields::class);
     }
 
     protected static function packageName(): string

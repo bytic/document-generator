@@ -21,7 +21,7 @@ class PdfLetters extends RecordManager
 
     public function generateTable(): string
     {
-        return 'pdf_letters';
+        return 'letters';
     }
 
     public function getParentManagerFromType($type)

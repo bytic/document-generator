@@ -18,6 +18,6 @@ class PdfIssuers extends RecordManager
 
     public function generateTable(): string
     {
-        return 'pdf_issuers';
+        return 'letter_issuers';
     }
 }

@@ -20,7 +20,7 @@ class PdfLetterFields extends RecordManager
 
     public function generateTable(): string
     {
-        return 'pdf_letter_fields';
+        return 'letter_fields';
     }
 
     public function getLetterManager()

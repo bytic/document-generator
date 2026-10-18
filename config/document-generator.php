@@ -8,18 +8,18 @@ use ByTIC\DocumentGenerator\PdfStats\Models\PdfStats;
 
 return [
     'models' => [
-        'pdf_letters' => PdfLetters::class,
-        'pdf_letter_fields' => PdfLetterFields::class,
-        'pdf_downloads' => PdfDownloads::class,
-        'pdf_stats' => PdfStats::class,
-        'pdf_issuers' => PdfIssuers::class,
+        'letters' => PdfLetters::class,
+        'letter_fields' => PdfLetterFields::class,
+        'letter_downloads' => PdfDownloads::class,
+        'letter_stats' => PdfStats::class,
+        'letter_issuers' => PdfIssuers::class,
     ],
     'tables' => [
-        'pdf_letters' => 'pdf_letters',
-        'pdf_letter_fields' => 'pdf_letter_fields',
-        'pdf_downloads' => 'pdf_downloads',
-        'pdf_stats' => 'pdf_stats',
-        'pdf_issuers' => 'pdf_issuers',
+        'letters' => 'pdf_letters',
+        'letter_fields' => 'pdf_letter_fields',
+        'letter_downloads' => 'pdf_downloads',
+        'letter_stats' => 'pdf_stats',
+        'letter_issuers' => 'pdf_issuers',
     ],
     'database' => [
         'connection' => null,

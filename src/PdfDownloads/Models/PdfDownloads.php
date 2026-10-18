@@ -20,6 +20,6 @@ class PdfDownloads extends RecordManager
 
     public function generateTable(): string
     {
-        return 'pdf_downloads';
+        return 'letter_downloads';
     }
 }

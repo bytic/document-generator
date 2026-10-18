@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace ByTIC\DocumentGenerator\Letters\Actions;
+namespace ByTIC\DocumentGenerator\Letters\Actions\Manage;
 
 use Bytic\Actions\Action;
 use Bytic\Actions\Behaviours\Entities\HasRepository;

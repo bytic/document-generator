@@ -21,7 +21,7 @@ class GetLetterByParent extends \ByTIC\Actions\Action
     protected $type;
     protected $item_id;
 
-    public static function byItemType(string $type, int $idItem): static
+    public static function byItemType(string $type, int|string $idItem): static
     {
         $action = new static();
         $action->type = $type;

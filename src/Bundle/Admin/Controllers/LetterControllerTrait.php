@@ -3,7 +3,9 @@
 namespace ByTIC\DocumentGenerator\Bundle\Admin\Controllers;
 
 use ByTIC\DocumentGenerator\Letters\Actions\Finder\GetLetterByParent;
-use ByTIC\DocumentGenerator\Letters\Actions\ImportFieldsFrom;
+use ByTIC\DocumentGenerator\Letters\Actions\Manage\ImportFieldsFrom;
+use ByTIC\DocumentGenerator\Letters\Actions\Manage\UploadFromRequest;
+use ByTIC\DocumentGenerator\Letters\Actions\Url\GenerateLetterViewUrl;
 use ByTIC\DocumentGenerator\Letters\Models\LettersTrait;
 use ByTIC\DocumentGenerator\Letters\Models\LetterTrait;
 use ByTIC\DocumentGenerator\Utility\DocumentGeneratorModels;
@@ -56,34 +58,35 @@ trait LetterControllerTrait
 
     public function upload()
     {
-        if ($this->getRequest()->files->has('letter')) {
-            $parent = $this->getParent();
-            if ($parent) {
-                /** @var UploadedFile $uploadedFile */
-                $uploadedFile = $this->getRequest()->files->get('letter');
-
-                if (!$uploadedFile->isValid()) {
-                    $this->flashRedirectLetter($parent, $uploadedFile->getErrorMessage(), 'error');
-                    return;
-                }
-
-                $letter = $this->getModelFromRequest();
-                if (!$letter) {
-                    $letter = $this->newLetterRecordFromItemType($parent, $this->getLetterType());
-                }
-
-                $result = $letter->uploadFromRequest($uploadedFile);
-
-                if ($result instanceof Media) {
-                    $this->flashRedirectLetter($parent, $this->getModelManager()->getMessage('add'));
-                } else {
-                    $letter->delete();
-                    $this->flashRedirectLetter($parent, $result, 'error');
-                }
-                return;
-            }
+        if (!$this->getRequest()->files->has('letter')) {
             return;
         }
+
+        $parent = $this->getParent();
+        if (!$parent) {
+            return;
+        }
+
+        /** @var UploadedFile|null $uploadedFile */
+        $uploadedFile = $this->getRequest()->files->get('letter');
+        if (!$uploadedFile instanceof UploadedFile) {
+            return;
+        }
+
+        $letter = $this->getModelFromRequest();
+        if (!$letter) {
+            $letter = $this->newLetterRecordFromItemType($parent, $this->getLetterType());
+        }
+
+        $result = UploadFromRequest::for($letter)->withUploadedFile($uploadedFile)->handle();
+
+        if ($result instanceof Media) {
+            $this->flashRedirectLetter($parent, $this->getModelManager()->getMessage('add'));
+            return;
+        }
+
+        $letter->delete();
+        $this->flashRedirectLetter($parent, $result, 'error');
     }
 
     public function downloadExample()
@@ -151,19 +154,10 @@ trait LetterControllerTrait
     {
         $this->flashRedirect(
             $message,
-            $this->getLettersPageUrl($parent),
+            GenerateLetterViewUrl::forParent($parent),
             $type,
             $this->getLettersPageController($parent)
         );
-    }
-
-    /**
-     * @param Record $parent
-     * @return mixed
-     */
-    protected function getLettersPageUrl($parent)
-    {
-        return $parent->getURL();
     }
 
     /**

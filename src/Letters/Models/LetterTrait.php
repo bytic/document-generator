@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace ByTIC\DocumentGenerator\Letters\Models;
 
 use ByTIC\DocumentGenerator\Helpers;
+use ByTIC\DocumentGenerator\Letters\Actions\Manage\UploadFromRequest;
 use ByTIC\DocumentGenerator\LetterDownloads\Models\DownloadsTrait;
 use ByTIC\DocumentGenerator\LetterFields\Models\FieldTrait;
-use ByTIC\MediaLibrary\Exceptions\FileCannotBeAdded\FileUnacceptableForCollection;
 use ByTIC\MediaLibrary\HasMedia\HasMediaTrait;
 use ByTIC\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use ByTIC\MediaLibrary\Media\Media;
@@ -439,55 +439,11 @@ trait LetterTrait
 
     /**
      * @param UploadedFile $uploadedFile
-     * @return string|boolean
+     * @return string|Media
      */
-    public function uploadFromRequest($uploadedFile)
+    public function uploadFromRequest(UploadedFile $uploadedFile)
     {
-        $fileCollection = $this->getFiles();
-
-        if (!$uploadedFile->isValid()) {
-            return $uploadedFile->getErrorMessage();
-        }
-
-        if (!$this->canOpenPdfWithFpdi($uploadedFile)) {
-            return 'INVALID_PDF_CONTENT_ERROR';
-        }
-
-        try {
-            $fileAdder = $this->addFile($uploadedFile);
-            $newMedia = $fileAdder->getMedia();
-        } catch (FileUnacceptableForCollection $exception) {
-            return $exception->violations->getMessageString();
-        }
-
-        foreach ($fileCollection as $name => $media) {
-            if ($name != $newMedia->getName()) {
-                $media->delete();
-            }
-        }
-        return $newMedia;
-    }
-
-    protected function canOpenPdfWithFpdi(UploadedFile $uploadedFile): bool
-    {
-        $path = $uploadedFile->getRealPath();
-        if (!$path || !is_file($path)) {
-            return false;
-        }
-
-        $pdf = null;
-        try {
-            $pdf = static::newPdfBuilder('L');
-            $pdf->setSourceFile($path);
-
-            return true;
-        } catch (\Throwable $throwable) {
-            return false;
-        } finally {
-            if ($pdf instanceof Fpdi\Tcpdf\Fpdi) {
-                $pdf->close();
-            }
-        }
+        return UploadFromRequest::for($this)->withUploadedFile($uploadedFile)->handle();
     }
 
     /**

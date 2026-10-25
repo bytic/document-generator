@@ -31,6 +31,7 @@
   "require": {
     "php": "^8.2",
     "bytic/orm": "^1.0|^2.0",
+    "bytic/orm-behaviors": "^1.0|^2.0",
     "bytic/data-objects": "^1.0|^2.0",
     "bytic/medialibrary": "^0.9|^1.0|^2.0",
     "bytic/models-smart-properties": "^1.0|^2.0",
@@ -44,7 +45,7 @@
     "bytic/controllers": "^1.0|^2.0",
     "bytic/cache": "^1.0|^2.0",
     "bytic/console": "^1.0|^2.0",
-    "phpoffice/phpspreadsheet": "^1.4",
+    "phpoffice/phpspreadsheet": "^5.0",
     "bytic/phpqatools": "^1.0"
   },
   "suggest": {
